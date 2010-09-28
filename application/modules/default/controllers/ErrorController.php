@@ -5,8 +5,8 @@
  *
  * LICENSE
  *
- * This source file is subject to the Simplified BSD License that is
- * bundled with this package in the file docs/LICENSE.txt.
+ * This source file is subject to the Simplified BSD License
+ * that is bundled with this package in the file docs/LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://blipoteka.pl/license
  * 
