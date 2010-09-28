@@ -14,16 +14,34 @@
  * to argasek@gmail.com so I can send you a copy immediately.
  *
  * @category   Void
- * @package    Void
+ * @package    Void_Application_Resource
  * @copyright  Copyright (c) 2010 Jakub Argasiński (argasek@gmail.com)
  * @license    http://tekla.art.pl/license/void-simplified-bsd-license.txt Simplified BSD License
  */
 
 /**
- * Generic exception
- * 
+ * Doctrine CLI resource class.
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
+class Void_Application_Resource_DoctrineCli extends Zend_Application_Resource_ResourceAbstract {
+	
+	public function init() {
+		return $this->getDoctrineCli();
+	}
 
-class Void_Exception extends Zend_Exception {}
+	public function getDoctrineCli() {
+		$this->getBootstrap()->bootstrap('doctrine');
+		
+		$config = array(
+			'data_fixtures_path'  =>  $this->_options['fixturesPath'],
+			'models_path'         =>  $this->_options['modelsPath'],
+			'migrations_path'     =>  $this->_options['migrationsPath'],
+			'sql_path'            =>  $this->_options['sqlPath'],
+			'yaml_schema_path'    =>  $this->_options['yamlSchemaPath']
+		);
+		
+		return new Doctrine_Cli($config);
+	}
+}
