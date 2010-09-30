@@ -1,0 +1,5 @@
+* There's a nice ZF and Doctrine 1.2.x integration available: http://github.com/beberlei/zf-doctrine/.
+  Let's use it! (may require some major refactoring).
+* Write unit and functional tests.
+* Prepare scripts and generate project documentation from sources.
+* Doctrine create-db creates database with the collation default for the MySQL server. Write some script to fix it.
