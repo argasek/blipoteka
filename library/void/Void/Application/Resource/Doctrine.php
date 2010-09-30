@@ -28,14 +28,22 @@
 class Void_Application_Resource_Doctrine extends Zend_Application_Resource_ResourceAbstract {
 
 	public function init() {
+		$className = 'Doctrine_Core';
+		if (!class_exists($className)) {
+			throw new Zend_Application_Resource_Exception(sprintf("Class '%s' not found. Probably Doctrine is not installed or include_path settings are wrong", $class));
+		}
+		spl_autoload_register(array($className, 'autoload'));
+
 		return $this->getDoctrine();
 	}
 
 	public function getDoctrine() {
-	  	$manager = Doctrine_Manager::getInstance();
+		$manager = Doctrine_Manager::getInstance();
 		// Set Doctrine configuration options (like model loading, etc.)
-	  	foreach ($this->_options['attr'] as $key => $value) {
-			$manager->setAttribute(constant('Doctrine_Core::' . $key), $value);
+		if (isset($this->_options['attr'])) {
+			foreach ($this->_options['attr'] as $key => $value) {
+				$manager->setAttribute(constant('Doctrine_Core::' . strtoupper($key)), $value);
+			}
 		}
 		/**
 		 * The array of profilers for all databases
@@ -47,15 +55,19 @@ class Void_Application_Resource_Doctrine extends Zend_Application_Resource_Resou
 		// Get databases array from configuration
 		$databases = $this->getBootstrap()->getOption('db');
 
+		if ($databases === null) {
+			throw new Zend_Application_Resource_Exception(sprintf("Before using Doctrine, you must setup at least one database connection"));
+		}
+
 		// Iterate through all database setups
 		foreach ($databases as $name => $attributes) {
 			// We create the DSN string from configuration attributes
 			$dsn = sprintf('%s://%s:%s@%s/%s',
-				$attributes['adapter'],
-				$attributes['username'],
-				$attributes['password'],
-				$attributes['host'],
-				$attributes['dbname']
+			$attributes['adapter'],
+			$attributes['username'],
+			$attributes['password'],
+			$attributes['host'],
+			$attributes['dbname']
 			);
 
 			// Open a new connection
@@ -71,11 +83,27 @@ class Void_Application_Resource_Doctrine extends Zend_Application_Resource_Resou
 
 		$doctrineProfilers = array(
 			'profilers' => $profilers,
-			'loggers' => $this->_options['dqlloggers']
+			'loggers' => (isset($this->_options['dqlloggers']) ? $this->_options['dqlloggers'] : null)
 		);
 
 		$manager->setParam('profilers', $doctrineProfilers);
 
-		return $manager;
+		$config = array();
+		if (isset($this->_options['cli'])) {
+			$config = array(
+				'data_fixtures_path'  =>  $this->_options['cli']['fixturesPath'],
+				'models_path'         =>  $this->_options['cli']['modelsPath'],
+				'migrations_path'     =>  $this->_options['cli']['migrationsPath'],
+				'sql_path'            =>  $this->_options['cli']['sqlPath'],
+				'yaml_schema_path'    =>  $this->_options['cli']['yamlSchemaPath']
+			);
+		}
+
+		$cli = new Doctrine_Cli($config);
+
+		$doctrine = new Void_Application_Doctrine($manager, $cli);
+
+		return $doctrine;
 	}
+
 }
