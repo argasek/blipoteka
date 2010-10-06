@@ -38,7 +38,7 @@ class Blipoteka_User extends Doctrine_Record {
 	 * @property string $log_date The date and time user last logged in
 	 * @property integer $lognum How many times user logged in
 	 * @property bool $is_active Is user's account active?
-	 * @property bool $accept_friends_borrow_requests Automatically accept all borrow requests from user's friends
+	 * @property bool $auto_accept_requests Automatically accept all borrow requests from user's friends
 	 * @property string $activated_at Date and time the account was activated by user
 	 * @property string $created_at Date and time the account was created
 	 * @property string $updated_at Date and time the record was updated
@@ -54,7 +54,7 @@ class Blipoteka_User extends Doctrine_Record {
 		$this->hasColumn('log_num', 'integer', 4, array('notnull' => true, 'default' => 0));
 		$this->hasColumn('is_active', 'boolean', null, array('default' => true, 'notnull' => true));
 		$this->hasColumn('activated_at', 'timestamp', null, array('notnull' => false));
-		$this->hasColumn('accept_friends_borrow_requests', 'boolean', null, array('default' => true, 'notnull' => true));
+		$this->hasColumn('auto_accept_requests', 'boolean', null, array('default' => true, 'notnull' => true));
 	}
 
 	/**
@@ -62,12 +62,21 @@ class Blipoteka_User extends Doctrine_Record {
 	 * @see Doctrine_Record::setUp()
 	 */
 	public function setUp() {
+		// User may have many friends
 		$this->hasMany('Blipoteka_User as friends', array(
 			'local' => 'user_id',
 			'foreign' => 'friend_id',
 			'refClass' => 'Blipoteka_User_FriendRef',
 			'equal' => true
 		));
+
+		// User may add many books to the system
+		$this->hasMany('Blipoteka_Book as books_provided', array('local' => 'user_id', 'foreign' => 'user_id'));
+		// User may be owner of many books
+		$this->hasMany('Blipoteka_Book as books_owned', array('local' => 'user_id', 'foreign' => 'owner_id'));
+		// User may be holder of many books
+		$this->hasMany('Blipoteka_Book as books_held', array('local' => 'user_id', 'foreign' => 'holder_id'));
+
 		// FIXME: this Doctrine behaviour doesn't suit our needs very well -- actually,
 		// we are interested only of user's triggered record updates (ie. updated_at
 		// shouldn't be touched when, for example, we are increasing log_num)
