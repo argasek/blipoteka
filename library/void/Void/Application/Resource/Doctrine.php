@@ -79,6 +79,10 @@ class Void_Application_Resource_Doctrine extends Zend_Application_Resource_Resou
 				$profilers[$name] = $profiler;
 				$connection->setListener($profiler);
 			}
+			// Set connection charset
+			if (isset($attributes['charset'])) {
+				$connection->setCharset($attributes['charset']);
+			}
 		}
 
 		$doctrineProfilers = array(
