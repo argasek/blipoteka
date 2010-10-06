@@ -38,4 +38,13 @@ class Blipoteka_User_FriendRef extends Doctrine_Record {
 		$this->hasColumn('friend_id', 'integer', 4, array('primary' => true));
 	}
 
+	/**
+	 * Set up relationships and behaviors
+	 * @see Doctrine_Record::setUp()
+	 */
+	public function setUp() {
+		$this->hasOne('Blipoteka_User as user', array('local' => 'user_id', 'foreign' => 'user_id', 'onDelete' => 'CASCADE', 'onUpdate' => 'CASCADE'));
+		$this->hasOne('Blipoteka_User as friend', array('local' => 'friend_id', 'foreign' => 'user_id', 'onDelete' => 'CASCADE', 'onUpdate' => 'CASCADE'));
+	}
+
 }
