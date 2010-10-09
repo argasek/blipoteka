@@ -1,0 +1,16 @@
+Blipoteka_Book:
+  Blipoteka_Book_1:
+    type: 0
+    user: Blipoteka_User_1
+    owner: Blipoteka_User_1
+    author: Blipoteka_Author_1
+    status: 0
+    title: 'Fatalne jaja'
+    original_title: null
+    city_id: null
+    year: 1988
+    pages: null
+    isbn: null
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-06 22:31:45'
