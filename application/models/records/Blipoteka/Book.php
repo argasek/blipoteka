@@ -137,6 +137,10 @@ class Blipoteka_Book extends Doctrine_Record {
 		$this->hasOne('Blipoteka_User as owner', array('local' => 'owner_id', 'foreign' => 'user_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'SET NULL'));
 		// Each book may be held by one user. NULL means the book is not being borrowed
 		$this->hasOne('Blipoteka_User as holder', array('local' => 'holder_id', 'foreign' => 'user_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'SET NULL'));
+
+		// Each book may have one city when it was printed. NULL means unknown.
+		$this->hasOne('Blipoteka_City as city', array('local' => 'city_id', 'foreign' => 'city_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'SET NULL'));
+
 		$this->actAs('Timestampable', array('updated' => array('disabled' => true)));
 	}
 

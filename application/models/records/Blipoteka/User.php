@@ -47,6 +47,7 @@ class Blipoteka_User extends Doctrine_Record {
 		$this->setTableName('users');
 
 		$this->hasColumn('user_id', 'integer', 4, array('primary' => true, 'autoincrement' => true));
+		$this->hasColumn('city_id', 'integer', 4, array('notnull' => true));
 		$this->hasColumn('email', 'string', 128, array('notnull' => true, 'unique' => true));
 		$this->hasColumn('password', 'string', 128, array('notnull' => true));
 		$this->hasColumn('name', 'string', 64, array('notnull' => true));
@@ -76,6 +77,9 @@ class Blipoteka_User extends Doctrine_Record {
 		$this->hasMany('Blipoteka_Book as books_owned', array('local' => 'user_id', 'foreign' => 'owner_id'));
 		// User may be holder of many books
 		$this->hasMany('Blipoteka_Book as books_held', array('local' => 'user_id', 'foreign' => 'holder_id'));
+
+		// Each user lives in a city. We don't allow deletion of cities as long as any entity have this city assigned
+		$this->hasOne('Blipoteka_City as city', array('local' => 'city_id', 'foreign' => 'city_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT'));
 
 		// FIXME: this Doctrine behaviour doesn't suit our needs very well -- actually,
 		// we are interested only of user's triggered record updates (ie. updated_at
