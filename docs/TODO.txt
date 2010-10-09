@@ -3,3 +3,5 @@
 * Write unit and functional tests.
 * Prepare scripts and generate project documentation from sources.
 * Doctrine create-db creates database with the collation default for the MySQL server. Write some script to fix it.
+* Blipoteka_Book ownership and relationship to the Blipoteka_User probably needs rethinking (especially the case
+  when user decides to delete his/her account).
