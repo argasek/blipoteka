@@ -48,7 +48,7 @@ class Blipoteka_Publisher extends Doctrine_Record {
 	 */
 	public function setUp() {
 		// Many books may have been published by this publisher
-		$this->hasMany('Blipoteka_Book as books', array('local' => 'publisher_id', 'foreign' => 'publisher_id'));
+		$this->hasMany('Blipoteka_Book as books', array('local' => 'publisher_id', 'foreign' => 'book_id'));
 	}
 
 }
