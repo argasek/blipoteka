@@ -109,6 +109,7 @@ class Blipoteka_Book extends Doctrine_Record {
 		$this->hasColumn('title', 'string', 256, array('notnull' => true));
 		$this->hasColumn('original_title', 'string', 256, array('notnull' => false));
 		$this->hasColumn('city_id', 'integer', 4, array('notnull' => false));
+		$this->hasColumn('publisher_id', 'integer', 4, array('notnull' => true));
 		$this->hasColumn('year', 'integer', 2, array('notnull' => false));
 		$this->hasColumn('pages', 'integer', 2, array('notnull' => false));
 		$this->hasColumn('isbn', 'string', 13, array('notnull' => false));
@@ -141,6 +142,9 @@ class Blipoteka_Book extends Doctrine_Record {
 		// Each book may have one city when it was printed. NULL means unknown.
 		$this->hasOne('Blipoteka_City as city', array('local' => 'city_id', 'foreign' => 'city_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'SET NULL'));
 
+		// Each book entity must have an exactly one publisher.
+		// If the publisher gets deleted, all books published by him/her are deleted as well.
+		$this->hasOne('Blipoteka_Publisher as publisher', array('local' => 'publisher_id', 'foreign' => 'publisher_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE'));
 		$this->actAs('Timestampable', array('updated' => array('disabled' => true)));
 	}
 

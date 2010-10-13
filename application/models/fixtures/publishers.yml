@@ -1,0 +1,7 @@
+Blipoteka_Publisher:
+  Blipoteka_Publisher_1:
+    name: 'Wydawnictwo Literackie'
+    url: 'http://www.wydawnictwoliterackie.pl'
+  Blipoteka_Publisher_2:
+    name: Alfa
+    url: null
