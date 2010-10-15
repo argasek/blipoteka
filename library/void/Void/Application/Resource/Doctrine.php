@@ -87,9 +87,6 @@ class Void_Application_Resource_Doctrine extends Zend_Application_Resource_Resou
 					// Setting charset may leave the connection open, thus CLI's script drop-db
 					// won't work on PostgreSQL. We need to close a connection first.
 					$connection->setCharset($attributes['charset']);
-					if ($connection->isConnected() === true) {
-						$connection->close();
-					}
 				} catch (Doctrine_Connection_Exception $e) {
 					trigger_error("Unable to to connect the database, thus setting charset has failed", E_USER_WARNING);
 				}
