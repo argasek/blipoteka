@@ -105,8 +105,7 @@ class Import_GeoNames {
 		// Iterate file by line
 		foreach ($file as $row) {
 			// We need to increase progressbar here -- because we filter out some lines later
-			if ($cli->options['verbose']) $progressBar->update($line);
-			$line++;
+			if ($cli->options['verbose']) $progressBar->update($line++);
 
 			// Prepare associative array in format acceptable by fromArray() / synchronizeFromArray()
 			$record = array_combine($this->_columns, $row);
