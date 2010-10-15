@@ -55,7 +55,7 @@ class Import_GeoNames {
 			$file->setFlags(SplFileObject::READ_CSV | SplFileObject::SKIP_EMPTY);
 			$file->setCsvControl("\t");
 		} catch (RuntimeException $e) {
-			printf("An error ocurred: %s\n" . $e->getMessage());
+			printf("An error ocurred: %s\n" , $e->getMessage());
 			exit($e->getCode());
 		}
 
