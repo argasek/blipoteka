@@ -45,6 +45,7 @@ class Blipoteka_Book_History extends Doctrine_Record {
 		$this->hasColumn('book_id', 'integer', 4, array('notnull' => true));
 		$this->hasColumn('borrower_id', 'integer', 4, array('notnull' => true));
 		$this->hasColumn('lender_id', 'integer', 4, array('notnull' => true));
+		$this->hasColumn('requested_at', 'timestamp', null, array('notnull' => true));
 		$this->hasColumn('received_at', 'timestamp', null, array('notnull' => false));
 	}
 
@@ -59,8 +60,29 @@ class Blipoteka_Book_History extends Doctrine_Record {
 		$this->hasOne('Blipoteka_User as borrower', array('local' => 'borrower_id', 'foreign' => 'user_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE'));
 		// User who lends a book
 		$this->hasOne('Blipoteka_User as lender', array('local' => 'lender_id', 'foreign' => 'user_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE'));
-		// This record is created when lender accepts borrower's request
-		$this->actAs('Timestampable', array('created' =>  array('name' => 'requested_at'), 'updated' => array('disabled' => true)));
+	}
+
+	/**
+	 * Check if saved data is right
+	 * @see Doctrine_Record::preSave()
+	 */
+	public function preSave($event) {
+		$invoker = $event->getInvoker();
+
+		// One cannot be lender and a borrower at the same time
+		if ($invoker->borrower_id === $invoker->lender_id) {
+			throw new Doctrine_Record_Exception("Borrower and lender can't be the same person", Doctrine_Core::ERR_CONSTRAINT);
+		}
+
+		// We don't care about timestamps as long as user didn't receive a book yet
+		if ($invoker->received_at !== null) {
+			$requested_at = new Zend_Date($invoker->requested_at);
+			$received_at = new Zend_Date($invoker->received_at);
+			// Make sure a date when book is received is later than a date when book was requested
+			if ($received_at->isLater($requested_at, Zend_Date::DATES) === false) {
+				throw new Doctrine_Record_Exception("The date of request is earlier or equal the date of receival", Doctrine_Core::ERR_CONSTRAINT);
+			}
+		}
 	}
 
 }
