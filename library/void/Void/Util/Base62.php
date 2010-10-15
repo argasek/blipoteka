@@ -21,23 +21,23 @@
 
 /**
  * The URL-safe BASE62 codec class.
- * 
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
 class Void_Util_Base62 {
 	const BASE = 62;
 	const CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	
+
 	/**
 	 * Encode 32-bit integer value (2^31 - 1) using URL-safe BASE62 encoding.
-	 *  
+	 *
 	 * @param integer $val A value to encode
 	 * @param integer $base Base number, 62 by default
 	 * @param string $chars Set of characters to use
 	 * @return string Encoded value as string
 	 */
-	static function encode($val, $base = self::BASE, $chars = self::CHARS) {
+	public static function encode($val, $base = self::BASE, $chars = self::CHARS) {
 		// can't handle numbers larger than  = 2147483647
 		$str = '';
 		do {
@@ -50,13 +50,13 @@ class Void_Util_Base62 {
 
 	/**
 	 * Decode BASE62 encoded integer value.
-	 *  
+	 *
 	 * @param string $str A string to encode
 	 * @param integer $base Base number, 62 by default
 	 * @param string $chars Set of characters to use
 	 * @return integer Original value
 	 */
-	static function decode($str, $base = self::BASE, $chars = self::BASE) {
+	public static function decode($str, $base = self::BASE, $chars = self::BASE) {
 		$len = strlen($str);
 		$val = 0;
 		$arr = array_flip(str_split($chars));
@@ -65,5 +65,5 @@ class Void_Util_Base62 {
 		}
 		return $val;
 	}
-	
+
 }

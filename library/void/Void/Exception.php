@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Void 
+ * Void
  *
  * LICENSE
  *
@@ -21,7 +21,7 @@
 
 /**
  * Generic exception
- * 
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Void 
+ * Void
  *
  * LICENSE
  *
@@ -56,7 +56,7 @@
  * Modifications made by Jakub Argasiński <argasek@gmail.com> on 2010-03-08:
  *
  *   + Renamed class from 'UUID' to 'Void_Util_UUID'.
- *   
+ *
  * @todo: make the class use php5-uuid or php5-ossp-uid extension if available.
  * @see http://codingforums.com/showthread.php?p=881913
  * @see https://answers.launchpad.net/ubuntu/+source/ossp-uuid/+question/87216
@@ -71,7 +71,7 @@ class Void_Util_UUID {
 
 	/**
 	 * Returns valid V3 UUID.
-	 * 
+	 *
 	 * @example Void_Util_UUID::v3('1546058f-5a25-4334-85ae-e68f2a44bbaf', 'SomeRandomString');
 	 * @see http://en.wikipedia.org/wiki/UUID
 	 * @param $namespace
@@ -121,7 +121,7 @@ class Void_Util_UUID {
 
 	/**
 	 * Returns valid V4 UUID().
-	 * 
+	 *
 	 * @return string V4 UUID.
 	 */
 	public static function v4() {
@@ -193,7 +193,7 @@ class Void_Util_UUID {
 
 	/**
 	 * Checks whether UUID is a valid one.
-	 * 
+	 *
 	 * @param string $uuid
 	 */
 	public static function isValid($uuid) {
