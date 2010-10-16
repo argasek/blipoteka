@@ -77,19 +77,15 @@ class Void_Application_Resource_Doctrine extends Zend_Application_Resource_Resou
 			if (isset($attributes['profiler']) && $attributes['profiler'] == 1) {
 				$profiler = new Doctrine_Connection_Profiler();
 				$profilers[$name] = $profiler;
-				$connection->setListener($profiler);
+				$connection->addListener($profiler, 'profiler');
 			}
 			// Set connection charset
 			if (isset($attributes['charset'])) {
-				// Setting charset in case of MySQL requires an existing database, but if CLI's script
-				// create-db is called, we have none yet. Thus, handle the exception and issue a warning instead.
-				try {
-					// Setting charset may leave the connection open, thus CLI's script drop-db
-					// won't work on PostgreSQL. We need to close a connection first.
-					$connection->setCharset($attributes['charset']);
-				} catch (Doctrine_Connection_Exception $e) {
-					trigger_error("Unable to to connect the database, thus setting charset has failed", E_USER_WARNING);
-				}
+				// We need to set a connection charset, but we have to do it after
+				// connection has been established. Thus, we attach an event listerner
+				// implementing postConnect() method.
+				$charset = new Void_Application_Doctrine_EventListener_Charset($attributes['charset']);
+				$connection->addListener($charset, 'charset');
 			}
 		}
 
