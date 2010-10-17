@@ -122,10 +122,19 @@ class Import_GeoNames {
 			// Transform empty strings onto NULL values
 			$record = array_map(function($item) { return ($item === '' ? null : $item); }, $record);
 
+			// Skip ill-formed records
+			$skip = false;
+			foreach ($record as $field => $value) {
+				// Only admin2_code field can be NULL
+				if ($value === null && $field !== 'admin2_code') $skip = true;
+			}
+			if ($skip === true) continue;
+
 			// Save record to the database
 			$city = Doctrine_Core::getTable('Blipoteka_City')->find($record['city_id']);
 			$city = ($city instanceof Blipoteka_City ? $city : clone $blipotekaCity);
-			$city->synchronizeWithArray($record);
+			$city->fromArray($record);
+			$city->save();
 			$city->free(true);
 
 			// Increase number of imported records
