@@ -3,7 +3,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_1
     status: '0'
     title: 'Juliet, naga'
@@ -20,7 +19,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_2
     status: '0'
     title: Marta
@@ -37,7 +35,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_4
     status: '0'
     title: Popioły
@@ -54,7 +51,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_5
     status: '0'
     title: 'Gra z cieniem'
@@ -71,7 +67,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    holder: Blipoteka_User_1
     author: Blipoteka_Author_3
     status: '0'
     title: Ulisses
@@ -88,7 +83,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_6
     status: '0'
     title: 'Pisma. Opowiadania i powieści 1901-1909'
@@ -105,7 +99,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_4
     status: '0'
     title: 'Ludzie bezdomni'
@@ -122,7 +115,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    holder: Blipoteka_User_1
     author: Blipoteka_Author_7
     status: '0'
     title: 'Blask fantastyczny'
@@ -139,7 +131,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_9
     status: '0'
     title: 'Na wakacjach; Nawrócony; Sen'
@@ -156,7 +147,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_10
     status: '0'
     title: 'Wiersze wybrane'
@@ -173,7 +163,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    holder: Blipoteka_User_1
     author: Blipoteka_Author_8
     status: '0'
     title: 'Deklinacja nic'
@@ -190,7 +179,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_4
     status: '0'
     title: Przedwiośnie
@@ -207,7 +195,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_5
     status: '0'
     title: 'Popiół i diament'
@@ -224,7 +211,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_12
     status: '0'
     title: 'Ziemia obiecana'
@@ -241,7 +227,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    holder: Blipoteka_User_1
     author: Blipoteka_Author_11
     status: '0'
     title: 'Pamiętnik jasnowidza'
@@ -258,7 +243,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_2
     status: '0'
     title: Cham
@@ -275,7 +259,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_13
     status: '0'
     title: 'Pani Bovary'
@@ -292,7 +275,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_2
     status: '0'
     title: 'Nad Niemnem'
@@ -309,7 +291,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    holder: Blipoteka_User_1
     author: Blipoteka_Author_14
     status: '0'
     title: 'Słoneczna loteria'
@@ -326,7 +307,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_15
     status: '0'
     title: 'Wybór pism. Nowele'
@@ -343,7 +323,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    holder: Blipoteka_User_1
     author: Blipoteka_Author_16
     status: '0'
     title: 'Sto lat samotności'
@@ -360,7 +339,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_17
     status: '0'
     title: 'Literatura polska okresu pozytywizmu'
@@ -377,7 +355,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_9
     status: '0'
     title: Placówka
@@ -394,7 +371,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_18
     status: '0'
     title: Pozytywizm
@@ -411,7 +387,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_15
     status: '0'
     title: 'Nowele wybrane'
@@ -428,7 +403,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_19
     status: '0'
     title: 'Reportaże zagraniczne'
@@ -445,7 +419,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_21
     status: '0'
     title: 'Najdawniejsze zabytki języka polskiego'
@@ -478,7 +451,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_23
     status: '0'
     title: Biłek
@@ -495,7 +467,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_24
     status: '0'
     title: Przyducha
@@ -512,7 +483,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_25
     status: '0'
     title: Germinal
@@ -577,7 +547,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_28
     status: '0'
     title: 'Przeminęło z filmem'
@@ -609,7 +578,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_29
     status: '0'
     title: 'Sercowa choroba czyli moje życie w sztuce'
@@ -626,7 +594,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_5
     status: '0'
     title: 'Trzy opowieści'
@@ -643,7 +610,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_34
     status: '0'
     title: 'Dreszcz czystości'
@@ -676,7 +642,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_22
     status: '0'
     title: 'Psie serce'
@@ -693,7 +658,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_35
     status: '0'
     title: Antygona
@@ -710,7 +674,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_37
     status: '0'
     title: 'Literatura polska okresu pozytywizmu'
@@ -727,7 +690,6 @@ Blipoteka_Book:
     type: '1'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    holder: Blipoteka_User_1
     author: Blipoteka_Author_36
     status: '0'
     title: 'Szanse rozwoju osobowości'
@@ -744,7 +706,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    holder: Blipoteka_User_2
     author: Blipoteka_Author_9
     status: '0'
     title: Lalka
