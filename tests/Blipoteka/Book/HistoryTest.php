@@ -20,6 +20,12 @@
  * @license    http://blipoteka.pl/license Simplified BSD License
  */
 
+/**
+ * Book history entry test case
+ *
+ * @author Jakub Argasiński <argasek@gmail.com>
+ *
+ */
 class Blipoteka_Book_HistoryTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var Zend_Date
