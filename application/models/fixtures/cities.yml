@@ -2,7 +2,7 @@ Blipoteka_City:
   Blipoteka_City_756135:
     city_id: 756135
     name: Warszawa
-    asciiname: Warsaw
+    asciiname: Warszawa
     lat: '52.22977'
     lng: '21.01178'
     feature_code: PPLC
@@ -149,6 +149,16 @@ Blipoteka_City:
     admin1_code: '82'
     admin2_code: '2261'
     modified_at: '2010-09-13'
+  Blipoteka_City_3100946:
+    city_id: 3100946
+    name: Częstochowa
+    asciiname: Czestochowa
+    lat: '50.80000'
+    lng: '19.11667'
+    feature_code: PPL
+    admin1_code: '83'
+    admin2_code: null
+    modified_at: '2010-08-10'
   Blipoteka_City_3102014:
     city_id: 3102014
     name: Bydgoszcz

@@ -11,10 +11,14 @@ Blipoteka_Author:
     name: 'Bułhakow Michaił'
   Blipoteka_Author_20:
     name: 'Buttler Danuta'
+  Blipoteka_Author_43:
+    name: 'Cabot Meg'
   Blipoteka_Author_14:
     name: 'Dick Philip K.'
   Blipoteka_Author_26:
     name: 'Dukaj Jacek'
+  Blipoteka_Author_48:
+    name: 'Eco Umberto'
   Blipoteka_Author_34:
     name: 'Eden Dawn'
   Blipoteka_Author_13:
@@ -25,16 +29,28 @@ Blipoteka_Author:
     name: 'Gloss Molly'
   Blipoteka_Author_6:
     name: 'Gorki Maksym'
+  Blipoteka_Author_49:
+    name: 'Grimm Jakub'
+  Blipoteka_Author_50:
+    name: 'Grimm Wilhelm'
   Blipoteka_Author_30:
     name: 'Herbert Frank'
+  Blipoteka_Author_52:
+    name: 'Hłasko Marek'
   Blipoteka_Author_1:
     name: 'Hornby Nick'
   Blipoteka_Author_23:
     name: 'Iwaszkiewicz Jarosław'
   Blipoteka_Author_3:
     name: 'Joyce James'
+  Blipoteka_Author_47:
+    name: 'Kaliński Witold'
+  Blipoteka_Author_40:
+    name: 'Keret Etgar'
   Blipoteka_Author_39:
     name: 'Klich Aleksandra'
+  Blipoteka_Author_41:
+    name: 'Knotz Ksawery'
   Blipoteka_Author_10:
     name: 'Konopnicka Maria'
   Blipoteka_Author_31:
@@ -45,8 +61,12 @@ Blipoteka_Author:
     name: 'Márquez Gabriel García'
   Blipoteka_Author_11:
     name: 'Mustafa Akhara Jussuf'
+  Blipoteka_Author_51:
+    name: 'Nienacki Zbigniew'
   Blipoteka_Author_17:
     name: 'Nofer-Ładyka Alina'
+  Blipoteka_Author_53:
+    name: 'Orwell George'
   Blipoteka_Author_2:
     name: 'Orzeszkowa Eliza'
   Blipoteka_Author_8:
@@ -59,12 +79,22 @@ Blipoteka_Author:
     name: 'Prus Bolesław'
   Blipoteka_Author_12:
     name: 'Reymont Władysław Stanisław'
+  Blipoteka_Author_54:
+    name: 'Schmitt Éric-Emmanuel'
   Blipoteka_Author_15:
     name: 'Sienkiewicz Henryk'
+  Blipoteka_Author_55:
+    name: 'Siesicka Krystyna'
   Blipoteka_Author_35:
     name: Sofokles
+  Blipoteka_Author_42:
+    name: 'Sowa Izabela'
   Blipoteka_Author_38:
     name: 'Stephenson Neal'
+  Blipoteka_Author_44:
+    name: 'Strugacki Arkadij'
+  Blipoteka_Author_45:
+    name: 'Strugacki Borys'
   Blipoteka_Author_29:
     name: 'Stuhr Jerzy'
   Blipoteka_Author_21:
@@ -73,6 +103,8 @@ Blipoteka_Author:
     name: 'Tolkien J. R. R.'
   Blipoteka_Author_19:
     name: 'Wańkowicz Melchior'
+  Blipoteka_Author_46:
+    name: 'Zapolska Gabriela'
   Blipoteka_Author_25:
     name: 'Zola Emil'
   Blipoteka_Author_4:

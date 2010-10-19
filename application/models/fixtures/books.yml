@@ -813,3 +813,227 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: true
     created_at: '2010-10-17 21:43:22'
+  Blipoteka_Book_53:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_40
+    status: '0'
+    title: 'Kolonie Knellera'
+    original_title: 'Hakaitana szel Kneller'
+    city: Blipoteka_City_756135
+    publisher: Blipoteka_Publisher_27
+    year: '2009'
+    pages: '107'
+    isbn: '9788374145503'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:01:03'
+  Blipoteka_Book_54:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_41
+    status: '0'
+    title: 'Nie bój się seksu czyli kochaj i rób, co chcesz'
+    original_title: null
+    city: Blipoteka_City_3094802
+    publisher: Blipoteka_Publisher_28
+    year: '2009'
+    pages: '209'
+    isbn: '9788360040997'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:07:28'
+  Blipoteka_Book_55:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_41
+    status: '0'
+    title: 'Seks, jakiego nie znacie'
+    original_title: null
+    city: Blipoteka_City_3100946
+    publisher: Blipoteka_Publisher_29
+    year: '2009'
+    pages: '211'
+    isbn: '9788374246187'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:20:46'
+  Blipoteka_Book_56:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_42
+    status: '0'
+    title: 'Zielone jabłuszko'
+    original_title: null
+    city: Blipoteka_City_756135
+    publisher: Blipoteka_Publisher_5
+    year: '2004'
+    pages: '176'
+    isbn: '8373378278'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:25:51'
+  Blipoteka_Book_57:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_43
+    status: '0'
+    title: 'Kłamczucha w opałach'
+    original_title: 'Pants on Fire'
+    city: Blipoteka_City_756135
+    publisher: Blipoteka_Publisher_18
+    year: '2008'
+    pages: '215'
+    isbn: '9788324130825'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:27:47'
+  Blipoteka_Book_58:
+    type: '0'
+    user: Blipoteka_User_1
+    owner: Blipoteka_User_1
+    author: Blipoteka_Author_44
+    status: '0'
+    title: 'Piknik na skraju drogi'
+    original_title: 'Пикник на обочине'
+    city: Blipoteka_City_756135
+    publisher: Blipoteka_Publisher_20
+    year: '1974'
+    pages: '239'
+    isbn: null
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:37:17'
+  Blipoteka_Book_59:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_46
+    status: '0'
+    title: 'Moralność pani Dulskiej'
+    original_title: null
+    city: Blipoteka_City_3094802
+    publisher: Blipoteka_Publisher_30
+    year: null
+    pages: '96'
+    isbn: '9788386740451'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:39:19'
+  Blipoteka_Book_60:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_47
+    status: '0'
+    title: 'Poezja naszego wieku. Antologia wierszy publikowanych po 1918 roku'
+    original_title: null
+    city: Blipoteka_City_756135
+    publisher: Blipoteka_Publisher_13
+    year: '1989'
+    pages: '463'
+    isbn: '8302037710'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:43:13'
+  Blipoteka_Book_61:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_49
+    status: '0'
+    title: Baśnie
+    original_title: null
+    city: Blipoteka_City_3094802
+    publisher: Blipoteka_Publisher_30
+    year: '2007'
+    pages: '158'
+    isbn: '9788374354134'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:49:10'
+  Blipoteka_Book_62:
+    type: '0'
+    user: Blipoteka_User_1
+    owner: Blipoteka_User_1
+    author: Blipoteka_Author_48
+    status: '0'
+    title: 'Imię róży'
+    original_title: 'Il nome della rosa'
+    city: Blipoteka_City_756135
+    publisher: Blipoteka_Publisher_4
+    year: '1996'
+    pages: '628'
+    isbn: '8306024842'
+    description: null
+    auto_accept_requests: true
+    created_at: '2010-10-18 21:49:40'
+  Blipoteka_Book_63:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_54
+    status: '0'
+    title: 'Pan Ibrahim i kwiaty Koranu'
+    original_title: 'Monsieur Ibrahim et les fleurs du Coran'
+    city: Blipoteka_City_3094802
+    publisher: Blipoteka_Publisher_26
+    year: '2008'
+    pages: '63'
+    isbn: '9788324004713'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 21:55:29'
+  Blipoteka_Book_65:
+    type: '1'
+    user: Blipoteka_User_1
+    owner: Blipoteka_User_1
+    author: Blipoteka_Author_51
+    status: '0'
+    title: 'Wielki las'
+    original_title: null
+    city: Blipoteka_City_763166
+    publisher: Blipoteka_Publisher_31
+    year: '1987'
+    pages: '416'
+    isbn: '8385255001'
+    description: null
+    auto_accept_requests: true
+    created_at: '2010-10-18 22:00:18'
+  Blipoteka_Book_66:
+    type: '0'
+    user: Blipoteka_User_2
+    owner: Blipoteka_User_2
+    author: Blipoteka_Author_55
+    status: '0'
+    title: Patussa
+    original_title: null
+    city: Blipoteka_City_3093133
+    publisher: Blipoteka_Publisher_32
+    year: '2006'
+    pages: '112'
+    isbn: '9788388790980'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 22:00:29'
+  Blipoteka_Book_67:
+    type: '0'
+    user: Blipoteka_User_1
+    owner: Blipoteka_User_1
+    author: Blipoteka_Author_52
+    status: '0'
+    title: 'Piękni, dwudziestoletni'
+    original_title: null
+    city: Blipoteka_City_756135
+    publisher: Blipoteka_Publisher_6
+    year: '1988'
+    pages: '174'
+    isbn: '8370012485'
+    description: null
+    auto_accept_requests: false
+    created_at: '2010-10-18 22:04:31'
