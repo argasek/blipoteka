@@ -30,7 +30,7 @@ class Void_Application_Resource_Doctrine extends Zend_Application_Resource_Resou
 	public function init() {
 		$className = 'Doctrine_Core';
 		if (!class_exists($className)) {
-			throw new Zend_Application_Resource_Exception(sprintf("Class '%s' not found. Probably Doctrine is not installed or include_path settings are wrong", $class));
+			throw new Zend_Application_Resource_Exception(sprintf("Class '%s' not found. Probably Doctrine is not installed or include_path settings are wrong", $className));
 		}
 		spl_autoload_register(array($className, 'autoload'));
 
@@ -71,7 +71,7 @@ class Void_Application_Resource_Doctrine extends Zend_Application_Resource_Resou
 			);
 
 			// Open a new connection
-			$connection = Doctrine_Manager::connection($dsn, $name);
+			$connection = $manager->openConnection($dsn, $name, ($name === 'default'));
 
 			// Add a profiler listener if configuration said so
 			if (isset($attributes['profiler']) && $attributes['profiler'] == 1) {
@@ -89,6 +89,7 @@ class Void_Application_Resource_Doctrine extends Zend_Application_Resource_Resou
 			}
 		}
 
+		// Register profilers and loggers
 		$doctrineProfilers = array(
 			'profilers' => $profilers,
 			'loggers' => (isset($this->_options['dqlloggers']) ? $this->_options['dqlloggers'] : null)
