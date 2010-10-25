@@ -25,5 +25,5 @@ define('APPLICATION_DOCTRINE_SCRIPT', true);
 
 include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'doctrine-console-common.php';
 
-$script = new Blipoteka_Scripts_Migration($doctrine->getCli());
+$script = new Blipoteka_Scripts_Migration($doctrine);
 $script->run();

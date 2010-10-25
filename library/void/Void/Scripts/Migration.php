@@ -35,11 +35,23 @@ class Void_Scripts_Migration extends Void_Scripts {
 	 */
 	protected $migration;
 
-	public function __construct(Doctrine_Cli $cli) {
+	/**
+	 * A doctrine object
+	 * @var Void_Application_Doctrine
+	 */
+	protected $doctrine;
+
+	/**
+	 * The constructor
+	 * @param Void_Application_Doctrine $doctrine
+	 */
+	public function __construct(Void_Application_Doctrine $doctrine) {
 		parent::__construct();
 
+		$this->doctrine = $doctrine;
+
 		// Set up a migration object
-		$this->setUpMigration($cli);
+		$this->setUpMigration($doctrine->getCli());
 	}
 
 	/**
@@ -63,6 +75,20 @@ class Void_Scripts_Migration extends Void_Scripts {
 			default:
 				$this->parser->displayUsage();
 		}
+		// Optionally, log all queries
+		$this->logQueries();
+	}
+
+	/**
+	 * Log queries to a file.
+	 * @see Void_Application_Doctrine_Log
+	 */
+	private function logQueries() {
+		if ($this->cli->options['logqueries'] !== true) return;
+		$profilers = $this->doctrine->getManager()->getCurrentConnection()->getParam('profilers');
+		$log = new Void_Application_Doctrine_Log($profilers['profilers']);
+		$log->setFilteredEventTypes(array('exec', 'execute'));
+		$log->saveToFile();
 	}
 
 	/**
@@ -145,9 +171,12 @@ class Void_Scripts_Migration extends Void_Scripts {
 
 	/**
 	 * Perform a migration
+	 * @return bool
 	 */
 	private function actionMigrate() {
+		$success = true;
 		$version = $this->getDestinationVersion();
+		$dryrun = !!$this->cli->options['dryrun'];
 		// Show information about current and latest available version
 		$this->showMigrationVersions();
 		printf("Migrating to version: %s\n", ($this->cli->command->args['version'] === null ? 'latest' : $version));
@@ -161,12 +190,18 @@ class Void_Scripts_Migration extends Void_Scripts {
 		} else {
 			// Migrate, optionally with a dry run.
 			try {
-				$this->getMigration()->migrate($version, !!$this->cli->options['dryrun']);
+				$this->getMigration()->migrate($version, $dryrun);
+				if ($dryrun === false) {
+					printf("Successfully migrated to version: #%d.\n", $version);
+				} else {
+					printf("Successfully performed a dry-run of migration to version: #%d.\n", $version);
+				}
 			} catch (Doctrine_Migration_Exception $e) {
 				printf("Error: %s\n", $e->getMessage());
-				exit($e->getCode());
+				$success = false;
 			}
 		}
+		return $success;
 	}
 
 	/**
@@ -179,6 +214,14 @@ class Void_Scripts_Migration extends Void_Scripts {
 			'long_name'   => '--dry-run',
 		    'action'      => 'StoreTrue',
 		    'description' => "don't perform actual changes"
+		));
+
+		// Add an option to log all queries to a file
+		$this->parser->addOption('logqueries', array(
+		    'short_name'  => '-l',
+			'long_name'   => '--log-queries',
+		    'action'      => 'StoreTrue',
+		    'description' => sprintf("log all queries to a %s file", self::QUERY_LOG_FILENAME)
 		));
 
 		// Add a command to get current migration version

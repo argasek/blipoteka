@@ -26,3 +26,9 @@ define('APPLICATION_DOCTRINE_SCRIPT', true);
 include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'doctrine-console-common.php';
 
 $doctrine->getCli()->run($_SERVER['argv']);
+
+// Log queries to file
+$profilers = $doctrine->getManager()->getCurrentConnection()->getParam('profilers');
+$log = new Void_Application_Doctrine_Log($profilers['profilers']);
+$log->setFilteredEventTypes(array('exec', 'execute'));
+$log->saveToFile();
