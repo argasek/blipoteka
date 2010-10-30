@@ -3,7 +3,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_1
     status: '0'
     title: 'Juliet, naga'
     original_title: 'Juliet, Naked'
@@ -19,7 +18,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_2
     status: '0'
     title: Marta
     original_title: null
@@ -35,7 +33,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_4
     status: '0'
     title: Popioły
     original_title: null
@@ -51,7 +48,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_5
     status: '0'
     title: 'Gra z cieniem'
     original_title: null
@@ -67,7 +63,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_3
     status: '0'
     title: Ulisses
     original_title: Ulysses
@@ -83,7 +78,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_6
     status: '0'
     title: 'Pisma. Opowiadania i powieści 1901-1909'
     original_title: null
@@ -99,7 +93,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_4
     status: '0'
     title: 'Ludzie bezdomni'
     original_title: null
@@ -115,7 +108,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_7
     status: '0'
     title: 'Blask fantastyczny'
     original_title: 'The Light Fantastic'
@@ -131,7 +123,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_9
     status: '0'
     title: 'Na wakacjach; Nawrócony; Sen'
     original_title: null
@@ -147,7 +138,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_10
     status: '0'
     title: 'Wiersze wybrane'
     original_title: null
@@ -163,7 +153,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_8
     status: '0'
     title: 'Deklinacja nic'
     original_title: null
@@ -179,7 +168,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_4
     status: '0'
     title: Przedwiośnie
     original_title: null
@@ -195,7 +183,6 @@ Blipoteka_Book:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_5
     status: '0'
     title: 'Popiół i diament'
     original_title: null
@@ -207,11 +194,10 @@ Blipoteka_Book:
     description: 'Seria: Biblioteka Powszechna'
     auto_accept_requests: false
     created_at: '2010-10-17 18:24:28'
-  Blipoteka_Book_15:
+  Blipoteka_Book_14:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_12
     status: '0'
     title: 'Ziemia obiecana'
     original_title: null
@@ -223,11 +209,10 @@ Blipoteka_Book:
     description: "Wydanie w 2 tomach;\r\nPosłowie i przypisy: Bogdan Mazan"
     auto_accept_requests: false
     created_at: '2010-10-17 18:29:16'
-  Blipoteka_Book_16:
+  Blipoteka_Book_15:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_11
     status: '0'
     title: 'Pamiętnik jasnowidza'
     original_title: null
@@ -239,11 +224,10 @@ Blipoteka_Book:
     description: 'Autor ciekawie, niejednokrotnie z humorem opisuje epizody ze swego życia, od trudnego dzieciństwa w przedwojennej Polsce, poprzez II wojnę światową i pobyt w obozach zagłady, do Polski Ludowej. Nie wprowadzając nas w arkana sztuk tajemnych przedstawia świat międzywojnia ze swojego osobliwego, oryginalnego punktu widzenia.'
     auto_accept_requests: false
     created_at: '2010-10-17 18:30:37'
-  Blipoteka_Book_17:
+  Blipoteka_Book_16:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_2
     status: '0'
     title: Cham
     original_title: null
@@ -255,11 +239,10 @@ Blipoteka_Book:
     description: 'Posłowie: Jan Okopień'
     auto_accept_requests: false
     created_at: '2010-10-17 18:31:05'
-  Blipoteka_Book_18:
+  Blipoteka_Book_17:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_13
     status: '0'
     title: 'Pani Bovary'
     original_title: 'Madame Bovary'
@@ -271,11 +254,10 @@ Blipoteka_Book:
     description: "Seria: Biblioteka Arcydzieł. Najsławniejsze powieści świata;\r\nPrzedmowa: Jan Parandowski"
     auto_accept_requests: false
     created_at: '2010-10-17 18:36:39'
-  Blipoteka_Book_19:
+  Blipoteka_Book_18:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_2
     status: '0'
     title: 'Nad Niemnem'
     original_title: null
@@ -287,11 +269,10 @@ Blipoteka_Book:
     description: 'Posłowie: Jan Krzyżanowski'
     auto_accept_requests: false
     created_at: '2010-10-17 18:41:21'
-  Blipoteka_Book_20:
+  Blipoteka_Book_19:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_14
     status: '0'
     title: 'Słoneczna loteria'
     original_title: 'Solar Lottery'
@@ -303,11 +284,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 18:45:23'
-  Blipoteka_Book_21:
+  Blipoteka_Book_20:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_15
     status: '0'
     title: 'Wybór pism. Nowele'
     original_title: null
@@ -319,11 +299,10 @@ Blipoteka_Book:
     description: "Tylko tom 1;\r\nWstęp: Leon Kruczkowski"
     auto_accept_requests: false
     created_at: '2010-10-17 18:47:40'
-  Blipoteka_Book_22:
+  Blipoteka_Book_21:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_16
     status: '0'
     title: 'Sto lat samotności'
     original_title: 'Cien años de soledad'
@@ -335,11 +314,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: true
     created_at: '2010-10-17 18:52:26'
-  Blipoteka_Book_23:
+  Blipoteka_Book_22:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_17
     status: '0'
     title: 'Literatura polska okresu pozytywizmu'
     original_title: null
@@ -351,11 +329,10 @@ Blipoteka_Book:
     description: 'Podręcznik szkolny'
     auto_accept_requests: false
     created_at: '2010-10-17 18:52:32'
-  Blipoteka_Book_24:
+  Blipoteka_Book_23:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_9
     status: '0'
     title: Placówka
     original_title: null
@@ -367,11 +344,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 18:55:58'
-  Blipoteka_Book_25:
+  Blipoteka_Book_24:
     type: '0'
     user: Blipoteka_User_1
-    owner: Blipoteka_User_2
-    author: Blipoteka_Author_18
+    owner: Blipoteka_User_1
     status: '0'
     title: Pozytywizm
     original_title: null
@@ -383,11 +359,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 19:05:59'
-  Blipoteka_Book_26:
+  Blipoteka_Book_25:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_15
     status: '0'
     title: 'Nowele wybrane'
     original_title: null
@@ -399,11 +374,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 19:06:03'
-  Blipoteka_Book_27:
+  Blipoteka_Book_26:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_19
     status: '0'
     title: 'Reportaże zagraniczne'
     original_title: null
@@ -415,11 +389,10 @@ Blipoteka_Book:
     description: 'Seria: Biblioteka Literatury Faktu'
     auto_accept_requests: false
     created_at: '2010-10-17 19:09:55'
-  Blipoteka_Book_28:
+  Blipoteka_Book_27:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_21
     status: '0'
     title: 'Najdawniejsze zabytki języka polskiego'
     original_title: null
@@ -431,11 +404,10 @@ Blipoteka_Book:
     description: 'Seria: Biblioteka Narodowa I 104'
     auto_accept_requests: false
     created_at: '2010-10-17 19:17:32'
-  Blipoteka_Book_29:
+  Blipoteka_Book_28:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_22
     status: '0'
     title: 'Fatalne jaja i inne opowiadania'
     original_title: 'Роковые яйца'
@@ -447,11 +419,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-06 22:31:45'
-  Blipoteka_Book_30:
+  Blipoteka_Book_29:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_23
     status: '0'
     title: Biłek
     original_title: null
@@ -463,11 +434,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 19:19:36'
-  Blipoteka_Book_31:
+  Blipoteka_Book_30:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_24
     status: '0'
     title: Przyducha
     original_title: null
@@ -479,11 +449,10 @@ Blipoteka_Book:
     description: 'Zawiera: 1) Przyducha, 2) Dziewięciokrotne powiększenie'
     auto_accept_requests: false
     created_at: '2010-10-17 19:27:05'
-  Blipoteka_Book_32:
+  Blipoteka_Book_31:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_25
     status: '0'
     title: Germinal
     original_title: Germinal
@@ -495,11 +464,10 @@ Blipoteka_Book:
     description: 'Seria: Biblioteka Klasyki Polskiej i Obcej'
     auto_accept_requests: false
     created_at: '2010-10-17 19:33:30'
-  Blipoteka_Book_33:
+  Blipoteka_Book_32:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_26
     status: '0'
     title: Lód
     original_title: null
@@ -511,11 +479,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 19:38:57'
-  Blipoteka_Book_34:
+  Blipoteka_Book_33:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_27
     status: '0'
     title: Silmarilion
     original_title: 'The Silmarillion'
@@ -527,11 +494,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 20:07:25'
-  Blipoteka_Book_35:
+  Blipoteka_Book_34:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_27
     status: '0'
     title: 'Hobbit albo tam i z powrotem'
     original_title: 'The Hobbit or There and Back Again'
@@ -543,11 +509,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 20:21:25'
-  Blipoteka_Book_36:
+  Blipoteka_Book_35:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_28
     status: '0'
     title: 'Przeminęło z filmem'
     original_title: null
@@ -559,11 +524,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 20:32:39'
-  Blipoteka_Book_37:
+  Blipoteka_Book_36:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_30
     status: '0'
     title: Diuna
     original_title: Dune
@@ -574,11 +538,10 @@ Blipoteka_Book:
     description: 'Wydanie w 2 tomach'
     auto_accept_requests: false
     created_at: '2010-10-17 20:36:39'
-  Blipoteka_Book_38:
+  Blipoteka_Book_37:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_29
     status: '0'
     title: 'Sercowa choroba czyli moje życie w sztuce'
     original_title: null
@@ -590,11 +553,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 20:37:47'
-  Blipoteka_Book_39:
+  Blipoteka_Book_38:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_5
     status: '0'
     title: 'Trzy opowieści'
     original_title: null
@@ -606,11 +568,10 @@ Blipoteka_Book:
     description: 'Zawiera: 1) Ciemności kryją ziemię, 2) Bramy raju, 3) Idzie skacząc po górach'
     auto_accept_requests: false
     created_at: '2010-10-17 20:40:14'
-  Blipoteka_Book_40:
+  Blipoteka_Book_39:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_34
     status: '0'
     title: 'Dreszcz czystości'
     original_title: 'The Thrill of the Chaste: Finding Fulfillment While Keeping Your Clothes On'
@@ -622,11 +583,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 20:44:36'
-  Blipoteka_Book_41:
+  Blipoteka_Book_40:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_31
     status: '0'
     title: 'Coś na progu'
     original_title: null
@@ -638,11 +598,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 20:45:33'
-  Blipoteka_Book_42:
+  Blipoteka_Book_41:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_22
     status: '0'
     title: 'Psie serce'
     original_title: 'Sobaczje sierdce'
@@ -654,11 +613,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 20:50:19'
-  Blipoteka_Book_43:
+  Blipoteka_Book_42:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_35
     status: '0'
     title: Antygona
     original_title: Αντιγόνη
@@ -670,11 +628,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 20:55:25'
-  Blipoteka_Book_44:
+  Blipoteka_Book_43:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_37
     status: '0'
     title: 'Literatura polska okresu pozytywizmu'
     original_title: null
@@ -686,11 +643,10 @@ Blipoteka_Book:
     description: 'Podręcznik dla techników'
     auto_accept_requests: false
     created_at: '2010-10-17 21:00:40'
-  Blipoteka_Book_45:
+  Blipoteka_Book_44:
     type: '1'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_36
     status: '0'
     title: 'Szanse rozwoju osobowości'
     original_title: null
@@ -702,11 +658,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: true
     created_at: '2010-10-17 21:02:19'
-  Blipoteka_Book_46:
+  Blipoteka_Book_45:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_9
     status: '0'
     title: Lalka
     original_title: null
@@ -718,11 +673,10 @@ Blipoteka_Book:
     description: 'Wydanie w 2 tomach'
     auto_accept_requests: false
     created_at: '2010-10-17 21:04:15'
-  Blipoteka_Book_47:
+  Blipoteka_Book_46:
     type: '1'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_32
     status: '0'
     title: 'Światło dnia'
     original_title: 'The Dazzle of Day'
@@ -734,11 +688,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: true
     created_at: '2010-10-17 21:05:52'
-  Blipoteka_Book_48:
+  Blipoteka_Book_47:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_33
     status: '0'
     title: 'Graf Zero'
     original_title: 'Count Zero'
@@ -750,11 +703,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 21:07:39'
-  Blipoteka_Book_49:
+  Blipoteka_Book_48:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_26
     status: '0'
     title: 'Inne pieśni'
     original_title: null
@@ -766,11 +718,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 21:09:05'
-  Blipoteka_Book_50:
+  Blipoteka_Book_49:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_38
     status: '0'
     title: Zamieć
     original_title: 'Snow Crash'
@@ -782,11 +733,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 21:12:43'
-  Blipoteka_Book_51:
+  Blipoteka_Book_50:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_14
     status: '0'
     title: 'Blade Runner'
     original_title: 'Do Androids Dream of Electric Sheep?'
@@ -797,11 +747,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-17 21:15:49'
-  Blipoteka_Book_52:
+  Blipoteka_Book_51:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_39
     status: '0'
     title: 'Cały ten Kutz'
     original_title: null
@@ -813,11 +762,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: true
     created_at: '2010-10-17 21:43:22'
-  Blipoteka_Book_53:
+  Blipoteka_Book_52:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_40
     status: '0'
     title: 'Kolonie Knellera'
     original_title: 'Hakaitana szel Kneller'
@@ -829,11 +777,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:01:03'
-  Blipoteka_Book_54:
+  Blipoteka_Book_53:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_41
     status: '0'
     title: 'Nie bój się seksu czyli kochaj i rób, co chcesz'
     original_title: null
@@ -845,11 +792,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:07:28'
-  Blipoteka_Book_55:
+  Blipoteka_Book_54:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_41
     status: '0'
     title: 'Seks, jakiego nie znacie'
     original_title: null
@@ -861,11 +807,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:20:46'
-  Blipoteka_Book_56:
+  Blipoteka_Book_55:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_42
     status: '0'
     title: 'Zielone jabłuszko'
     original_title: null
@@ -877,11 +822,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:25:51'
-  Blipoteka_Book_57:
+  Blipoteka_Book_56:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_43
     status: '0'
     title: 'Kłamczucha w opałach'
     original_title: 'Pants on Fire'
@@ -893,11 +837,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:27:47'
-  Blipoteka_Book_58:
+  Blipoteka_Book_57:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_44
     status: '0'
     title: 'Piknik na skraju drogi'
     original_title: 'Пикник на обочине'
@@ -909,11 +852,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:37:17'
-  Blipoteka_Book_59:
+  Blipoteka_Book_58:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_46
     status: '0'
     title: 'Moralność pani Dulskiej'
     original_title: null
@@ -925,11 +867,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:39:19'
-  Blipoteka_Book_60:
+  Blipoteka_Book_59:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_47
     status: '0'
     title: 'Poezja naszego wieku. Antologia wierszy publikowanych po 1918 roku'
     original_title: null
@@ -941,11 +882,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:43:13'
-  Blipoteka_Book_61:
+  Blipoteka_Book_60:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_49
     status: '0'
     title: Baśnie
     original_title: null
@@ -957,11 +897,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:49:10'
-  Blipoteka_Book_62:
+  Blipoteka_Book_61:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_48
     status: '0'
     title: 'Imię róży'
     original_title: 'Il nome della rosa'
@@ -973,11 +912,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: true
     created_at: '2010-10-18 21:49:40'
-  Blipoteka_Book_63:
+  Blipoteka_Book_62:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_54
     status: '0'
     title: 'Pan Ibrahim i kwiaty Koranu'
     original_title: 'Monsieur Ibrahim et les fleurs du Coran'
@@ -989,11 +927,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 21:55:29'
-  Blipoteka_Book_65:
+  Blipoteka_Book_63:
     type: '1'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_51
     status: '0'
     title: 'Wielki las'
     original_title: null
@@ -1005,11 +942,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: true
     created_at: '2010-10-18 22:00:18'
-  Blipoteka_Book_66:
+  Blipoteka_Book_64:
     type: '0'
     user: Blipoteka_User_2
     owner: Blipoteka_User_2
-    author: Blipoteka_Author_55
     status: '0'
     title: Patussa
     original_title: null
@@ -1021,11 +957,10 @@ Blipoteka_Book:
     description: null
     auto_accept_requests: false
     created_at: '2010-10-18 22:00:29'
-  Blipoteka_Book_67:
+  Blipoteka_Book_65:
     type: '0'
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
-    author: Blipoteka_Author_52
     status: '0'
     title: 'Piękni, dwudziestoletni'
     original_title: null

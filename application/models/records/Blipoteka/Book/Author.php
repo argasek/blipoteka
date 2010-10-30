@@ -31,15 +31,15 @@ class Blipoteka_Book_Author extends Doctrine_Record {
 	/**
 	 * Setup record, table name etc.
 	 *
-	 * @property integer $author_id Primary key
-	 * @property string $name Surname and name of the author
+	 * @property integer $book_id Foreign key of a book
+	 * @property integer $author_id Foreign key of book's author
+	 * @property bool $is_master Is this author marked as a master author of this book?
 	 */
 	public function setTableDefinition() {
 		$this->setTableName('books_authors');
-
-		$this->hasColumn('id', 'integer', 4, array('primary' => true, 'autoincrement' => true));
-		$this->hasColumn('book_id', 'integer', 4, array('notnull' => true));
-		$this->hasColumn('author_id', 'integer', 4, array('notnull' => true));
+		$this->hasColumn('book_id', 'integer', 4, array('primary' => true));
+		$this->hasColumn('author_id', 'integer', 4, array('primary' => true));
+		$this->hasColumn('is_master', 'boolean', null, array('notnull' => true, 'default' => false));
 	}
 
 	/**

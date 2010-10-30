@@ -39,7 +39,6 @@ class Blipoteka_BookTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$this->book = new Blipoteka_Book();
 		$this->book->title = 'Przykładowa, bardzo interesująca książka';
-		$this->book->author_id = 1;
 		$this->book->city_id = 756135;
 		$this->book->publisher_id = 1;
 		$this->book->user_id = 1;

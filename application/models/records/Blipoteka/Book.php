@@ -84,7 +84,6 @@ class Blipoteka_Book extends Doctrine_Record {
 	 * @property integer $user_id Foreign key of user being provider of the book
 	 * @property integer $owner_id Foreign key of user being owner of the book
 	 * @property integer $holder_id Foreign key of user being current holder of the book
-	 * @property integer $author_id Foreign key of default (main) author of the book
 	 * @property integer $status What's going on with the book? (awaits courier, being read, delivered etc.)
 	 * @property string $title Title of the book in Polish language
 	 * @property string $original_title Title of the book in original language
@@ -104,7 +103,6 @@ class Blipoteka_Book extends Doctrine_Record {
 		$this->hasColumn('user_id', 'integer', 4, array('notnull' => false));
 		$this->hasColumn('owner_id', 'integer', 4, array('notnull' => false));
 		$this->hasColumn('holder_id', 'integer', 4, array('notnull' => false));
-		$this->hasColumn('author_id', 'integer', 4, array('notnull' => true));
 		$this->hasColumn('status', 'integer', 1, array('notnull' => true, 'default' => self::STATUS_AVAILABLE));
 		$this->hasColumn('title', 'string', 256, array('notnull' => true));
 		$this->hasColumn('original_title', 'string', 256, array('notnull' => false));
@@ -122,10 +120,9 @@ class Blipoteka_Book extends Doctrine_Record {
 	 * @see Doctrine_Record::setUp()
 	 */
 	public function setUp() {
-		// We assume each book has at least one author and we consider him/her a main (default) author.
-		// If this author gets deleted, all books by him/her are deleted as well.
-		$this->hasOne('Blipoteka_Author as author', array('local' => 'author_id', 'foreign' => 'author_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE'));
-		// Book may have many additional authors
+		// We assume each book has at least one author and we consider him/her a master (default) author.
+		// If this author gets deleted, all books by him/her are deleted as well. Also, a book may have
+		// many additional authors.
 		$this->hasMany('Blipoteka_Author as authors', array(
 			'local' => 'book_id',
 			'foreign' => 'author_id',
