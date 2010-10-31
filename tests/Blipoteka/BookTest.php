@@ -93,4 +93,21 @@ class Blipoteka_BookTest extends PHPUnit_Framework_TestCase {
 		$this->assertNull($this->book->holder_id);
 	}
 
+	/**
+	 * A status should be valid
+	 * @expectedException Doctrine_Record_Exception
+	 */
+	public function testPreSaveValidStatus() {
+		$this->book->status = -1;
+		$this->book->save();
+	}
+
+	/**
+	 * A type should be valid
+	 * @expectedException Doctrine_Record_Exception
+	 */
+	public function testPreSaveValidType() {
+		$this->book->type = -1;
+		$this->book->save();
+	}
 }

@@ -120,6 +120,7 @@ class Blipoteka_Book extends Doctrine_Record {
 	 * @see Doctrine_Record::setUp()
 	 */
 	public function setUp() {
+		parent::setUp();
 		// We assume each book has at least one author and we consider him/her a master (default) author.
 		// If this author gets deleted, all books by him/her are deleted as well. Also, a book may have
 		// many additional authors.
@@ -146,6 +147,22 @@ class Blipoteka_Book extends Doctrine_Record {
 	}
 
 	/**
+	 * Check if given status is a valid one
+	 * @return bool
+	 */
+	protected function isValidStatus($status) {
+		return Void_Util_Class::isValidConstant(get_class($this), 'STATUS', $status, false);
+	}
+
+	/**
+	 * Check if given type is a valid one
+	 * @return bool
+	 */
+	protected function isValidType($type) {
+		return Void_Util_Class::isValidConstant(get_class($this), 'TYPE', $type, false);
+	}
+
+	/**
 	 * Check if saved data is right
 	 * @see Doctrine_Record::preSave()
 	 */
@@ -155,6 +172,14 @@ class Blipoteka_Book extends Doctrine_Record {
 		// One cannot be a current owner and a holder of a book at the same time.
 		if ($invoker->owner_id !== null && $invoker->owner_id === $invoker->holder_id) {
 			throw new Doctrine_Record_Exception("Owner and holder of a book can't be the same person", Doctrine_Core::ERR_CONSTRAINT);
+		}
+		// Check for a valid status
+		if ($this->isValidStatus($invoker->status) === false) {
+			throw new Doctrine_Record_Exception(sprintf("Tried to set invalid book status (%d)", $invoker->status), Doctrine_Core::ERR_CONSTRAINT);
+		}
+		// Check for a valid type
+		if ($this->isValidType($invoker->type) === false) {
+			throw new Doctrine_Record_Exception(sprintf("Tried to set invalid book type (%d)", $invoker->type), Doctrine_Core::ERR_CONSTRAINT);
 		}
 	}
 
@@ -177,6 +202,17 @@ class Blipoteka_Book extends Doctrine_Record {
 
 		// When a book is added to a user's pool, he or she becomes an owner automatically
 		$invoker->owner_id = $invoker->user_id;
+	}
+
+	/**
+	 * Set up non-standard doctrine record validators
+	 */
+	protected function setUpValidators() {
+		// Validate e-mail address
+		$isbn = new Zend_Validate_Isbn();
+		$validators = new Zend_Validate();
+		$validators->addValidator($isbn);
+		$this->setColumnValidators('isbn', $validators);
 	}
 
 }
