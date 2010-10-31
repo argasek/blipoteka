@@ -26,14 +26,14 @@
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
-class Blipoteka_User extends Doctrine_Record {
+class Blipoteka_User extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
 	 *
 	 * @property integer $user_id Primary key
 	 * @property string $email E-mail address
-	 * @property string $password Salted hash of users's password
+	 * @property string $password Salted hash of user's password
 	 * @property string $name Last name and first name of user
 	 * @property string $log_date The date and time user last logged in
 	 * @property integer $lognum How many times user logged in
@@ -63,6 +63,7 @@ class Blipoteka_User extends Doctrine_Record {
 	 * @see Doctrine_Record::setUp()
 	 */
 	public function setUp() {
+		parent::setUp();
 		// User may have many friends
 		$this->hasMany('Blipoteka_User as friends', array(
 			'local' => 'user_id',
@@ -85,6 +86,17 @@ class Blipoteka_User extends Doctrine_Record {
 		// we are interested only of user's triggered record updates (ie. updated_at
 		// shouldn't be touched when, for example, we are increasing log_num)
 		$this->actAs('Timestampable');
+	}
+
+	/**
+	 * Set up non-standard doctrine record validators
+	 */
+	protected function setUpValidators() {
+		// Validate e-mail address
+		$email = new Void_Validate_Email(array('checkdns' => true));
+		$validators = new Zend_Validate();
+		$validators->addValidator($email);
+		$this->setColumnValidators('email', $validators);
 	}
 
 }
