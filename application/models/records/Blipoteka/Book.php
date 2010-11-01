@@ -26,7 +26,7 @@
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
-class Blipoteka_Book extends Doctrine_Record {
+class Blipoteka_Book extends Void_Doctrine_Record {
 
 	/**
 	 * The book is available for lending

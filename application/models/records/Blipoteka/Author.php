@@ -26,7 +26,7 @@
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
-class Blipoteka_Author extends Doctrine_Record {
+class Blipoteka_Author extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
