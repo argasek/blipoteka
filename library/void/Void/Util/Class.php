@@ -48,4 +48,27 @@ class Void_Util_Class {
 		return false;
 	}
 
+	/**
+	 * Get class constants (optionally filtered by
+	 *
+	 * @param string $class A class
+	 * @param string $prefix A constant prefix
+	 * @param mixed $value A value
+	 * @param bool $strict If true, make a type check when comparing values
+	 *
+	 * @return bool
+	 */
+	public static function getConstants($class, $prefix = '') {
+		$reflection = new ReflectionClass($class);
+		$constants = $reflection->getConstants();
+		// Return all class constants if no prefix given
+		if ($prefix === '') return $constants;
+		// Filter constants by prefix
+		foreach ($constants as $name => $constant) {
+			if (substr($name, 0, strlen($prefix)) !== $prefix) {
+				unset($constants[$name]);
+			}
+		}
+		return $constants;
+	}
 }
