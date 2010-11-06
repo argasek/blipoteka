@@ -23,6 +23,11 @@
 /**
  * User's Blip account entity
  *
+ * @property integer $blip_id Primary key
+ * @property integer $user_id Foreign key of user's entity
+ * @property string $blip_login User's blip login (Blip account name)
+ * @property Blipoteka_User $user User's account entity
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */

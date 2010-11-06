@@ -23,6 +23,28 @@
 /**
  * Book entity
  *
+ * @property integer $book_id Primary key
+ * @property integer $type Type (actually: a model of distribution) of the book. May be owned or free.
+ * @property integer $user_id Foreign key of user being provider of the book
+ * @property integer $owner_id Foreign key of user being owner of the book
+ * @property integer $holder_id Foreign key of user being current holder of the book
+ * @property integer $status What's going on with the book? (awaits courier, being read, delivered etc.)
+ * @property string $title Title of the book in Polish language
+ * @property string $original_title Title of the book in original language
+ * @property integer $city_id Foreign key of edition's city
+ * @property integer $publisher_id Foreign key of book's publisher
+ * @property integer $year Year of the book's edition
+ * @property integer $pages Number of pages
+ * @property string $isbn ISBN-10 or ISBN-13 number
+ * @property string $description Description of the book
+ * @property bool $auto_accept_requests Automatically accept borrow requests from any user
+ * @property string $created_at Date and time the book was added to library
+ * @property Blipoteka_User $user A user who provided the book
+ * @property Blipoteka_User $owner A user who is the owner of the book
+ * @property Blipoteka_User $holder A user who is the current holder of the book
+ * @property Blipoteka_Publisher $publisher A publisher of the book
+ * @property Doctrine_Collection $authors Author(s) of the book
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
@@ -78,22 +100,6 @@ class Blipoteka_Book extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
-	 *
-	 * @property integer $book_id Primary key
-	 * @property integer $type Type (actually: a model of distribution) of the book. May be owned or free.
-	 * @property integer $user_id Foreign key of user being provider of the book
-	 * @property integer $owner_id Foreign key of user being owner of the book
-	 * @property integer $holder_id Foreign key of user being current holder of the book
-	 * @property integer $status What's going on with the book? (awaits courier, being read, delivered etc.)
-	 * @property string $title Title of the book in Polish language
-	 * @property string $original_title Title of the book in original language
-	 * @property integer $city_id Foreign key of edition's city
-	 * @property integer $year Foreign key of edition's year
-	 * @property integer $pages Number of pages
-	 * @property string $isbn ISBN-10 or ISBN-13 number
-	 * @property string $description Description of the book
-	 * @property bool $auto_accept_requests Automatically accept borrow requests from any user
-	 * @property string $created_at Date and time the book was added to library
 	 */
 	public function setTableDefinition() {
 		$this->setTableName('books');

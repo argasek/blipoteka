@@ -23,6 +23,12 @@
 /**
  * Books-authors reference class
  *
+ * @property integer $book_id Foreign key of a book
+ * @property integer $author_id Foreign key of book's author
+ * @property bool $is_master Is this author marked as a master author of this book?
+ * @property Blipoteka_Book $book A book
+ * @property Blipoteka_Author $author An author of a book
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
@@ -30,10 +36,6 @@ class Blipoteka_Book_Author extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
-	 *
-	 * @property integer $book_id Foreign key of a book
-	 * @property integer $author_id Foreign key of book's author
-	 * @property bool $is_master Is this author marked as a master author of this book?
 	 */
 	public function setTableDefinition() {
 		$this->setTableName('books_authors');

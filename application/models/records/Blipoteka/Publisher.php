@@ -23,6 +23,11 @@
 /**
  * Publisher entity
  *
+ * @property integer $publisher_id Primary key
+ * @property string $name Name of the publisher
+ * @property string $url URL of a web page of the publisher
+ * @property Doctrine_Collection $books Books published by the publisher
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
@@ -30,9 +35,6 @@ class Blipoteka_Publisher extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
-	 *
-	 * @property integer $publisher_id Primary key
-	 * @property string $name Name of the publisher
 	 */
 	public function setTableDefinition() {
 		$this->setTableName('publishers');

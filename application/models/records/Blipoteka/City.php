@@ -23,6 +23,16 @@
 /**
  * City entity
  *
+ * @property integer $city_id Primary key
+ * @property string $name City name
+ * @property string $asciiname City name in ASCII (no national characters)
+ * @property double $lat Latitude
+ * @property double $lng Longitude
+ * @property string $feature_code GeoNames feature code
+ * @property string $admin1_code A first part of GeoNames administrative code
+ * @property string $admin1_code A second part of GeoNames administrative code
+ * @property string $modified_at Date of the last update of the data
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
@@ -30,9 +40,6 @@ class Blipoteka_City extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
-	 *
-	 * @property integer $city_id Primary key
-	 * @property string $name City name
 	 */
 	public function setTableDefinition() {
 		$this->setTableName('cities');

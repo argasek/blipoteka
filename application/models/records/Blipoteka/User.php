@@ -23,6 +23,24 @@
 /**
  * User entity
  *
+ * @property integer $user_id Primary key
+ * @property integer $city_id Foreign key of a city where user lives in
+ * @property string $email E-mail address
+ * @property string $password Salted hash of user's password
+ * @property string $name Last name and first name of user
+ * @property string $log_date The date and time user last logged in
+ * @property integer $lognum How many times user logged in
+ * @property bool $is_active Is user's account active?
+ * @property bool $auto_accept_requests Automatically accept all borrow requests from user's friends
+ * @property string $activated_at Date and time the account was activated by user
+ * @property string $created_at Date and time the account was created
+ * @property string $updated_at Date and time the record was updated
+ * @property Blipoteka_City $city A city where user lives in
+ * @property Doctrine_Collection $friends A collection of user's friends
+ * @property Doctrine_Collection $books_provided These books were provided by this user
+ * @property Doctrine_Collection $books_owned Books owned by this user
+ * @property Doctrine_Collection $books_held Books currently held by this user
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
@@ -30,18 +48,6 @@ class Blipoteka_User extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
-	 *
-	 * @property integer $user_id Primary key
-	 * @property string $email E-mail address
-	 * @property string $password Salted hash of user's password
-	 * @property string $name Last name and first name of user
-	 * @property string $log_date The date and time user last logged in
-	 * @property integer $lognum How many times user logged in
-	 * @property bool $is_active Is user's account active?
-	 * @property bool $auto_accept_requests Automatically accept all borrow requests from user's friends
-	 * @property string $activated_at Date and time the account was activated by user
-	 * @property string $created_at Date and time the account was created
-	 * @property string $updated_at Date and time the record was updated
 	 */
 	public function setTableDefinition() {
 		$this->setTableName('users');

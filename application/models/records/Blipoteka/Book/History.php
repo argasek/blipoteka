@@ -23,6 +23,16 @@
 /**
  * Book lending history
  *
+ * @property integer $id Primary key
+ * @property integer $book_id ID of a book
+ * @property integer $borrower_id Foreign key of borrowing user
+ * @property integer $lender_id Foreign key of lending user
+ * @property string $requested_at Date and time a borrower requested a book
+ * @property string $received_at Date and time a borrower received a book (may be NULL, if book is still being delivered)
+ * @property Blipoteka_Book $book A book
+ * @property Blipoteka_User $borrower A user who borrows a book
+ * @property Blipoteka_User $lender A user who lends a book
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
@@ -30,13 +40,6 @@ class Blipoteka_Book_History extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
-	 *
-	 * @property integer $id Primary key
-	 * @property integer $book_id ID of a book
-	 * @property integer $borrower_id ID of borrowing user
-	 * @property integer $lender_id ID of lending user
-	 * @property string $requested_at Date and time a borrower requested a book
-	 * @property string $received_at Date and time a borrower received a book (may be NULL, if book is still being delivered)
 	 */
 	public function setTableDefinition() {
 		$this->setTableName('books_history');

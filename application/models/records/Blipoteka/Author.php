@@ -23,6 +23,9 @@
 /**
  * Author entity
  *
+ * @property integer $author_id Primary key
+ * @property string $name Surname and name of the author
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
@@ -30,9 +33,6 @@ class Blipoteka_Author extends Void_Doctrine_Record {
 
 	/**
 	 * Setup record, table name etc.
-	 *
-	 * @property integer $author_id Primary key
-	 * @property string $name Surname and name of the author
 	 */
 	public function setTableDefinition() {
 		$this->setTableName('authors');

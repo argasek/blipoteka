@@ -23,6 +23,11 @@
 /**
  * User's friends reference class
  *
+ * @property integer $user_id Foreign key of a user
+ * @property integer $friend_id Foreign key of user's friend
+ * @property Blipoteka_User $user A user
+ * @property Blipoteka_User $friend A friend of a user
+ *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
