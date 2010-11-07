@@ -38,6 +38,11 @@ class Blipoteka_Book_HistoryTest extends PHPUnit_Framework_TestCase {
 	private $received_at;
 
 	/**
+	 * @var Blipoteka_Book_History
+	 */
+	private $history;
+
+	/**
 	 * Initialization.
 	 * @see PHPUnit_Framework_TestCase::setUp()
 	 */
@@ -45,21 +50,13 @@ class Blipoteka_Book_HistoryTest extends PHPUnit_Framework_TestCase {
 		$this->requested_at = new Zend_Date();
 		$this->received_at = new Zend_Date();
 		$this->received_at->addDay(14)->addHour(1)->addMinute(15);
-	}
 
-	/**
-	 * Set common record values
-	 * @param Blipoteka_Book_History $history
-	 * @return Blipoteka_Book_History $history
-	 */
-	private function prepareHistoryRecord(Blipoteka_Book_History $history) {
-		$history->borrower_id = 1;
-		$history->lender_id = 2;
-		$history->book_id = 1;
-		$history->requested_at = $this->requested_at->get(Zend_Date::W3C);
-		$history->received_at = $this->received_at->get(Zend_Date::W3C);
-
-		return $history;
+		$this->history = new Blipoteka_Book_History();
+		$this->history->borrower_id = 1;
+		$this->history->lender_id = 2;
+		$this->history->book_id = 1;
+		$this->history->requested_at = $this->requested_at->get(Zend_Date::W3C);
+		$this->history->received_at = $this->received_at->get(Zend_Date::W3C);
 	}
 
 	/**
@@ -67,9 +64,8 @@ class Blipoteka_Book_HistoryTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException Doctrine_Record_Exception
 	 */
 	public function testConstraintUsers() {
-		$history = $this->prepareHistoryRecord(new Blipoteka_Book_History());
-		$history->lender_id = $history->borrower_id;
-		$history->save();
+		$this->history->lender_id = $this->history->borrower_id;
+		$this->history->save();
 	}
 
 	/**
@@ -77,30 +73,25 @@ class Blipoteka_Book_HistoryTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException Doctrine_Record_Exception
 	 */
 	public function testConstraintTimestamps() {
-		$history = $this->prepareHistoryRecord(new Blipoteka_Book_History());
-		$history->received_at = $history->requested_at;
-		$history->save();
+		$this->history->received_at = $this->history->requested_at;
+		$this->history->save();
 	}
 
 	/**
 	 * Test entry with receival date specified.
 	 */
 	public function testEntryReceived() {
-		$history = $this->prepareHistoryRecord(new Blipoteka_Book_History());
-		$history->save();
-
-		$this->assertTrue($history->exists());
+		$this->history->save();
+		$this->assertTrue($this->history->exists());
 	}
 
 	/**
 	 * Test entry without receival date specified.
 	 */
 	public function testEntryNotReceived() {
-		$history = $this->prepareHistoryRecord(new Blipoteka_Book_History());
-		$history->received_at = null;
-		$history->save();
-
-		$this->assertTrue($history->exists());
+		$this->history->received_at = null;
+		$this->history->save();
+		$this->assertTrue($this->history->exists());
 	}
 
 }
