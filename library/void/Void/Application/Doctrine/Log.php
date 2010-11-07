@@ -115,6 +115,8 @@ class Void_Application_Doctrine_Log {
 					}
 				}
 				$query = str_replace('= ?', "= %s", $query);
+				$query = str_replace('?,', "%s,", $query);
+				$query = str_replace('?)', "%s)", $query);
 				$query = vsprintf($query, $params);
 			}
 			if ($filterEvents === true && !in_array($event->getName(), $filteredEventTypes)) {
