@@ -111,4 +111,26 @@ abstract class Void_Doctrine_Record extends Doctrine_Record {
 	protected function setUpValidators() {
 	}
 
+	/**
+	 * Check if records' primary keys match.
+	 *
+	 * @param self $record
+	 * @todo Handle case (?), when $record and/or $this are subclasses of
+	 * some parent class and Doctrine's inheritance mechanism is used.
+	 */
+	public function equalsByPrimaryKey(self $record) {
+		// Check for class equality
+		if (get_class($record) === get_class($this)) {
+			// Check if identifiers' names match
+			$identifiers = (array) $this->getTable()->getIdentifier();
+			if ($identifiers === (array) $record->getTable()->getIdentifier()) {
+				// Check if identifiers' values match
+				foreach ($identifiers as $identifier) {
+					if ($record->get($identifier) != $this->get($identifier)) return false;
+				}
+				return true;
+			}
+		}
+		return false;
+	}
 }
