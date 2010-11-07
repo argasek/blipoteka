@@ -153,6 +153,40 @@ class Blipoteka_Book extends Void_Doctrine_Record {
 	}
 
 	/**
+	 * Set a type of the book.
+	 *
+	 * @param integer $type A type of book
+	 * @param Blipoteka_User $user A user who tries to set a type of book
+	 * @throws Blipoteka_Book_Exception
+	 */
+	public function setType($type, Blipoteka_User $user) {
+		// Don't allow to change a type of a book from owned to free,
+		// unless this user is an owner of the book
+		if ($type === self::TYPE_FREE && $this->type === self::TYPE_OWNED) {
+			if ($this->owner instanceof Blipoteka_User && $this->owner->equalsByPrimaryKey($user, true) === false) {
+				throw new Blipoteka_Book_Exception('', Blipoteka_Book_Exception::ERR_TYPE_CHANGE_FORBIDDEN);
+			}
+		}
+		$this->type = $type;
+	}
+
+	/**
+	 * Get a list of book statuses.
+	 * @return array
+	 */
+	public function getStatusList() {
+		return Void_Util_Class::getConstants(get_class($this), 'STATUS');
+	}
+
+	/**
+	 * Get a list of book types.
+	 * @return array
+	 */
+	public function getTypeList() {
+		return Void_Util_Class::getConstants(get_class($this), 'TYPE');
+	}
+
+	/**
 	 * Check if given status is a valid one
 	 * @return bool
 	 */
@@ -169,7 +203,11 @@ class Blipoteka_Book extends Void_Doctrine_Record {
 	}
 
 	/**
-	 * Check if saved data is right
+	 * Check if saved data is right.
+	 * Please note: restrictions applied here are not validators: any exception
+	 * thrown below indicates incorrect usage of model, i.e., an application bug.
+	 *
+	 * @throws Doctrine_Record_Exception
 	 * @see Doctrine_Record::preSave()
 	 */
 	public function preSave($event) {
@@ -190,7 +228,11 @@ class Blipoteka_Book extends Void_Doctrine_Record {
 	}
 
 	/**
-	 * Preparation of record
+	 * Preparation of a record.
+	 * Please note: restrictions applied here are not validators: any exception
+	 * thrown below indicates incorrect usage of model, i.e., an application bug.
+	 *
+	 * @throws Doctrine_Record_Exception
 	 * @see Doctrine_Record::preInsert()
 	 */
 	public function preInsert($event) {
@@ -219,6 +261,20 @@ class Blipoteka_Book extends Void_Doctrine_Record {
 		$validators = new Zend_Validate();
 		$validators->addValidator($isbn);
 		$this->setColumnValidators('isbn', $validators);
+
+		// Validate year. It's safe to assume no one will possess a book printed by 1900, is it?
+		// Also, we check if a date of edition is not set in future.
+		$validators = new Zend_Validate();
+		$validators->addValidator(new Zend_Validate_Int());
+		$validators->addValidator(new Void_Validate_GreaterThanOrEqual(1900));
+		$validators->addValidator(new Void_Validate_LessThanOrEqual(date('Y')));
+		$this->setColumnValidators('year', $validators);
+
+		// Validate number of pages. We assume 16 pages minimum (it seems to be a reasonable
+		// number; from a formal point of view, if it's less than 48 pages, it's a brochure).
+		$validators = new Zend_Validate();
+		$validators->addValidator(new Void_Validate_GreaterThanOrEqual(16));
+		$this->setColumnValidators('pages', $validators);
 	}
 
 }

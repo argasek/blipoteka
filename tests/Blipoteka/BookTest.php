@@ -110,4 +110,109 @@ class Blipoteka_BookTest extends PHPUnit_Framework_TestCase {
 		$this->book->type = -1;
 		$this->book->save();
 	}
+
+	/**
+	 * A title length should be valid
+	 * @expectedException Doctrine_Validator_Exception
+	 */
+	public function testValidateTitleLength() {
+		$this->book->title = str_repeat('x', 512);
+		$this->book->save();
+	}
+
+	/**
+	 * A year must be 1900 or greater
+	 * @expectedException Doctrine_Validator_Exception
+	 */
+	public function testValidateMinYear() {
+		$this->book->year = 1899;
+		$this->book->save();
+	}
+
+	/**
+	 * A year must be a current year or earlier
+	 * @expectedException Doctrine_Validator_Exception
+	 */
+	public function testValidateMaxYear() {
+		$this->book->year = (integer) date('Y') + 1;
+		$this->book->save();
+	}
+
+	/**
+	 * A number of pages must be 16 or greater
+	 * @expectedException Doctrine_Validator_Exception
+	 */
+	public function testValidateMinPages() {
+		$this->book->pages = 15;
+		$this->book->save();
+	}
+
+	/**
+	 * Book type change from OWNED to FREE is forbidden
+	 * in case when user is not an owner of the book.
+	 *
+	 * @expectedException Blipoteka_Book_Exception
+	 */
+	public function testTypeChangeOwnedToFreeMismatchedOwner() {
+		$this->book->owner_id = 1;
+		$this->book->type = Blipoteka_Book::TYPE_OWNED;
+		$this->book->save();
+
+		$user = new Blipoteka_User();
+		$user->user_id = 2;
+
+		$this->book->setType(Blipoteka_Book::TYPE_FREE, $user);
+	}
+
+	/**
+	 * Book type change from FREE to OWNED is always allowed.
+	 */
+	public function testTypeChangeFreeToOwnedMismatchedOwner() {
+		$this->book->owner_id = 1;
+		$this->book->type = Blipoteka_Book::TYPE_FREE;
+		$this->book->save();
+
+		$user = new Blipoteka_User();
+		$user->user_id = 2;
+
+		$this->book->setType(Blipoteka_Book::TYPE_OWNED, $user);
+	}
+
+	/**
+	 * Book type change should work without problem in
+	 * either direction when owners match.
+	 */
+	public function testTypeChangeOwnedToFree() {
+		$this->book->owner_id = 1;
+		$this->book->type = Blipoteka_Book::TYPE_OWNED;
+		$this->book->save();
+
+		$user = new Blipoteka_User();
+		$user->user_id = 1;
+
+		// Same user, type OWNED -> FREE
+		$this->book->setType(Blipoteka_Book::TYPE_FREE, $user);
+		$this->book->save();
+		$this->assertEquals($this->book->type, Blipoteka_Book::TYPE_FREE);
+
+	}
+
+	/**
+	 * Book type change should work without problem in
+	 * either direction when owners match.
+	 */
+	public function testTypeChangeFreeToOwned() {
+		$this->book->owner_id = 1;
+		$this->book->type = Blipoteka_Book::TYPE_FREE;
+		$this->book->save();
+
+		$user = new Blipoteka_User();
+		$user->user_id = 1;
+
+		// Same user, type FREE -> OWNED
+		$this->book->setType(Blipoteka_Book::TYPE_OWNED, $user);
+		$this->book->save();
+		$this->assertEquals($this->book->type, Blipoteka_Book::TYPE_OWNED);
+	}
+
 }
