@@ -95,6 +95,37 @@ class Blipoteka_User extends Void_Doctrine_Record {
 	}
 
 	/**
+	 * Check if saved data is right.
+	 * Please note: restrictions applied here are not validators: any exception
+	 * thrown below indicates incorrect usage of model, i.e., an application bug.
+	 *
+	 * @throws Doctrine_Record_Exception
+	 * @see Doctrine_Record::preSave()
+	 */
+	public function preSave($event) {
+		$invoker = $event->getInvoker();
+		$created_at = new Zend_Date($invoker->created_at);
+
+		// Activation timestamp restrictions
+		if ($invoker->activated_at !== null) {
+			$activated_at = new Zend_Date($invoker->activated_at);
+			// Make sure a date when book is received is later than a date when book was requested
+			if ($activated_at->isEarlier($created_at, Zend_Date::DATES) === true) {
+				throw new Doctrine_Record_Exception("The date of activation is earlier than the date of creation", Doctrine_Core::ERR_CONSTRAINT);
+			}
+		}
+
+		// Logging in timestamp restrictions
+		if ($invoker->log_date !== null) {
+			$logged_at = new Zend_Date($invoker->log_date);
+			// Make sure a date when book is received is later than a date when book was requested
+			if ($logged_at->isEarlier($created_at, Zend_Date::DATES) === true) {
+				throw new Doctrine_Record_Exception("The date of logging in is earlier than the date of creation", Doctrine_Core::ERR_CONSTRAINT);
+			}
+		}
+	}
+
+	/**
 	 * Set up non-standard doctrine record validators
 	 */
 	protected function setUpValidators() {

@@ -60,4 +60,26 @@ class Blipoteka_UserTest extends PHPUnit_Framework_TestCase {
 		$this->fail('Doctrine_Validator_Exception has not been raised.');
 	}
 
+	/**
+	 * We expect account activation date to be greater than or equal to the account's creation date
+	 * @expectedException Doctrine_Record_Exception
+	 */
+	public function testConstraintActivatedAtTimestamp() {
+		$activated_at = new Zend_Date($this->user->created_at);
+		$activated_at->subDay(1);
+		$this->user->activated_at = $activated_at->get(Zend_Date::W3C);
+		$this->user->save();
+	}
+
+	/**
+	 * We expect user's logon date to be greater than or equal to the account's creation date
+	 * @expectedException Doctrine_Record_Exception
+	 */
+	public function testConstraintLoggedAtTimestamp() {
+		$log_date = new Zend_Date($this->user->created_at);
+		$log_date->subDay(1);
+		$this->user->log_date = $log_date->get(Zend_Date::W3C);
+		$this->user->save();
+	}
+
 }
