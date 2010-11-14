@@ -74,4 +74,13 @@ class ErrorController extends Zend_Controller_Action {
 		$this->_helper->layout->setLayout('error-plain');
 	}
 
+	/**
+	 * Forbidden (403) error action
+	 *
+	 * @return void
+	 */
+	public function forbiddenAction() {
+		$this->getResponse()->setHttpResponseCode(403);
+		$this->_helper->layout->setLayout('error-plain');
+	}
 }
