@@ -9,7 +9,7 @@
  * that is bundled with this package in the file docs/LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://blipoteka.pl/license
- * 
+ *
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to blipoteka@gmail.com so we can send you a copy immediately.
@@ -21,26 +21,26 @@
  */
 
 /**
- * The error controller. 
+ * The error controller.
  *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
 class ErrorController extends Zend_Controller_Action {
-	
+
 	/**
-	 * Set a different layout for the error controller. 
-	 * 
-	 * @return void 
+	 * Set a different layout for the error controller.
+	 *
+	 * @return void
 	 */
 	public function init() {
 		parent::init();
 		$this->_helper->layout->setLayout('error');
 	}
-	
+
 	/**
 	 * Default error action
-	 * 
+	 *
 	 * @return void
 	 */
 	public function errorAction() {
@@ -63,4 +63,15 @@ class ErrorController extends Zend_Controller_Action {
 		$this->view->exception = $errors->exception;
 		$this->view->request   = print_r($errors->request->getParams(), true);
 	}
+
+	/**
+	 * Not found (404) error action
+	 *
+	 * @return void
+	 */
+	public function notFoundAction() {
+		$this->getResponse()->setHttpResponseCode(404);
+		$this->_helper->layout->setLayout('error-plain');
+	}
+
 }

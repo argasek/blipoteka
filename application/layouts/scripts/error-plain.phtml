@@ -1,0 +1,21 @@
+<?php echo $this->doctype() . "\n"; ?>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="<?php echo $this->lang; ?>" class="no-js"> <!--<![endif]-->
+<head>
+<?php echo $this->headMeta() . "\n"; ?>
+<?php echo $this->headTitle() . "\n"; ?>
+<?php echo $this->headLink() . "\n"; ?>
+<script src="<?php echo $this->baseUrl("js/libs/modernizr-1.6.min.js"); ?>"></script>
+</head>
+<body>
+<?php echo $this->layout()->content . "\n" ?>
+<?php echo $this->headScript() . "\n"; ?>
+<!--[if lt IE 7 ]>
+<script src="<?php echo $this->baseUrl("js/libs/dd_belatedpng.js"); ?>"></script>
+<script> DD_belatedPNG.fix('img, .png_bg'); </script>
+<![endif]-->
+</body>
+</html>
