@@ -252,7 +252,7 @@ class Void_Util_Text {
 			// Find the last word boundary, if there is one within $min_wordsafe_length
 			// to $max_length characters. preg_match() is always greedy, so it will
 			// find the longest string possible.
-			$found = preg_match('/^(.{' . $min_wordsafe_length . ',' . $max_length . '})[' . PREG_UNICODE_WORD_BOUNDARY . ']/u', $string, $matches);
+			$found = preg_match('/^(.{' . $min_wordsafe_length . ',' . $max_length . '})[' . self::PREG_UNICODE_WORD_BOUNDARY . ']/u', $string, $matches);
 			$string = ($found ? $matches[1] : mb_substr($string, 0, $max_length));
 		} else {
 			$string = mb_substr($string, 0, $max_length);
