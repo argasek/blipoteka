@@ -26,7 +26,7 @@
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
-class Blipoteka_Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
+final class Blipoteka_Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	const HEAD_META_DESCRIPTION = 'Bli­po­teka to biblio­teka mię­dzy­mia­stowa użyt­kow­ni­ków ser­wisu Blip.pl.';
 	const HEAD_TITLE = 'Blipoteka';
 	const OPENSEARCH_TITLE = 'Blipoteka';
