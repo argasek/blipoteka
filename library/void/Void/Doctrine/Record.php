@@ -65,7 +65,7 @@ abstract class Void_Doctrine_Record extends Doctrine_Record {
 	 * @param string $field
 	 * @return Zend_Validate|false
 	 */
-	protected function getColumnValidators($field) {
+	public function getColumnValidators($field) {
 		$extra = $this->getColumnOption($field, 'extra');
 		return (isset($extra['validators']) ? $extra['validators'] : false);
 	}
