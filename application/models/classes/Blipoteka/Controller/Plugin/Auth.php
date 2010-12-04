@@ -66,6 +66,11 @@ class Blipoteka_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract {
 		// An index/index action call does not require any authorization
 		if ($controller === 'index' && $action === 'index') return false;
 
+		// We require authentication for all actions, unless otherwise stated.
+		if ($request->getUserParam('skip-auth') !== null && $request->getUserParam('skip-auth') == true) {
+			return false;
+		}
+
 		return true;
 	}
 
