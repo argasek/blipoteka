@@ -41,6 +41,7 @@ class Blipoteka_UserTest extends PHPUnit_Framework_TestCase {
 		$this->user->city_id = 756135;
 		$this->user->password = 'password';
 		$this->user->name = 'user_' . Void_Util_Base62::encode(time());
+		$this->user->blip = 'blip_' . Void_Util_Base62::encode(time());
 		$this->user->email = $this->user->name . '@blipoteka.pl';
 	}
 

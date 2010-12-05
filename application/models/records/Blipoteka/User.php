@@ -25,6 +25,7 @@
  *
  * @property integer $user_id Primary key
  * @property integer $city_id Foreign key of a city where user lives in
+ * @property string $blip Blip account login associated with this one
  * @property string $email E-mail address
  * @property string $password Salted hash of user's password
  * @property string $name Last name and first name of user
@@ -54,6 +55,7 @@ class Blipoteka_User extends Void_Doctrine_Record {
 
 		$this->hasColumn('user_id', 'integer', 4, array('primary' => true, 'autoincrement' => true));
 		$this->hasColumn('city_id', 'integer', 4, array('notnull' => true));
+		$this->hasColumn('blip', 'string', 30, array('notnull' => true, 'unique' => true));
 		$this->hasColumn('email', 'string', 128, array('notnull' => true, 'unique' => true));
 		$this->hasColumn('password', 'string', 128, array('notnull' => true));
 		$this->hasColumn('name', 'string', 64, array('notnull' => true));
