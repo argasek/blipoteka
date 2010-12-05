@@ -19,6 +19,16 @@ Blipoteka_City:
     admin1_code: '80'
     admin2_code: null
     modified_at: '2010-08-10'
+  Blipoteka_City_762753:
+    city_id: 762753
+    name: Pacanów
+    asciiname: Pacanow
+    lat: '50.40031'
+    lng: '21.04148'
+    feature_code: PPL
+    admin1_code: '84'
+    admin2_code: 2601
+    modified_at: '2010-09-10'
   Blipoteka_City_763166:
     city_id: 763166
     name: Olsztyn
