@@ -52,7 +52,7 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 		parent::__construct($request);
 
 		if ($authAdapter === null && Zend_Registry::isRegistered('auth-adapter')) {
-			$authAdapter = Zend_Registry::get('auth-adapter');
+			$authAdapter = Zend_Registry::get('auth-adapter')->getDefaultAdapter();
 		}
 		if ($authAdapter instanceof Void_Auth_Adapter_Interface) {
 			$this->_authAdapter = $authAdapter;

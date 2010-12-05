@@ -27,5 +27,5 @@ include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'doctrine-console-common.php';
 
 $application->bootstrap('auth');
 $adapter = Zend_Registry::get('auth-adapter');
-$script = new Void_Scripts_Passwd($adapter);
+$script = new Void_Scripts_Passwd($adapter->getDefaultAdapter());
 $script->run();
