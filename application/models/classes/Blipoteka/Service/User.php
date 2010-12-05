@@ -115,6 +115,15 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	}
 
 	/**
+	 * Get user entity by identity.
+	 * @todo Don't assume email is an identity field.
+	 * @param string $identity
+	 */
+	public function getUserByIdentity($identity) {
+		return Doctrine_Core::getTable('Blipoteka_User')->findOneBy('email', $identity);
+	}
+
+	/**
 	 * Return default city.
 	 *
 	 * @todo This should be set up by some resource
