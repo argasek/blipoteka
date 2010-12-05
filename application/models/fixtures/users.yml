@@ -2,6 +2,7 @@ Blipoteka_User:
   Blipoteka_User_1:
     city: Blipoteka_City_3094802
     email: argasek@gmail.com
+    blip: argasek
     password: dupa.8
     name: 'Argasiński Jakub'
     log_date: '2010-10-06 22:32:44'
@@ -14,6 +15,7 @@ Blipoteka_User:
   Blipoteka_User_2:
     city: Blipoteka_City_776069
     email: ulalup@gmail.com
+    blip: ylka
     password: dupa.8
     name: 'Łupińska Urszula'
     log_date: null
