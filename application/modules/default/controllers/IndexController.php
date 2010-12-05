@@ -34,6 +34,20 @@ class IndexController extends Blipoteka_Controller {
 	 * @return void
 	 */
 	public function indexAction() {
+		if (Zend_Auth::getInstance()->hasIdentity()) {
+			$this->view->headTitle('Strona główna');
+		} else {
+			$this->_forward('login', null, null, array('skip-auth' => 1));
+		}
+	}
 
+	/**
+	 * Login action
+	 *
+	 * @return void
+	 */
+	public function loginAction() {
+		$signinForm = new Blipoteka_Form_Account_Signin(array('action' => $this->view->url(array(), 'signin')));
+		$this->view->signinForm = $signinForm;
 	}
 }
