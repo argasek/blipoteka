@@ -269,6 +269,10 @@ hr {
 	content: ' • ';
 }
 
+.error {
+	color: #FF5000;
+}
+
 input[type=text],input[type=email],input[type=password],select,textarea
 	{
 	border: 1px solid #aaa;
