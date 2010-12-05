@@ -68,7 +68,7 @@ class Void_Application_Resource_Auth extends Zend_Application_Resource_ResourceA
 				throw new Zend_Application_Resource_Exception("Auth resource requires adapter.default.class option to be specified");
 			}
 			$adapter = $this->_authAdapterChain($options['adapter']);
-			Zend_Registry::set('auth-adapter', $adapter->getDefaultAdapter());
+			Zend_Registry::set('auth-adapter', $adapter);
 		}
 		return $this->_authAdapterChain;
 	}
