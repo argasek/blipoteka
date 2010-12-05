@@ -30,5 +30,27 @@ class Blipoteka_Form_Account_Signin extends Zend_Form {
 
 	public function init() {
 		$this->setMethod('post');
+
+		$email = $this->createElement('text', 'email');
+		$email->setLabel('Adres e-mail');
+		$email->setFilters(array('StringTrim', 'StringToLower'));
+		$email->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Adres e-mail nie może być pusty')));
+		$validator = new Void_Validate_Email();
+		$validator->zfBreakChainOnFailure = true;
+		$validator->setMessage('Nieprawidłowy adres e-mail', Void_Validate_Email::INVALID);
+		$email->addValidator($validator);
+		$email->setRequired(true);
+		$this->addElement($email);
+
+		$password = $this->createElement('password', 'password');
+		$password->setLabel('Hasło');
+		$password->setFilters(array('StringTrim'));
+		$password->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Hasło nie może być puste')));
+		$password->setRequired(true);
+		$this->addElement($password);
+
+		$viewScript = new Zend_Form_Decorator_ViewScript();
+		$viewScript->setViewScript('forms/signin.phtml');
+		$this->clearDecorators()->addDecorator($viewScript);
 	}
 }
