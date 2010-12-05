@@ -52,7 +52,21 @@ class AccountController extends Blipoteka_Controller {
 	 * @return void
 	 */
 	public function signinAction() {
-
+		$auth = Zend_Auth::getInstance();
+		$adapter = Zend_Registry::get('auth-adapter');
+		// If this is POST request, try to authenticate using form credentials
+		if ($this->getRequest()->isPost()) {
+			$form = new Blipoteka_Form_Account_Signin(array('action' => $this->view->url(array(), 'signin')));
+			if ($form->isValid($this->getRequest()->getParams())) {
+				$default = $adapter->getDefaultAdapter();
+				$default->setIdentity($form->getValue('email'));
+				$default->setCredential($form->getValue('password'));
+				$result = $auth->authenticate($adapter);
+				if ($result->isValid()) {
+				}
+			}
+		}
+		$this->_redirect($this->view->url(array(), 'index'));
 	}
 
 	/**
@@ -64,7 +78,7 @@ class AccountController extends Blipoteka_Controller {
 		$auth = Zend_Auth::getInstance();
 		$auth->clearIdentity();
 
-		$this->_redirector->gotoRoute(array(), 'index');
+		$this->_redirect($this->view->url(array(), 'index'));
 	}
 
 	/**
