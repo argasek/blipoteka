@@ -15,7 +15,7 @@
  * to blipoteka@gmail.com so we can send you a copy immediately.
  *
  * @category   Blipoteka
- * @package    Blipoteka_Service
+ * @package    Blipoteka
  * @copyright  Copyright (c) 2010 Jakub Argasiński (argasek@gmail.com)
  * @license    http://blipoteka.pl/license Simplified BSD License
  */

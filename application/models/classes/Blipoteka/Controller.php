@@ -29,7 +29,10 @@
 abstract class Blipoteka_Controller extends Zend_Controller_Action {
 
 	public function init() {
-
+		$this->view->hasIdentity = false;
+		if (Zend_Auth::getInstance()->hasIdentity()) {
+			$this->view->hasIdentity = true;
+		}
 	}
 
 }
