@@ -34,8 +34,7 @@ class AccountController extends Blipoteka_Controller {
 	 * @return void
 	 */
 	public function indexAction() {
-		$signinForm = new Blipoteka_Form_Account_Signup(array('action' => $this->view->url(array(), 'signin')));
-		$this->view->signinForm = $signinForm;
+		$this->view->headTitle('Twój profil');
 	}
 
 	/**
@@ -74,6 +73,7 @@ class AccountController extends Blipoteka_Controller {
 	 * @return void
 	 */
 	public function signupAction() {
+		$this->view->headTitle('Zarejestruj się');
 		$signupForm = new Blipoteka_Form_Account_Signup(array('action' => $this->view->url(array(), 'account-register')));
 		$this->view->signupForm = $signupForm;
 	}

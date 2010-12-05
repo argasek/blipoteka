@@ -42,6 +42,15 @@ class IndexController extends Blipoteka_Controller {
 	}
 
 	/**
+	 * Contact action
+	 *
+	 * @return void
+	 */
+	public function contactAction() {
+		$this->view->headTitle('Kontakt');
+	}
+
+	/**
 	 * Login action
 	 *
 	 * @return void
@@ -49,5 +58,16 @@ class IndexController extends Blipoteka_Controller {
 	public function loginAction() {
 		$signinForm = new Blipoteka_Form_Account_Signin(array('action' => $this->view->url(array(), 'signin')));
 		$this->view->signinForm = $signinForm;
+		$this->_helper->layout->setLayout('layout-login');
 	}
+
+	/**
+	 * Terms action
+	 *
+	 * @return void
+	 */
+	public function termsAction() {
+		$this->view->headTitle('Regulamin');
+	}
+
 }
