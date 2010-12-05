@@ -26,7 +26,7 @@
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
-class ErrorController extends Zend_Controller_Action {
+class ErrorController extends Blipoteka_Controller {
 
 	/**
 	 * Set a different layout for the error controller.

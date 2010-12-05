@@ -26,7 +26,7 @@
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
-class AccountController extends Zend_Controller_Action {
+class AccountController extends Blipoteka_Controller {
 
 	/**
 	 * Index action

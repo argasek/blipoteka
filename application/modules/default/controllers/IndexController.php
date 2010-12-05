@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Blipoteka.pl
@@ -9,7 +9,7 @@
  * that is bundled with this package in the file docs/LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://blipoteka.pl/license
- * 
+ *
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to blipoteka@gmail.com so we can send you a copy immediately.
@@ -21,19 +21,19 @@
  */
 
 /**
- * The index controller. 
+ * The index controller.
  *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
  */
-class IndexController extends Zend_Controller_Action {
-	
+class IndexController extends Blipoteka_Controller {
+
 	/**
 	 * Index action
-	 * 
+	 *
 	 * @return void
 	 */
 	public function indexAction() {
-		
+
 	}
 }
