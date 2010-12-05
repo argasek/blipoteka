@@ -56,7 +56,9 @@ class AccountController extends Blipoteka_Controller {
 		$adapter = Zend_Registry::get('auth-adapter');
 		// If this is POST request, try to authenticate using form credentials
 		if ($this->getRequest()->isPost()) {
-			$form = new Blipoteka_Form_Account_Signin(array('action' => $this->view->url(array(), 'signin')));
+			$session = new Zend_Session_Namespace('signin');
+			$form = $session->form;
+			$session->setExpirationHops(1, true);
 			if ($form->isValid($this->getRequest()->getParams())) {
 				$default = $adapter->getDefaultAdapter();
 				$default->setIdentity($form->getValue('email'));

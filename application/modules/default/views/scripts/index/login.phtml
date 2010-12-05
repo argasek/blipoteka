@@ -1,16 +1,4 @@
-<form id="signin" method="post" action="<?php echo $this->url(array(), 'signin'); ?>">
-	<p>
-		<label for="email">E-mail:</label>
-		<input type="email" id="email">
-	</p>
-	<p>
-		<label for="password">Hasło:</label>
-		<input type="password" id="password">
-	</p>
-	<p>
-		<button class="button" type="submit">Zaloguj się</button>
-	</p>
-</form>
+<?php echo $this->form; ?>
 <footer>
 	<p>Możesz też zalogować się <a href="<?php echo $this->url(array(), 'signin'); ?>">przez Blipa</a>.</p>
 	<p>Aby móc skorzystać z serwisu, musisz się <a href="<?php echo $this->url(array(), 'signup') ?>">zarejestrować</a>.</p>

@@ -56,8 +56,14 @@ class IndexController extends Blipoteka_Controller {
 	 * @return void
 	 */
 	public function loginAction() {
-		$signinForm = new Blipoteka_Form_Account_Signin(array('action' => $this->view->url(array(), 'signin')));
-		$this->view->signinForm = $signinForm;
+		$form = new Blipoteka_Form_Account_Signin(array('action' => $this->view->url(array(), 'signin')));
+		$session = new Zend_Session_Namespace('signin');
+		if ($session->form instanceof Blipoteka_Form_Account_Signin) {
+			$this->view->form = $session->form;
+		} else {
+			$this->view->form = $form;
+		}
+		$session->form = $form;
 		$this->_helper->layout->setLayout('layout-login');
 	}
 
