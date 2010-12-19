@@ -31,7 +31,19 @@ class Void_View_Helper_GoogleAnalytics extends Zend_View_Helper_Abstract {
 	 * Tracker ID string
 	 * @var string
 	 */
-	private $_trackerId = 'UA-XXXXX-X';
+	private $_trackerId = null;
+
+	/**
+	 * Default tracker ID string
+	 * @var string
+	 */
+	private static $_defaultTrackerId = null;
+
+	/**
+	 * Should helper render its contents?
+	 * @var bool
+	 */
+	private static $_enabled = true;
 
 	/**
 	 * Helper code
@@ -41,7 +53,7 @@ class Void_View_Helper_GoogleAnalytics extends Zend_View_Helper_Abstract {
 	 *
 	 * @return $this for fluent interface
 	 */
-	public function googleAnalytics($trackerId, array $options = array()) {
+	public function googleAnalytics($trackerId = null, array $options = array()) {
 		$this->setTrackerId($trackerId);
 		return $this;
 	}
@@ -59,6 +71,9 @@ class Void_View_Helper_GoogleAnalytics extends Zend_View_Helper_Abstract {
 	 * Render Google Analytics Tracker script
 	 */
 	public function toString() {
+		if (self::$_enabled === false) {
+			return '';
+		}
 		$scriptOpening = '<script type="text/javascript">';
 		$useCdata = false;
 		if ($this->view instanceof Zend_View_Abstract) {
@@ -80,15 +95,40 @@ class Void_View_Helper_GoogleAnalytics extends Zend_View_Helper_Abstract {
 		if ($escapeEnd != '') $html[] = $escapeEnd;
 		$html[] = "</script>";
 
-		return implode("\n", $html);
+		return implode("\n", $html) . "\n";
 	}
 
+	/**
+	 * Get tracker ID string for this helper instance. If not set,
+	 * return default tracker ID shared between all instances of this helper.
+	 * @return string
+	 */
 	protected function getTrackerId() {
-		return $this->_trackerId;
+		return ($this->_trackerId ? $this->_trackerId : self::$_defaultTrackerId);
 	}
 
+	/**
+	 * Set tracker ID string
+	 * @param string $trackerId
+	 */
 	protected function setTrackerId($trackerId) {
 		$this->_trackerId = $trackerId;
+	}
+
+	/**
+	 * Set default tracker ID (shared between all view helper instances) string
+	 * @param string $trackerId
+	 */
+	public static function setDefaultTrackerId($trackerId) {
+		self::$_defaultTrackerId = $trackerId;
+	}
+
+	/**
+	 * Whether to render helper or not
+	 * @param string $enabled
+	 */
+	public static function setEnabled($enabled) {
+		self::$_enabled = (bool) $enabled;
 	}
 
 }
