@@ -1,4 +1,4 @@
-<form id="signin" method="<?php echo $this->element->getMethod(); ?>" action="<?php echo $this->element->getAction(); ?>">
+<form method="<?php echo $this->element->getMethod(); ?>" action="<?php echo $this->element->getAction(); ?>">
 	<?php if (count($this->element->email->getMessages()) > 0): ?>
 	<p class="error"><?php echo ltrim(implode('. ', $this->element->email->getMessages()) . '.', '.'); ?>
 	<?php endif;?>
