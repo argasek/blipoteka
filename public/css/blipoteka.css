@@ -1,5 +1,5 @@
 /* --- CSS sticky footer: http://www.cssstickyfooter.com/ */
-html,body {
+html, body {
 	height: 100%;
 }
 
@@ -28,7 +28,8 @@ body:before {
 	margin-top: -32767px;
 }
 
-.ie6 #wrap,.ie8 #wrap {
+/* Internet Explorer 6 and 8 fix */
+.ie6 #wrap, .ie8 #wrap {
 	display: table;
 	height: 100%
 }
@@ -37,11 +38,10 @@ body:before {
 .button {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	border-radius: 3px;
 	background: white url(../img/button.png) 0 0 repeat-x;
 	background: -moz-linear-gradient(0% 170% 90deg, #c4c4c4, white);
-	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(white),
-		to(#c4c4c4) );
-	border-radius: 3px;
+	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(white), to(#c4c4c4));
 	color: #404040;
 	display: inline-block;
 	font-size: 13px;
@@ -51,7 +51,7 @@ body:before {
 	white-space: nowrap;
 }
 
-.button,.button:focus,.button:hover,.button:active {
+.button, .button:focus, .button:hover, .button:active {
 	border: 1px solid;
 }
 
@@ -61,8 +61,7 @@ body:before {
 
 .button:hover {
 	background: -moz-linear-gradient(0% 170% 90deg, #b8b8b8, white);
-	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(white),
-		to(#b8b8b8) );
+	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(white), to(#b8b8b8));
 	border-color: #ffcc99;
 	color: #333333;
 }
@@ -72,15 +71,14 @@ body:before {
 	top: 1px;
 }
 
-
 .button:focus {
 	border-color: #ffc78f #ffc994 #ffc994 #ffc78f;
 }
+
 .button:active {
 	background-position: 0 -25px;
 	background: -moz-linear-gradient(0% 170% 90deg, white, #dedede);
-	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(#dedede),
-		to(white) );
+	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(#dedede), to(white));
 	border-color: #ffc78f #ffc994 #ffc994 #ffc78f;
 	color: #1a1a1a;
 	text-shadow: 1px -1px 0 rgba(255, 255, 255, 0.5);
@@ -92,20 +90,17 @@ body:before {
 	font-weight: bold;
 	background-image: white;
 	background: -moz-linear-gradient(0% 170% 90deg, #c4c4c4, white);
-	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(white),
-		to(#c4c4c4) );
+	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(white), to(#c4c4c4));
 }
 
-.button.large:active,.button.large:focus {
+.button.large:active, .button.large:focus {
 	background: -moz-linear-gradient(0% 170% 90deg, white, #dedede);
-	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(#dedede),
-		to(white) );
+	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(#dedede), to(white));
 }
 
 .button.red {
 	background: -moz-linear-gradient(0% 170% 90deg, red, #bd0000);
-	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(#bd0000),
-		to(red) );
+	background: -webkit-gradient(linear, 0% 0%, 0% 170%, from(#bd0000), to(red));
 	text-shadow: 1px 1px 0 #b30000;
 	font-weight: bold;
 	color: white;
@@ -113,7 +108,7 @@ body:before {
 	padding: 4px 8px 6px;
 }
 
-.opera .button.red,.msie .button.red {
+.opera .button.red, .msie .button.red {
 	background: red;
 }
 
@@ -121,7 +116,7 @@ body:before {
 	border-color: red;
 }
 
-.button.red:active,.button.red:focus {
+.button.red:active, .button.red:focus {
 	text-shadow: 1px -1px 0 #b30000;
 	border-color: #990000 #d60000 #d60000 #990000;
 }
@@ -191,7 +186,7 @@ body:before {
 	line-height: 1.15;
 }
 
-.opera .button.multi,.msie .button.multi {
+.opera .button.multi, .msie .button.multi {
 	background: white;
 }
 
@@ -209,14 +204,20 @@ body:before {
 }
 
 /* --- Blipoteka styles */
-body {
+body, select, input, textarea {
 	font: 13px/1.2 "lucida grande", "helvetica neue", helvetica, arial, freesans, "liberation sans", "numbus sans l", sans-serif;
 }
 
 a, a:active, a:visited {
-    color: #907860;
+	color: #907860;
 }
-.r { text-align: right; }
+
+::-moz-selection { background: #FFA21F; color:#fff; text-shadow: none; }
+::selection { background:#FFA21F; color:#fff; text-shadow: none; }
+
+.r {
+	text-align: right;
+}
 
 hr {
 	border: 0 #ccc solid;
@@ -224,24 +225,29 @@ hr {
 	clear: both;
 	height: 0
 }
+
 #header {
-	padding-top: 16px;
-	padding-bottom: 16px;
+	padding-top: 12px;
+	padding-bottom: 12px;
 	background-color: #FFF8EF;
 	margin-bottom: 36px;
 	color: #6F4C30;
+	min-height: 64px;
 }
+
 #header h1 {
 	font-size: 24px;
 	padding-bottom: 8px;
+	text-shadow: 1px 1px 1px #CFA981;
 }
+
 #header p {
 	padding-bottom: 8px;
 }
+
 #header .account-area p {
 	text-align: right;
 }
-
 
 #signin > footer p {
 	margin-top: 0.5em;
@@ -252,7 +258,7 @@ hr {
 	background-color: #eee;
 }
 
-#footer>div {
+#footer > div {
 	padding: 17px;
 	height: 16px;
 }
@@ -261,11 +267,11 @@ hr {
 	text-align: right;
 }
 
-#footer ul>li {
+#footer ul > li {
 	display: inline-block;
 }
 
-#footer ul>li+li:before {
+#footer ul > li+li:before {
 	content: ' • ';
 }
 
@@ -273,16 +279,14 @@ hr {
 	color: #FF5000;
 }
 
-input[type=text],input[type=email],input[type=password],select,textarea
-	{
+input[type=text], input[type=email], input[type=password], select, textarea {
 	border: 1px solid #aaa;
 	transition: border linear .2s, box-shadow linear .2s;
 	-moz-transition: border linear .2s, -moz-box-shadow linear .2s;
 	-webkit-transition: border linear .2s, -webkit-box-shadow linear .2s;
 }
 
-input[type=email]:focus,input[type=text]:focus,input[type=password]:focus,textarea:focus
-	{
+input[type=email]:focus, input[type=text]:focus, input[type=password]:focus, textarea:focus {
 	outline: none;
 	border-color: rgba(236, 168, 82, .75) !important;
 	box-shadow: 0 0 8px rgba(236, 168, 82, .5);
@@ -295,7 +299,7 @@ label {
 	padding: 0 0 3px;
 }
 
-input[type=text],input[type=email],input[type=password] {
+input[type=text], input[type=email], input[type=password], input[type=search] {
 	background: #fff;
 	display: block;
 	width: 220px;
@@ -305,7 +309,13 @@ input[type=text],input[type=email],input[type=password] {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	font: 13px "Lucida Grande", Arial, Sans-serif;
+	font-size: 13px;
+}
+input:invalid, textarea:invalid {
+	border-radius: 4px;
+	-moz-box-shadow: 0px 0px 8px rgba(236, 236, 236, .5);
+	-webkit-box-shadow: 0px 0px 8px rgba(236, 236, 236, .5);
+	box-shadow: 0px 0px 8px rgba(236, 236, 236, .5);
 }
 
 button {
@@ -321,16 +331,14 @@ input:focus {
 	padding-bottom: 24px;
 }
 
-.content h2,
-.content h3,
-.content h4,
-.content p,
-.content ul,
-.content ol,
-.content li {
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6, .content p, .content dl, .content ul, .content ol, .content li, .content pre, .content table, .content address, .content fieldset {
 	margin-bottom: 0.5em;
 }
 
 .content h2 {
 	font-size: 28px;
+}
+
+.content ul {
+	list-style: disc
 }
