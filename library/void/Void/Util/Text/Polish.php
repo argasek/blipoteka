@@ -35,7 +35,7 @@ class Void_Util_Text_Polish {
 	 * @param string $several Forma odmieniona w bierniku ('produkty')
 	 * @param string $multi Forma odmieniona w dopełniaczu ('produktów')
 	 */
-	public function numeral($numeral, $base, $several, $multi) {
+	static public function numeral($numeral, $base, $several, $multi) {
 		$r = $numeral;
 		if ($r == 1) { return $base; }
 		$r = $numeral % 100;
