@@ -43,7 +43,16 @@ class AccountController extends Blipoteka_Controller {
 	 * @return void
 	 */
 	public function registerAction() {
-
+		// If this is POST request, try to authenticate using form credentials
+		if ($this->getRequest()->isPost()) {
+			$session = new Zend_Session_Namespace('signup');
+			$form = $session->form;
+			$session->setExpirationHops(1, true);
+			if ($form->isValid($this->getRequest()->getParams())) {
+				// ...
+			}
+		}
+		$this->_redirect($this->view->url(array(), 'signup'));
 	}
 
 	/**
@@ -90,8 +99,14 @@ class AccountController extends Blipoteka_Controller {
 	 */
 	public function signupAction() {
 		$this->view->headTitle('Zarejestruj się');
-		$signupForm = new Blipoteka_Form_Account_Signup(array('action' => $this->view->url(array(), 'account-register')));
-		$this->view->signupForm = $signupForm;
+		$form = new Blipoteka_Form_Account_Signup(array('action' => $this->view->url(array(), 'account-register')));
+		$session = new Zend_Session_Namespace('signup');
+		if ($session->form instanceof Blipoteka_Form_Account_Signup) {
+			$this->view->form = $session->form;
+		} else {
+			$this->view->form = $form;
+		}
+		$session->form = $form;
 	}
 
 }

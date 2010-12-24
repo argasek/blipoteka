@@ -1,26 +1,4 @@
 <h2>Załóż kartę blipoteczną</h2>
 <p>Rejestracja jest prosta i zajmie Ci mniej niż minutę. Wypełnij po prostu formularz poniżej:</p>
-<form id="signup" method="post" action="<?php echo $this->url(array(), 'account-register'); ?>">
-<fieldset>
-	<p>
-		<label for="email">E-mail:</label>
-		<input type="email" id="email" name="email">
-	</p>
-	<p>
-		<label for="login">Login na Blip:</label>
-		<input type="text" id="login" name="login">
-	</p>
-	<p>
-		<label for="password">Hasło:</label>
-		<input type="password" id="password" name="password">
-	</p>
-	<p>
-		<label for="password-confirm">Powtórz hasło:</label>
-		<input type="password" id="password-confirm" name="password-confirm">
-	</p>
-	<p>
-		<button class="button" type="submit">Utwórz nowe konto</button>
-	</p>
-</fieldset>
-</form>
+<?php echo $this->form; ?>
 <p>Jeśli rejestracja przebiegła poprawnie, otrzymasz e-maila z linkiem aktywacyjnym.</p>
