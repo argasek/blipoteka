@@ -30,5 +30,41 @@ class Blipoteka_Form_Account_Signup extends Zend_Form {
 
 	public function init() {
 		$this->setMethod('post');
+
+		$user = Doctrine_Core::getTable('Blipoteka_User')->getRecordInstance();
+
+		$email = $this->createElement('text', 'email');
+		$email->setLabel('E-mail');
+		$email->setFilters(array('StringTrim', 'StringToLower'));
+		$email->setValidators($user->getColumnValidatorsArray('email'));
+		$email->setRequired(true);
+		$this->addElement($email);
+
+		$login = $this->createElement('text', 'login');
+		$login->setLabel('Login na Blip');
+		$login->setFilters(array('StringTrim', 'StringToLower'));
+		$login->setValidators($user->getColumnValidatorsArray('blip'));
+		$login->setRequired(true);
+		$this->addElement($login);
+
+		$password = $this->createElement('password', 'password');
+		$password->setLabel('Hasło');
+		$password->setFilters(array('StringTrim'));
+		$password->setValidators($user->getColumnValidatorsArray('password'));
+		$password->setRequired(true);
+		$this->addElement($password);
+
+		$passwordconfirm = $this->createElement('password', 'passwordconfirm');
+		$passwordconfirm->setLabel('Hasło');
+		$passwordconfirm->setFilters(array('StringTrim'));
+		$passwordconfirm->setValidators($user->getColumnValidatorsArray('password'));
+		$passwordconfirm->setRequired(true);
+		$this->addElement($passwordconfirm);
+
+		$viewScript = new Zend_Form_Decorator_ViewScript();
+		$viewScript->setViewScript('forms/signup.phtml');
+		$this->clearDecorators()->addDecorator($viewScript);
+
+
 	}
 }
