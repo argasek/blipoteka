@@ -45,14 +45,19 @@ abstract class Void_Doctrine_Record extends Doctrine_Record {
 	 * Attach a Zend_Validate validator chain to a field
 	 *
 	 * @param string $field
-	 * @param Zend_Validate $validators
+	 * @param array $validators Array of Zend_Validate
 	 */
-	protected function setColumnValidators($field, Zend_Validate $validators) {
+	protected function setColumnValidators($field, array $validators) {
+		$validate = new Zend_Validate();
+		foreach ($validators as $validator) {
+			$validate->addValidator($validator);
+		}
 		$extra = $this->getColumnOption($field, 'extra');
+		$options = array('validators' => $validators, 'validate' => $validate);
 		if (is_array($extra)) {
-			$extra = array_merge($extra, array('validators' => $validators));
+			$extra = array_merge($extra, $options);
 		} elseif ($extra === null) {
-			$extra = array('validators' => $validators);
+			$extra = $options;
 		} else {
 			throw new Doctrine_Record_Exception("Column '%s' 'extra' option is neighter an array nor NULL, don't know what to do.", Doctrine_Core::ERR_UNSUPPORTED);
 		}
@@ -67,7 +72,18 @@ abstract class Void_Doctrine_Record extends Doctrine_Record {
 	 */
 	public function getColumnValidators($field) {
 		$extra = $this->getColumnOption($field, 'extra');
-		return (isset($extra['validators']) ? $extra['validators'] : false);
+		return (isset($extra['validate']) ? $extra['validate'] : false);
+	}
+
+	/**
+	 * Returns validators for a given field as array
+	 *
+	 * @param string $field
+	 * @return array
+	 */
+	public function getColumnValidatorsArray($field) {
+		$extra = $this->getColumnOption($field, 'extra');
+		return (isset($extra['validators']) ? $extra['validators'] : array());
 	}
 
 	/**
