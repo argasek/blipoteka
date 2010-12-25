@@ -4,5 +4,7 @@ type -P phpunit &>/dev/null || { echo "PHPUnit is required, but is not installed
 
 SCRIPTPATH="$(dirname $(cd "${0%/*}" 2>/dev/null; echo "$PWD"/"${0##*/}"))"
 
-APPLICATION_ENV=testing $SCRIPTPATH/doctrine-cli.php build-all-reload
+export APPLICATION_ENV=testing
+$SCRIPTPATH/doctrine-cli.php build-all-reload
 cd $SCRIPTPATH/../tests && phpunit && cd $SCRIPTPATH
+export APPLICATION_ENV=
