@@ -1,15 +1,18 @@
 <form method="<?php echo $this->element->getMethod(); ?>" action="<?php echo $this->element->getAction(); ?>">
 <fieldset>
+	<?php if (count($this->element->getErrorMessages())): ?>
+	<p class="error"><?php echo ltrim(implode('. ', $this->element->getErrorMessages()) . '.', '.'); ?></p>
+	<?php endif; ?>
 	<p>
 		<label for="email">E-mail:</label>
-		<input type="email" id="email" name="email">
+		<input type="email" id="email" name="email" value="<?php echo $this->element->email->getValue(); ?>">
 		<?php if (count($this->element->email->getMessages()) > 0): ?>
 		<span class="error"><?php echo ltrim(implode('. ', $this->element->email->getMessages()) . '.', '.'); ?></span>
 		<?php endif; ?>
 	</p>
 	<p>
 		<label for="login">Login na Blip:</label>
-		<input type="text" id="login" name="login">
+		<input type="text" id="login" name="login" value="<?php echo $this->element->login->getValue(); ?>">
 		<?php if (count($this->element->login->getMessages()) > 0): ?>
 		<span class="error"><?php echo ltrim(implode('. ', $this->element->login->getMessages()) . '.', '.'); ?></span>
 		<?php endif; ?>

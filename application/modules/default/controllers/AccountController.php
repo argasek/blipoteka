@@ -79,6 +79,8 @@ class AccountController extends Blipoteka_Controller {
 					$default->setCredential($form->getValue('password'));
 					$result = $auth->authenticate($adapter);
 					if ($result->isValid()) {
+					} else {
+						$form->addError("Podano nieprawidłowy adres e-mail lub hasło");
 					}
 				}
 			}
