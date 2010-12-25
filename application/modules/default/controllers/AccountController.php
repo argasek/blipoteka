@@ -47,9 +47,12 @@ class AccountController extends Blipoteka_Controller {
 		if ($this->getRequest()->isPost()) {
 			$session = new Zend_Session_Namespace('signup');
 			$form = $session->form;
-			$session->setExpirationHops(1, true);
-			if ($form->isValid($this->getRequest()->getParams())) {
-				// ...
+			// Check for validity of form instance (one could delete cookie etc.)
+			if ($form instanceof Blipoteka_Form_Account_Signup) {
+				$session->setExpirationHops(1, true);
+				if ($form->isValid($this->getRequest()->getParams())) {
+					// ...
+				}
 			}
 		}
 		$this->_redirect($this->view->url(array(), 'signup'));
@@ -67,13 +70,16 @@ class AccountController extends Blipoteka_Controller {
 		if ($this->getRequest()->isPost()) {
 			$session = new Zend_Session_Namespace('signin');
 			$form = $session->form;
-			$session->setExpirationHops(1, true);
-			if ($form->isValid($this->getRequest()->getParams())) {
-				$default = $adapter->getDefaultAdapter();
-				$default->setIdentity($form->getValue('email'));
-				$default->setCredential($form->getValue('password'));
-				$result = $auth->authenticate($adapter);
-				if ($result->isValid()) {
+			// Check for validity of form instance (one could delete cookie etc.)
+			if ($form instanceof Blipoteka_Form_Account_Signin) {
+				$session->setExpirationHops(1, true);
+				if ($form->isValid($this->getRequest()->getParams())) {
+					$default = $adapter->getDefaultAdapter();
+					$default->setIdentity($form->getValue('email'));
+					$default->setCredential($form->getValue('password'));
+					$result = $auth->authenticate($adapter);
+					if ($result->isValid()) {
+					}
 				}
 			}
 		}
