@@ -133,7 +133,7 @@ class Blipoteka_User extends Void_Doctrine_Record {
 	protected function setUpValidators() {
 		// Validate e-mail address
 		$validators = array();
-		$validators[] = new Void_Validate_Email(array('checkdns' => true));
+		$validators['email'] = new Void_Validate_Email(array('checkdns' => true));
 		$this->setColumnValidators('email', $validators);
 	}
 

@@ -258,21 +258,21 @@ class Blipoteka_Book extends Void_Doctrine_Record {
 	protected function setUpValidators() {
 		// Validate ISBN number
 		$validators = array();
-		$validators[] = new Zend_Validate_Isbn();
+		$validators['isbn'] = new Zend_Validate_Isbn();
 		$this->setColumnValidators('isbn', $validators);
 
 		// Validate year. It's safe to assume no one will possess a book printed by 1900, is it?
 		// Also, we check if a date of edition is not set in future.
 		$validators = array();
-		$validators[] = new Zend_Validate_Int();
-		$validators[] = new Void_Validate_GreaterThanOrEqual(1900);
-		$validators[] = new Void_Validate_LessThanOrEqual(date('Y'));
+		$validators['int'] = new Zend_Validate_Int();
+		$validators['year'] = new Void_Validate_GreaterThanOrEqual(1900);
+		$validators['past'] = new Void_Validate_LessThanOrEqual(date('Y'));
 		$this->setColumnValidators('year', $validators);
 
 		// Validate number of pages. We assume 16 pages minimum (it seems to be a reasonable
 		// number; from a formal point of view, if it's less than 48 pages, it's a brochure).
 		$validators = array();
-		$validators[] = new Void_Validate_GreaterThanOrEqual(16);
+		$validators['pages'] = new Void_Validate_GreaterThanOrEqual(16);
 		$this->setColumnValidators('pages', $validators);
 	}
 
