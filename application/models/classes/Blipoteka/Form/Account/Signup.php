@@ -33,31 +33,40 @@ class Blipoteka_Form_Account_Signup extends Zend_Form {
 
 		$user = Doctrine_Core::getTable('Blipoteka_User')->getRecordInstance();
 
+		$validators = $user->getColumnValidatorsArray('email');
+		$validators['email']->setMessage('Nieprawidłowy adres e-mail', Void_Validate_Email::INVALID);
 		$email = $this->createElement('text', 'email');
 		$email->setLabel('E-mail');
 		$email->setFilters(array('StringTrim', 'StringToLower'));
-		$email->setValidators($user->getColumnValidatorsArray('email'));
+		$email->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Adres e-mail nie może być pusty')));
+		$email->addValidators($validators);
 		$email->setRequired(true);
 		$this->addElement($email);
 
+		$validators = $user->getColumnValidatorsArray('blip');
 		$login = $this->createElement('text', 'login');
 		$login->setLabel('Login na Blip');
 		$login->setFilters(array('StringTrim', 'StringToLower'));
-		$login->setValidators($user->getColumnValidatorsArray('blip'));
+		$login->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Login nie może być pusty')));
+		$login->addValidators($validators);
 		$login->setRequired(true);
 		$this->addElement($login);
 
+		$validators = $user->getColumnValidatorsArray('password');
 		$password = $this->createElement('password', 'password');
 		$password->setLabel('Hasło');
 		$password->setFilters(array('StringTrim'));
-		$password->setValidators($user->getColumnValidatorsArray('password'));
+		$password->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Hasło nie może być puste')));
+		$password->addValidators($validators);
 		$password->setRequired(true);
 		$this->addElement($password);
 
+		$validators = $user->getColumnValidatorsArray('password');
 		$passwordconfirm = $this->createElement('password', 'passwordconfirm');
-		$passwordconfirm->setLabel('Hasło');
+		$passwordconfirm->setLabel('Powtórz hasło');
 		$passwordconfirm->setFilters(array('StringTrim'));
-		$passwordconfirm->setValidators($user->getColumnValidatorsArray('password'));
+		$passwordconfirm->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Hasło nie może być puste')));
+		$passwordconfirm->addValidators($validators);
 		$passwordconfirm->setRequired(true);
 		$this->addElement($passwordconfirm);
 

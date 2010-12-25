@@ -31,14 +31,15 @@ class Blipoteka_Form_Account_Signin extends Zend_Form {
 	public function init() {
 		$this->setMethod('post');
 
+		$user = Doctrine_Core::getTable('Blipoteka_User')->getRecordInstance();
+
+		$validators = $user->getColumnValidatorsArray('email');
+		$validators['email']->setMessage('Nieprawidłowy adres e-mail', Void_Validate_Email::INVALID);
 		$email = $this->createElement('text', 'email');
 		$email->setLabel('Adres e-mail');
 		$email->setFilters(array('StringTrim', 'StringToLower'));
 		$email->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Adres e-mail nie może być pusty')));
-		$validator = new Void_Validate_Email();
-		$validator->zfBreakChainOnFailure = true;
-		$validator->setMessage('Nieprawidłowy adres e-mail', Void_Validate_Email::INVALID);
-		$email->addValidator($validator);
+		$email->addValidators($validators);
 		$email->setRequired(true);
 		$this->addElement($email);
 
