@@ -13,7 +13,7 @@
 		<section id="header">
 			<div class="container_12 clearfix">
 				<header class="grid_8">
-					<h1>Blipoteka.pl</h1>
+					<h1><a href="<?php echo $this->url(array(), 'index') ?>">Blipoteka.pl</a></h1>
 					<p>Mię­dzy­mia­stowa biblioteka użyt­kow­ni­ków ser­wisu Blip.pl</p>
 				</header>
 				<?php if ($this->hasIdentity === true): ?>
@@ -24,10 +24,10 @@
 				<?php endif; ?>
 			</div>
 		</section>
-		<section id="content" class="container_12 content">
-			<div class="grid_12">
+		<section id="content" class="container_12">
+			<article class="grid_12">
 			<?php echo $this->layout()->content . "\n" ?>
-			</div>
+			</article>
 		</section>
 	</div>
 </div>

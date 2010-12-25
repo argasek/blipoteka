@@ -13,15 +13,15 @@
 		<section id="header">
 			<div class="container_12 clearfix">
 				<header class="grid_8">
-					<h1>Blipoteka.pl</h1>
+					<h1><a href="<?php echo $this->url(array(), 'index') ?>">Blipoteka.pl</a></h1>
 					<p>Mię­dzy­mia­stowa biblioteka użyt­kow­ni­ków ser­wisu Blip.pl</p>
 				</header>
 			</div>
 		</section>
 		<section id="signin-wrap" class="container_12 clearfix">
-			<div class="grid_2 push_3">
+			<aside class="grid_2 push_3">
 				<a href="<?php echo $this->url(array(), 'index') ?>"><img src="<?php echo $this->baseUrl('img/logo128.png'); ?>" alt="Logo Blipoteki" /></a>
-			</div>
+			</aside>
 			<section id="signin" class="grid_7 push_3">
 			<?php echo $this->layout()->content . "\n" ?>
 			</section>
