@@ -33,6 +33,8 @@
  * @property integer $lognum How many times user logged in
  * @property bool $is_active Is user's account active?
  * @property bool $auto_accept_requests Automatically accept all borrow requests from user's friends
+ * @property bool $gender Gender of user (true for male, false for female, NULL for not specified)
+ * @property string $token General usage SHA1 token holder (for activation, password reset etc.)
  * @property string $activated_at Date and time the account was activated by user
  * @property string $created_at Date and time the account was created
  * @property string $updated_at Date and time the record was updated
@@ -64,6 +66,8 @@ class Blipoteka_User extends Void_Doctrine_Record {
 		$this->hasColumn('is_active', 'boolean', null, array('default' => true, 'notnull' => true));
 		$this->hasColumn('activated_at', 'timestamp', null, array('notnull' => false));
 		$this->hasColumn('auto_accept_requests', 'boolean', null, array('default' => true, 'notnull' => true));
+		$this->hasColumn('gender', 'boolean', null, array('notnull' => false));
+		$this->hasColumn('token', 'string', 40, array('unique' => true, 'notnull' => false));
 	}
 
 	/**
