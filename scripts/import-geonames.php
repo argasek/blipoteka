@@ -23,7 +23,7 @@
 
 define('APPLICATION_DOCTRINE_SCRIPT', true);
 
-include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'doctrine-console-common.php';
+include __DIR__ . DIRECTORY_SEPARATOR . 'doctrine-console-common.php';
 
 $defaultGeoNamesPath = APPLICATION_PATH . DS . 'models' . DS . 'fixtures' . DS . 'geonames' . DS;
 

@@ -28,7 +28,7 @@ if (!defined('APPLICATION_DOCTRINE_SCRIPT')) {
 define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'cli');
 defined('DS') || define('DS', DIRECTORY_SEPARATOR);
 
-include dirname(__FILE__) . DS . '..' . DS . 'public' . DS . 'initenv.php';
+include __DIR__ . DS . '..' . DS . 'public' . DS . 'initenv.php';
 
 $bootstrap = $application->bootstrap('doctrine')->getBootstrap();
 $doctrine = $bootstrap->getResource('doctrine');

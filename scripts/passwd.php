@@ -23,7 +23,7 @@
 
 define('APPLICATION_DOCTRINE_SCRIPT', true);
 
-include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'doctrine-console-common.php';
+include __DIR__ . DIRECTORY_SEPARATOR . 'doctrine-console-common.php';
 
 $application->bootstrap('auth');
 $adapter = Zend_Registry::get('auth-adapter');
