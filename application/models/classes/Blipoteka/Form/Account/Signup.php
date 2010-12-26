@@ -44,19 +44,31 @@ class Blipoteka_Form_Account_Signup extends Zend_Form {
 		$this->addElement($email);
 
 		$validators = $user->getColumnValidatorsArray('blip');
+		$blipValidator = new Blipoteka_Validate_Blip_Login();
+		$blipValidator->setSkipCheck(APPLICATION_ENV == 'development');
+		$blipValidator->setMessages(array(
+			'accountNonExistant' => 'Nie ma takiego konta na Blipie',
+			'connectionFailed' => 'Pan Oponka urwał od połączenia, spróbuj później',
+			'invalidResponse' => 'Nieprawidłowa odpowiedź serwera Blip'
+		));
 		$login = $this->createElement('text', 'login');
 		$login->setLabel('Login na Blip');
 		$login->setFilters(array('StringTrim', 'StringToLower'));
 		$login->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Login nie może być pusty')));
 		$login->addValidators($validators);
+		$login->addValidator($blipValidator);
 		$login->setRequired(true);
 		$this->addElement($login);
 
+		$minPasswordLength = 8;
 		$validators = $user->getColumnValidatorsArray('password');
 		$password = $this->createElement('password', 'password');
 		$password->setLabel('Hasło');
 		$password->setFilters(array('StringTrim'));
 		$password->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Hasło nie może być puste')));
+		$password->addValidator('StringLength', false, array($minPasswordLength, null,'messages' => array(
+			Zend_Validate_StringLength::TOO_SHORT => "Zbyt krótkie hasło (min. $minPasswordLength znaków)"
+		)));
 		$password->addValidators($validators);
 		$password->setRequired(true);
 		$this->addElement($password);
@@ -65,15 +77,25 @@ class Blipoteka_Form_Account_Signup extends Zend_Form {
 		$passwordconfirm = $this->createElement('password', 'passwordconfirm');
 		$passwordconfirm->setLabel('Powtórz hasło');
 		$passwordconfirm->setFilters(array('StringTrim'));
-		$passwordconfirm->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Hasło nie może być puste')));
+		$passwordconfirm->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Ej. Hasło naprawdę nie może być puste')));
 		$passwordconfirm->addValidators($validators);
+		$passwordconfirm->addValidator('Identical');
 		$passwordconfirm->setRequired(true);
 		$this->addElement($passwordconfirm);
 
 		$viewScript = new Zend_Form_Decorator_ViewScript();
 		$viewScript->setViewScript('forms/signup.phtml');
 		$this->clearDecorators()->addDecorator($viewScript);
-
-
 	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Zend_Form::isValid()
+	 */
+	public function isValid($data) {
+		$passwordconfirm = $this->getElement('passwordconfirm');
+		$passwordconfirm->getValidator('Identical')->setToken($data['password'])->setMessage("Podane hasła nie są zgodne");
+		return parent::isValid($data);
+	}
+
 }
