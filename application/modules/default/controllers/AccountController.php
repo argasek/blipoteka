@@ -49,9 +49,15 @@ class AccountController extends Blipoteka_Controller {
 			$form = $session->form;
 			// Check for validity of form instance (one could delete cookie etc.)
 			if ($form instanceof Blipoteka_Form_Account_Signup) {
-				$session->setExpirationHops(1, true);
+				$session->setExpirationHops(1, null, true);
 				if ($form->isValid($this->getRequest()->getParams())) {
-					// ...
+					$user = new Blipoteka_User();
+					$service = new Blipoteka_Service_User($this->getRequest());
+					$result = $service->createUser($user, $form);
+					if ($result === true) {
+						$this->view->user = $user->toArray();
+						return;
+					}
 				}
 			}
 		}
@@ -72,7 +78,7 @@ class AccountController extends Blipoteka_Controller {
 			$form = $session->form;
 			// Check for validity of form instance (one could delete cookie etc.)
 			if ($form instanceof Blipoteka_Form_Account_Signin) {
-				$session->setExpirationHops(1, true);
+				$session->setExpirationHops(1, null, true);
 				if ($form->isValid($this->getRequest()->getParams())) {
 					$default = $adapter->getDefaultAdapter();
 					$default->setIdentity($form->getValue('email'));
