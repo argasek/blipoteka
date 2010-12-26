@@ -149,4 +149,33 @@ abstract class Void_Doctrine_Record extends Doctrine_Record {
 		}
 		return false;
 	}
+
+	/**
+	 * Set up an error handler proxying between Void_Doctrine_Record and Zend_Form.
+	 * This method has to be executed after a validation has taken place.
+	 *
+	 * @param Void_Doctrine_Record $record A record we refer to
+	 * @param string $column A column (field) name in this record
+	 * @param Zend_Form $form A form we refer to
+	 * @param string $field A name of form field
+	 * @param array $mappings Key: an error type we expect to happen, value: an error message passed to form element when this error happens
+	 */
+	public function errorStackToForm($column, array $mappings, Zend_Form $form, $field = null) {
+		// Check if error stack for this record mentions column we refer to
+		if ($this->getErrorStack()->contains($column)) {
+			// Get errors for this column
+			foreach ($this->getErrorStack()->get($column) as $type) {
+				// Check if error type found exists in mappings, if so use it; if no, pass an error as-is
+				$error = (array_key_exists($type, $mappings) ? $mappings[$type] : $type);
+				if ($field === null) {
+					// Attach an error to the form
+					$form->addError($error);
+				} else {
+					// Attach an error to the form element given
+					$form->getElement($field)->addError($error);
+				}
+			}
+		}
+	}
+
 }
