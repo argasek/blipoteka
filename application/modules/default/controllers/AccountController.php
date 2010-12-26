@@ -50,17 +50,32 @@ class AccountController extends Blipoteka_Controller {
 			// Check for validity of form instance (one could delete cookie etc.)
 			if ($form instanceof Blipoteka_Form_Account_Signup) {
 				$session->setExpirationHops(1, null, true);
+				// If form data is valid, try to create a new user account
 				if ($form->isValid($this->getRequest()->getParams())) {
 					$user = new Blipoteka_User();
 					$service = new Blipoteka_Service_User($this->getRequest());
 					$result = $service->createUser($user, $form);
+					// If user account was created successfuly, pass account
+					// data through session with one hop validity
 					if ($result === true) {
-						$this->view->user = $user->toArray();
-						return;
+						$session = new Zend_Session_Namespace('signupsuccess');
+						$session->user = $user->toArray();
+						$session->setExpirationHops(1, null, true);
+						$this->_redirect($this->view->url(array(), 'account-register'));
 					}
 				}
 			}
+		// This is GET request
+		} else {
+			// If user data found within signupsuccess session namespace,
+			// render registration success view
+			$session = new Zend_Session_Namespace('signupsuccess');
+			if (is_array($session->user)) {
+				$this->view->user = $session->user;
+				return;
+			}
 		}
+
 		$this->_redirect($this->view->url(array(), 'signup'));
 	}
 
@@ -121,6 +136,15 @@ class AccountController extends Blipoteka_Controller {
 			$this->view->form = $form;
 		}
 		$session->form = $form;
+	}
+
+	/**
+	 * Sigin via OAuth action
+	 *
+	 * @return void
+	 */
+	public function signinOauthAction() {
+
 	}
 
 }

@@ -290,17 +290,25 @@ hr {
 #content > article {
 	padding: 2em 0;
 }
+#content > article > footer {
+	padding-top: 0.75em;
+}
 
 .error {
 	color: #FF5000;
 }
 
-article h1, article h2, article h3, article h4, article h5, article h6, article p, article dl, article ul, article ol, article li, article pre, article table, article address, article fieldset {
+article h1, article h2, article h3, article h4, article h5, article h6, article p, article dl, article ul, article ol, article li, article pre, article table, article address {
 	margin-bottom: 0.5em;
 }
 
 article h2 {
 	font-size: 28px;
+}
+
+article h3 {
+	font-size: 20px;
+	margin-top: 0.75em;
 }
 
 article ul {
@@ -316,7 +324,7 @@ form p .error {
 }
 
 form fieldset {
-	padding: 0.5em 0;
+	padding-top: 0.5em;
 }
 
 input[type=text], input[type=email], input[type=password], select, textarea {
