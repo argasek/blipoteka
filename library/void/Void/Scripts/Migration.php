@@ -221,7 +221,7 @@ class Void_Scripts_Migration extends Void_Scripts {
 		    'short_name'  => '-l',
 			'long_name'   => '--log-queries',
 		    'action'      => 'StoreTrue',
-		    'description' => sprintf("log all queries to a %s file", self::QUERY_LOG_FILENAME)
+		    'description' => sprintf("log all queries to a file")
 		));
 
 		// Add a command to get current migration version
