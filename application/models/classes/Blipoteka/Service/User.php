@@ -99,25 +99,41 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	public function createUser(Blipoteka_User $user, Blipoteka_Form_Account_Signup $form) {
 		$user->blip = $form->getValue('login');
 		$user->email = $form->getValue('email');
+		$user->is_active = false;
 		$this->setPassword($form->getValue('password'), $user);
 		// If user name not provided, use default
 		if ($user->name === null) {
 			$user->name = $this->getDefaultUserName();
 		}
 		// If user city not provided, use default
-		if ($user->city === null) {
+		if ($user->city_id === null) {
 			$user->city = $this->getDefaultCity();
 		}
-		// Create user's account.
-		$user->save();
 
-		return $this;
+		// If save successful, nothing to see here, move along.
+		if ($user->trySave()) return true;
+
+		// Email errors handling
+		$mappings = array(
+			'unique' => 'Konto o takim adresie e-mail już istnieje',
+		);
+		$user->errorStackToForm('email', $mappings, $form, 'email');
+
+		// Login errors handling
+		$mappings = array(
+			'unique' => 'Konto takiego użytkownika już istnieje',
+		);
+		$user->errorStackToForm('blip', $mappings, $form, 'login');
+
+		return false;
 	}
 
 	/**
 	 * Get user entity by identity.
+	 *
 	 * @todo Don't assume email is an identity field.
 	 * @param string $identity
+	 * @return Blipoteka_User
 	 */
 	public function getUserByIdentity($identity) {
 		return Doctrine_Core::getTable('Blipoteka_User')->findOneBy('email', $identity);
@@ -126,18 +142,18 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	/**
 	 * Return default city.
 	 *
-	 * @todo This should be set up by some resource
-	 * @return string
+	 * @todo Default city name should be set up by some resource
+	 * @return Blipoteka_City
 	 */
 	protected function getDefaultCity() {
 		$name = self::DEFAULT_CITY_NAME;
-		return Doctrine_Query::getTable('Blipoteka_City')->findOneByName($name);
+		return Doctrine_Core::getTable('Blipoteka_City')->findOneByName($name);
 	}
 
 	/**
 	 * Return default user name.
 	 *
-	 * @todo This should be set up by some resource
+	 * @todo Default user name should be set up by some resource
 	 * @return string
 	 */
 	protected function getDefaultUserName() {
