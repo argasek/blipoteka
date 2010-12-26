@@ -94,7 +94,7 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	 * Create user account with reasonable default values.
 	 *
 	 * @param Blipoteka_User $user
-	 * @return Blipoteka_Service_User
+	 * @return bool
 	 */
 	public function createUser(Blipoteka_User $user, Blipoteka_Form_Account_Signup $form) {
 		$user->blip = $form->getValue('login');
@@ -110,8 +110,15 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 			$user->city = $this->getDefaultCity();
 		}
 
+		// Generate token and send e-mail notification
+		$subject = 'Potwierdzenie rejestracji w Blipotece';
+		$user->addListener(new Blipoteka_Listener_User_Token());
+		$user->addListener(new Blipoteka_Listener_User_Notification_Email('activation', $subject));
+
 		// If save successful, nothing to see here, move along.
-		if ($user->trySave()) return true;
+		if ($user->trySave()) {
+			return true;
+		}
 
 		// Email errors handling
 		$mappings = array(
@@ -159,6 +166,99 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	protected function getDefaultUserName() {
 		$name = self::DEFAULT_USER_NAME;
 		return $name;
+	}
+
+	/**
+	 * Activates user account pointed out by a token. Return
+	 * Blipoteka_User entity if activation was successful, false
+	 * if it failed.
+	 *
+	 * @return bool
+	 */
+	public function activateRegisteredAccount($token) {
+		$user = Doctrine_Core::getTable('Blipoteka_User')->findOneByToken($token);
+		// User with such token found, activate
+		if ($user instanceof Blipoteka_User) {
+			$activated_at = new Zend_Date();
+			// Reset token
+			$user->token = null;
+			// Mark as active
+			$user->is_active = true;
+			$user->activated_at = $activated_at->toString('YYYY-MM-dd HH:mm:ss');
+			$user->save();
+			// Authenticate user
+			$this->authenticateUser($user);
+		}
+		return $user;
+	}
+
+	/**
+	 * Authenticates user using his/her own credential data.
+	 *
+	 * @param Blipoteka_User $user
+	 */
+	public function authenticateUser(Blipoteka_User $user) {
+		$auth = Zend_Auth::getInstance();
+
+		$treatment = new Void_Auth_Credential_Treatment_None();
+
+		$adapter = $this->_authAdapter;
+		$adapter->setIdentity($user->email);
+		$adapter->setCredential($user->password);
+		$adapter->setCredentialTreatment($treatment);
+		$result = $auth->authenticate($adapter);
+
+		return $result;
+	}
+
+	/**
+	 * Try to sign in user using default adapter.
+	 *
+	 * @param Blipoteka_Form_Account_Signin $form
+	 * @return Blipoteka_User|false
+	 */
+	public function signin(Blipoteka_Form_Account_Signin $form) {
+		$auth = Zend_Auth::getInstance();
+
+		$adapter = $this->_authAdapter;
+		$adapter->setIdentity($form->getValue('email'));
+		$adapter->setCredential($form->getValue('password'));
+		$result = $auth->authenticate($adapter);
+		if ($result->isValid()) {
+			$user = $this->getUserByIdentity($auth->getIdentity());
+			if ($this->isAccountActivated($user) === false) {
+				$auth->clearIdentity();
+				$form->addError("Najpierw musisz aktywować konto");
+			} else {
+				if ($this->isAccountActive($user) === false) {
+					$auth->clearIdentity();
+					$form->addError("Twoje konto zostało zablokowane");
+				}
+			}
+		} else {
+			$form->addError("Podano nieprawidłowy adres e-mail lub hasło");
+		}
+	}
+
+	/**
+	 * Checks if user's account was activated
+	 * (ie. activated_at is not NULL and token is NULL).
+	 *
+	 * @param Blipoteka_User $user
+	 * @return bool
+	 */
+	public function isAccountActivated(Blipoteka_User $user) {
+		return $user->activated_at !== null && $user->token === null;
+	}
+
+	/**
+	 * Checks if user's account is active.
+	 *
+	 * @param Blipoteka_User $user
+	 * @return bool
+	 */
+	public function isAccountActive(Blipoteka_User $user) {
+		return $user->is_active;
 	}
 
 }
