@@ -2,3 +2,4 @@ dump
 restore
 blipoteka.sql
 doctrine.log
+rebuild.sh
