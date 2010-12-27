@@ -43,6 +43,7 @@ class AccountController extends Blipoteka_Controller {
 	 * @return void
 	 */
 	public function registerAction() {
+		$this->view->headTitle('Rejestracja pomyślna');
 		// If this is POST request, try to authenticate using form credentials
 		if ($this->getRequest()->isPost()) {
 			$session = new Zend_Session_Namespace('signup');
@@ -85,8 +86,6 @@ class AccountController extends Blipoteka_Controller {
 	 * @return void
 	 */
 	public function signinAction() {
-		$auth = Zend_Auth::getInstance();
-		$adapter = Zend_Registry::get('auth-adapter');
 		// If this is POST request, try to authenticate using form credentials
 		if ($this->getRequest()->isPost()) {
 			$session = new Zend_Session_Namespace('signin');
@@ -95,14 +94,8 @@ class AccountController extends Blipoteka_Controller {
 			if ($form instanceof Blipoteka_Form_Account_Signin) {
 				$session->setExpirationHops(1, null, true);
 				if ($form->isValid($this->getRequest()->getParams())) {
-					$default = $adapter->getDefaultAdapter();
-					$default->setIdentity($form->getValue('email'));
-					$default->setCredential($form->getValue('password'));
-					$result = $auth->authenticate($adapter);
-					if ($result->isValid()) {
-					} else {
-						$form->addError("Podano nieprawidłowy adres e-mail lub hasło");
-					}
+					$service = new Blipoteka_Service_User($this->getRequest());
+					$identity = $service->signin($form);
 				}
 			}
 		}
@@ -136,6 +129,22 @@ class AccountController extends Blipoteka_Controller {
 			$this->view->form = $form;
 		}
 		$session->form = $form;
+	}
+
+	/**
+	 * Account activation action
+	 *
+	 * @todo Take care of page refreshes using session
+	 * @return void
+	 */
+	public function activateAction() {
+		$this->view->headTitle('Aktywacja konta');
+		$this->view->success = false;
+		$service = new Blipoteka_Service_User($this->getRequest());
+		$user = $service->activateRegisteredAccount($this->getRequest()->token);
+		if ($user instanceof Blipoteka_User) {
+			$this->view->success = true;
+		}
 	}
 
 	/**
