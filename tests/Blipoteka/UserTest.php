@@ -55,7 +55,7 @@ class Blipoteka_UserTest extends PHPUnit_Framework_TestCase {
 		} catch (Doctrine_Validator_Exception $e) {
 			$this->assertEquals($this->user->getErrorStack()->count(), 1);
 			$this->assertEquals(count($this->user->getErrorStack()->get('email')), 1);
-			$this->assertStringEndsWith('is not a valid email address', current($this->user->getErrorStack()->get('email')));
+			$this->assertStringEndsWith('nie jest poprawnym adresem e-mail', current($this->user->getErrorStack()->get('email')));
 			return;
 		}
 		$this->fail('Doctrine_Validator_Exception has not been raised.');
