@@ -15,7 +15,7 @@
  * The functions are defined with the same arguments and returns that their no-multibyte counterparts.
  *
  * Note: Some of them could have added arguments with default values defined.
- * 
+ *
  * Modified by: Jakub Argasiński <argasek@gmail.com>
  * - filename: mbfunctions-1.0.20100223.inc.php => mbfunctions.php
  * - more accented characters
@@ -27,7 +27,7 @@
  * @todo:
  *   $a = array('Ĳ', 'ĳ',  'Œ', 'œ', 'Ǽ', 'ǽ', 'Æ', 'æ');
  *   $b = array('IJ', 'ij', 'OE', 'oe', 'AE', 'ae', 'AE', 'ae');
- * 
+ *
  */
 
 
@@ -51,7 +51,7 @@ if (! function_exists ('mb_init'))
       setlocale(LC_CTYPE, $locale.'.UTF-8');
       iconv_set_encoding("output_encoding", "UTF-8");
       mb_internal_encoding('UTF-8');
-      //header('Content-Type: text/html; charset=utf-8');
+      mb_regex_encoding('UTF-8');
    }
 }
 
@@ -83,7 +83,10 @@ if (! function_exists ('mb_strip_accents'))
 {
    function mb_strip_accents ($string)
    {
-      return mb_strtr ($string, UTF8_ENCODED_CHARLIST, UTF8_NOACCENTS_CHARLIST);
+      $keys = preg_split('//u', UTF8_ENCODED_CHARLIST, -1, PREG_SPLIT_NO_EMPTY);
+      $values = preg_split('//u', UTF8_NOACCENT_CHARLIST, -1, PREG_SPLIT_NO_EMPTY);
+      $replace_pairs = array_combine($keys, $values);
+      return strtr ($string, $replace_pairs);
    }
 }
 
