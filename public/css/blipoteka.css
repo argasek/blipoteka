@@ -379,3 +379,23 @@ input:focus {
 #content > div {
 	padding-bottom: 24px;
 }
+
+.book-list .pagination {
+	text-align: center;
+}
+
+.book-list table {
+	width: 100%;
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+}
+
+.book-list th {
+	vertical-align: middle;
+}
+
+.book-list th, .book-list td {
+	border: 1px solid #ccc;
+	padding: 4px;
+}
+
