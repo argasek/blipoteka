@@ -36,6 +36,10 @@ class IndexController extends Blipoteka_Controller {
 	public function indexAction() {
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			$this->view->headTitle('Strona główna');
+			$service = new Blipoteka_Service_Book();
+			$paginator = $service->getBookListPaginator();
+			$paginator->setCurrentPageNumber($this->_getParam('page'));
+			$this->view->books = $paginator;
 		} else {
 			$this->_forward('login', null, null, array('skip-auth' => 1));
 		}
