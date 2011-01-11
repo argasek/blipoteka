@@ -37,6 +37,8 @@
  * @property integer $pages Number of pages
  * @property string $isbn ISBN-10 or ISBN-13 number
  * @property string $description Description of the book
+ * @property string $status_name Book status as string
+ * @property string $type_name Book type as string
  * @property bool $auto_accept_requests Automatically accept borrow requests from any user
  * @property string $created_at Date and time the book was added to library
  * @property Blipoteka_User $user A user who provided the book
@@ -150,6 +152,10 @@ class Blipoteka_Book extends Void_Doctrine_Record {
 		// If the publisher gets deleted, all books published by him/her are deleted as well.
 		$this->hasOne('Blipoteka_Publisher as publisher', array('local' => 'publisher_id', 'foreign' => 'publisher_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE'));
 		$this->actAs('Timestampable', array('updated' => array('disabled' => true)));
+
+		// Add default record listeners
+		$this->addListener(new Blipoteka_Book_Listener_Status());
+		$this->addListener(new Blipoteka_Book_Listener_Type());
 	}
 
 	/**
