@@ -294,6 +294,17 @@ hr {
 	padding-top: 0.75em;
 }
 
+#content > article div.warning {
+	padding: 1em;
+	border: 1px solid #FFE3BF;
+	background-color: #FFF8EF;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: auto;
+	margin-right: auto;
+	width: 60%;
+}
+
 .error {
 	color: #FF5000;
 }
