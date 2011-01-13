@@ -77,4 +77,14 @@ class IndexController extends Blipoteka_Controller {
 		$this->view->headTitle('Regulamin');
 	}
 
+
+	/**
+	 * License action
+	 *
+	 * @return void
+	 */
+	public function licenseAction() {
+		$this->view->headTitle('Licencja');
+	}
+
 }
