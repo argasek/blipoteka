@@ -44,6 +44,98 @@ class Blipoteka_Service_Book extends Blipoteka_Service {
 	}
 
 	/**
+	 * Get a book by a book identifier
+	 *
+	 * @see getBookBySlug
+	 * @param string $book
+	 * @return Blipoteka_Book
+	 */
+	public function getBook($book) {
+		$item = $this->getBookBySlug($book);
+		return $item;
+	}
+
+	/**
+	 * Get a book by slug
+	 *
+	 * @param string $book
+	 * @return Blipoteka_Book
+	 */
+	public function getBookBySlug($slug) {
+		$query = $this->getBookQuery();
+		$query->where('book.slug = ?', $slug);
+		$item = $query->fetchOne(array(), Doctrine_Core::HYDRATE_ARRAY);
+		return $item;
+	}
+
+	/**
+	 * Get an author entity
+	 *
+	 * @param string $author
+	 * @return Blipoteka_Author|false
+	 */
+	public function getAuthor($author) {
+		$author = Doctrine::getTable('Blipoteka_Author')->findOneBySlug($author);
+		return $author;
+	}
+
+	/**
+	 * Get book list of given author
+	 *
+	 * @param string $author Slug of author
+	 * @return array List of books by $author
+	 */
+	public function getBooksByAuthor($author) {
+		$query = $this->getBookQuery();
+		$query->addWhere('authors.slug = ?', $author);
+		$result = $query->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+		return $result;
+	}
+
+	/**
+	 * Return default query for selecting single books.
+	 *
+	 * @return Doctrine_Query
+	 */
+	protected function getBookQuery() {
+		$query = Doctrine_Query::create();
+		$query->select('book.*');
+		$query->from($this->_recordClass . ' book');
+		// User
+		$query->leftJoin('book.user user');
+		$query->addSelect($this->getUserFieldsQueryPart('user'));
+		// Owner
+		$query->leftJoin('book.owner owner');
+		$query->addSelect($this->getUserFieldsQueryPart('owner'));
+		// Holder
+		$query->leftJoin('book.holder holder');
+		$query->addSelect($this->getUserFieldsQueryPart('holder'));
+		// Author
+		$query->innerJoin('book.authors authors');
+		$query->addSelect('authors.*');
+		// Publisher
+		$query->innerJoin('book.publisher publisher');
+		$query->addSelect('publisher.*');
+		// City
+		$query->leftJoin('book.city city');
+		$query->addSelect('city.*');
+
+		return $query;
+	}
+
+	/**
+	 * Get DQL query part with 'safe' list of user field (ie.
+	 * usable and without sensible data like password).
+	 *
+	 * @param string $field Field being a Blipoteka_User
+	 * @return string
+	 */
+	protected function getUserFieldsQueryPart($field) {
+		$query = "$field.user_id, $field.blip";
+		return $query;
+	}
+
+	/**
 	 * Return collection of books owned by user
 	 *
 	 * @param Blipoteka_User $user
@@ -58,9 +150,9 @@ class Blipoteka_Service_Book extends Blipoteka_Service {
 	 *
 	 * @return Doctrine_Query
 	 */
-	public function getBookListQuery() {
+	protected function getBookListQuery() {
 		$query = Doctrine_Query::create();
-		$query->select('book.book_id, book.type, book.status, book.title');
+		$query->select('book.type, book.status, book.title, book.slug');
 		$query->from($this->_recordClass . ' book');
 		// Owner
 		$query->leftJoin('book.owner owner');
@@ -73,7 +165,7 @@ class Blipoteka_Service_Book extends Blipoteka_Service {
 		$query->addSelect('holder_city.name');
 		// Author
 		$query->innerJoin('book.authors authors');
-		$query->addSelect('authors.name');
+		$query->addSelect('authors.name, authors.slug');
 		// Publisher
 		$query->innerJoin('book.publisher publisher');
 		$query->addSelect('publisher.name');
