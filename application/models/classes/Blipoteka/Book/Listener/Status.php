@@ -34,9 +34,11 @@ class Blipoteka_Book_Listener_Status extends Doctrine_Record_Listener {
 	 * @param Doctrine_Event $event
 	 */
 	public function postHydrate(Doctrine_Event $event) {
-        $data = $event->data;
-		$data['status_name'] = $this->hydrateStatusName((int) $data['status']);
-		$event->data = $data;
+        if (array_key_exists('status', $event->data)) {
+        	$data = $event->data;
+			$data['status_name'] = $this->hydrateStatusName((int) $data['status']);
+			$event->data = $data;
+        }
 	}
 
 	/**
