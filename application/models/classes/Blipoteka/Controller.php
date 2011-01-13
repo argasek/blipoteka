@@ -37,4 +37,12 @@ abstract class Blipoteka_Controller extends Zend_Controller_Action {
 		}
 	}
 
+	/**
+	 * Forward to 404 page (with optional custom $message).
+	 * @param string $message
+	 */
+	public function notfound($message = null) {
+		$this->_forward('not-found', 'error', null, array('message' => $message));
+	}
+
 }
