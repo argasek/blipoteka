@@ -41,4 +41,19 @@ class BookController extends Blipoteka_Controller {
 		$this->_helper->previousPage->setPreviousPage('book-index');
 	}
 
+	/**
+	 * Show book action
+	 *
+	 * @return void
+	 */
+	public function showAction() {
+		$service = new Blipoteka_Service_Book();
+		$book = $service->getBook($this->_getParam('book'));
+		if ($book === false) {
+			$this->notfound('Nie ma takiej książki');
+		} else {
+			$this->view->book = $book;
+		}
+	}
+
 }

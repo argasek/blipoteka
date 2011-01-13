@@ -1,0 +1,27 @@
+<p>&laquo; <a href="<?php echo $this->previousPage('book-index'); ?>">wróć do listy książek</a></p>
+<p>&nbsp;</p>
+
+<header>
+	<h2>
+	<?php echo $this->book['title']; ?>
+	</h2>
+	<h3>
+	<?php $bookAuthors = new SplFixedArray(count($this->book['authors'])); ?>
+	<?php foreach ($this->book['authors'] as $i => $author): ?>
+	<?php $bookAuthors[$i] = '<a href="#">' . $author['name'] . '</a>'; ?>
+	<?php endforeach; ?>
+	<?php echo implode(', ', $bookAuthors->toArray()); ?>
+	</h3>
+</header>
+<p>
+<strong>Wydawnictwo:</strong> <?php echo $this->book['publisher']['name']; ?>
+</p>
+<p>
+<?php echo $this->book['city']['name']; ?> <?php echo $this->book['year']; ?>
+</p>
+<article>
+<h4>Opis:</h4>
+<?php echo $this->book['description']; ?>
+</article>
+<pre> <?php // var_dump($this->book); ?> </pre>
+
