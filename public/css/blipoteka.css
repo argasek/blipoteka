@@ -231,12 +231,13 @@ hr {
 	padding-bottom: 12px;
 	background-color: #FFF8EF;
 	color: #6F4C30;
-	min-height: 64px;
+	min-height: 60px;
 }
 
 #header h1 {
 	font-size: 24px;
-	padding-bottom: 8px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 	text-shadow: 1px 1px 1px #CFA981;
 }
 
@@ -247,6 +248,10 @@ hr {
 
 #header p {
 	padding-bottom: 8px;
+}
+
+#header .logo {
+	display: block;
 }
 
 #header .account-area p {
