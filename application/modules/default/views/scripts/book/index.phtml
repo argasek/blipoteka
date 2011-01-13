@@ -25,7 +25,14 @@
 		<?php $holder = $book['holder']; ?>
 		<tr class="<?php echo 's'.$book['status']; ?>">
 			<td><?php $author = current($book['authors']); echo $author['name']; ?></td>
-			<td><?php $title = $book['title']; echo Void_Util_Text::truncate($title, 48, true, ''); ?></td>
+			<td>
+			<?php
+				$title = $book['title'];
+				$title = Void_Util_Text::truncate($title, 48, true, '');
+				$title = '<a href="' . $this->url(array('book' => $book['slug']), 'book') . '">' . $title . '</a>';
+				echo $title;
+			?>
+			</td>
 			<td><?php echo $book['type_name']; ?></td>
 			<td><?php echo $book['status_name']; ?></td>
 			<td><?php echo $book['owner']['blip']; ?></td>
