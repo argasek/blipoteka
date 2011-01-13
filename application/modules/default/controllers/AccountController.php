@@ -16,7 +16,7 @@
  *
  * @category   Blipoteka
  * @package    Blipoteka_Account
- * @copyright  Copyright (c) 2010 Jakub Argasiński (argasek@gmail.com)
+ * @copyright  Copyright (c) 2010-2011 Jakub Argasiński (argasek@gmail.com)
  * @license    http://blipoteka.pl/license Simplified BSD License
  */
 

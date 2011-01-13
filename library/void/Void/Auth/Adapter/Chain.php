@@ -15,7 +15,7 @@
  *
  * @category   Void
  * @package    Void_Auth_Adapter_Chain
- * @copyright  Copyright (c) 2010 Jakub Argasiński (argasek@gmail.com)
+ * @copyright  Copyright (c) 2010-2011 Jakub Argasiński (argasek@gmail.com)
  * @copyright  Copyright (c) 2008 Zym. (http://www.zym-project.com/)
  * @license    http://tekla.art.pl/license/void-simplified-bsd-license.txt Simplified BSD License
  * @license    http://www.zym-project.com/license New BSD License

@@ -15,7 +15,7 @@
  *
  * @category   Void
  * @package    Void
- * @copyright  Copyright (c) 2010 Jakub Argasiński (argasek@gmail.com)
+ * @copyright  Copyright (c) 2010-2011 Jakub Argasiński (argasek@gmail.com)
  * @license    http://tekla.art.pl/license/void-simplified-bsd-license.txt Simplified BSD License
  */
 
