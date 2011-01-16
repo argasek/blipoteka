@@ -25,6 +25,7 @@
  *
  * @property integer $author_id Primary key
  * @property string $name Surname and name of the author
+ * @property string $slug Slug of the author
  *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
@@ -52,6 +53,23 @@ class Blipoteka_Author extends Void_Doctrine_Record {
 			'foreign' => 'book_id',
 			'refClass' => 'Blipoteka_Book_Author'
 		));
+
+		// Add sluggable behavior
+		$this->actAs('Sluggable',
+			array(
+				'unique'    => true,
+				'fields'    => array('name'),
+				'canUpdate' => false
+			)
+        );
+	}
+
+	/**
+	 * Return the author name
+	 * @see Doctrine_Record::__toString()
+	 */
+	public function __toString() {
+		return $this->name;
 	}
 
 }
