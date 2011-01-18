@@ -9,7 +9,7 @@
  * bundled with this package in the file docs/LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://blipoteka.pl/license
- * 
+ *
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to blipoteka@gmail.com so we can send you a copy immediately.
@@ -47,13 +47,37 @@ set_include_path(
 
 require_once 'Zend/Application.php';
 require_once 'Zend/Config/Ini.php';
+require_once 'Zend/Cache.php';
 
 // We load main application configuration file, all sections (null) and we allow to further modify configuration values (true)
 try {
-	$config = new Zend_Config_Ini(APPLICATION_PATH . DS . 'configs' . DS . 'application.ini', null, true);
-	$config->merge(new Zend_Config_Ini(APPLICATION_PATH . DS . 'configs' . DS . 'routing.ini'));
-	if (is_file(APPLICATION_PATH . DS . 'configs' . DS . 'custom.ini')) {
-		$config->merge(new Zend_Config_Ini(APPLICATION_PATH . DS . 'configs' . DS . 'custom.ini'));
+	$configPath = APPLICATION_PATH . DS . 'configs' . DS;
+	$ini = array(
+		'application' => $configPath . 'application.ini',
+		'routing' => $configPath . 'routing.ini',
+		'custom' => $configPath . 'custom.ini',
+	);
+	// Prepare configuration cache frontend
+	$frontendOptions = array(
+		'lifetime' => 7200,
+		'automatic_serialization' => true,
+		'master_files' => $ini,
+		'ignore_missing_master_files' => true
+	);
+	// Prepare configuration cache backend
+	$backendOptions = array(
+		'cache_dir' => APPLICATION_PATH . DS . 'cache'
+	);
+	// Instantiate configration cache object
+	$configCache = Zend_Cache::factory('File', 'Apc', $frontendOptions, $backendOptions);
+	// Try to load configuration from cache. In case of cache miss, parse files.
+	if (($config = $configCache->load('config')) === false) {
+		$config = new Zend_Config_Ini($ini['application'], null, true);
+		$config->merge(new Zend_Config_Ini($ini['routing']));
+		if (is_file($ini['custom'])) {
+			$config->merge(new Zend_Config_Ini($ini['custom']));
+		}
+		$configCache->save($config, 'config');
 	}
 } catch (Zend_Config_Exception $e) {
 	if (PHP_SAPI !== 'cli') header('Content-Type: text/plain; charset=UTF-8');
