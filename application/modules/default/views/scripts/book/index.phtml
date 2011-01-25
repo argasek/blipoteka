@@ -1,4 +1,4 @@
-<h2>Pełna lista książek</h2>
+<h2>Lista książek</h2>
 
 <section class="book-list">
 	<?php $pagination = $this->paginationControl($this->books, 'Sliding', 'paginators/book-list.phtml'); ?>
@@ -24,7 +24,7 @@
 		<?php foreach ($this->books as $book): ?>
 		<?php $holder = $book['holder']; ?>
 		<tr class="<?php echo 's'.$book['status']; ?>">
-			<td><?php $author = current($book['authors']); echo $author['name']; ?></td>
+			<td><?php $author = current($book['authors']); echo '<a href="' . $this->url(array('author' => $author['slug']), 'author') . '">' . $author['name'] . '</a>'; ?></td>
 			<td>
 			<?php
 				$title = $book['title'];
@@ -35,7 +35,7 @@
 			</td>
 			<td><?php echo $book['type_name']; ?></td>
 			<td><?php echo $book['status_name']; ?></td>
-			<td><?php echo $book['owner']['blip']; ?></td>
+			<td><?php echo $book['owner']['username']; ?></td>
 			<td>
 			<?php if ($holder !== null): ?>
 			<?php echo $holder['blip']; ?> (<?php echo $holder['city']['name']; ?>)

@@ -8,7 +8,7 @@
 	<h3>
 	<?php $bookAuthors = new SplFixedArray(count($this->book['authors'])); ?>
 	<?php foreach ($this->book['authors'] as $i => $author): ?>
-	<?php $bookAuthors[$i] = '<a href="#">' . $author['name'] . '</a>'; ?>
+	<?php $bookAuthors[$i] = '<a href="' . $this->url(array('author' => $author['slug']), 'author') . '">' . $author['name'] . '</a>'; ?>
 	<?php endforeach; ?>
 	<?php echo implode(', ', $bookAuthors->toArray()); ?>
 	</h3>
