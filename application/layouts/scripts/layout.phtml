@@ -21,7 +21,7 @@
 				</header>
 				<?php if ($this->hasIdentity === true): ?>
 				<div class="grid_4 account-area">
-					<p>Witaj, <strong><?php echo ucfirst($this->identity->blip); ?></strong>!</p>
+					<p>Witaj, <strong><?php echo $this->identity['username']; ?></strong>!</p>
 					<p>Zobacz <a href="<?php echo $this->url(array(), 'account') ?>">swój profil</a> lub <a href="<?php echo $this->url(array(), 'signout') ?>">wyloguj się</a>.</p>
 				</div>
 				<?php endif; ?>
