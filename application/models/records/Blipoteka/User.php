@@ -98,6 +98,9 @@ class Blipoteka_User extends Void_Doctrine_Record {
 		// we are interested only of user's triggered record updates (ie. updated_at
 		// shouldn't be touched when, for example, we are increasing log_num)
 		$this->actAs('Timestampable');
+
+		// Add username accessor
+		$this->hasAccessor('username', 'getUsername');
 	}
 
 	/**
@@ -140,5 +143,48 @@ class Blipoteka_User extends Void_Doctrine_Record {
 		$validators['email'] = new Void_Validate_Email(array('checkdns' => true));
 		$this->setColumnValidators('email', $validators);
 	}
+
+	/**
+	 * Username field accessor
+	 *
+	 * @return string
+	 */
+	public function getUsername() {
+		return $this->toUsername($this->blip);
+	}
+
+	/**
+	 * Add username (currently: capitalized Blip login).
+	 *
+	 * @param Doctrine_Event $event
+	 */
+	public function postHydrate($event) {
+        if (array_key_exists('blip', $event->data)) {
+        	$data = $event->data;
+        	$data['username'] = $this->toUsername($data['blip']);
+			$event->data = $data;
+        }
+	}
+
+	/**
+	 * Common username retrieval mechanizm for both accessor and postHydrate.
+	 * @param string $string A string we want to transform to username
+	 */
+	protected function toUsername($string) {
+        $filter = new Void_Filter_Ucfirst();
+		return $filter->filter($string);
+	}
+
+	/**
+	 * Overloaded version to allow array access of virtual fields
+	 * @see Doctrine_Record::toArray()
+	 */
+	public function toArray($deep = true, $prefixKey = false) {
+        $array = parent::toArray($deep, $prefixKey);
+        foreach ($this->getAccessors() as $key => $accessor) {
+            $array = array_merge($array, array($key => $this->$accessor()));
+        }
+        return $array;
+    }
 
 }
