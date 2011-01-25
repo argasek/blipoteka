@@ -75,4 +75,22 @@ abstract class Blipoteka_Service {
 		}
 	}
 
+	/**
+	 * Return a cache object from the cache manager
+	 * or false, if cache is not found.
+	 *
+	 * @param string $name Name of cache
+	 * @return Zend_Cache|false
+	 */
+	protected function getCache($name) {
+		$cache = false;
+		$manager = Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource('cachemanager');
+		if ($manager instanceof Zend_Cache_Manager) {
+			if ($manager->hasCache($name)) {
+				$cache = $manager->getCache($name);
+			}
+		}
+		return $cache;
+	}
+
 }
