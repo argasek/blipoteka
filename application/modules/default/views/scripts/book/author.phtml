@@ -1,0 +1,14 @@
+<h2><?php echo $this->author['name']; ?></h2>
+
+<?php if (count($this->books) > 0): ?>
+<ul>
+<?php foreach ($this->books as $book): ?>
+<li>
+<?php echo '<a href="' . $this->url(array('book' => $book['slug']), 'book') . '">' . $book['title'] . '</a> '; ?>
+<?php if ($book['year'] !== null) { echo '(' . $book['year'] . ')'; } ?>
+</li>
+<?php endforeach; ?>
+</ul>
+<?php else: ?>
+<p>Nie znaleziono żadnych książek tego autora. <a href="<?php echo $this->url(array(), 'index'); ?>">Dodaj jakąś</a>, jeśli ją posiadasz.</p>
+<?php endif; ?>

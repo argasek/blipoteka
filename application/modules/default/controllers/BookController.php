@@ -53,7 +53,27 @@ class BookController extends Blipoteka_Controller {
 			$this->notfound('Nie ma takiej książki');
 		} else {
 			$this->view->book = $book;
+			$this->view->headTitle($book['title']);
 		}
 	}
+
+	/**
+	 * Show books by author action
+	 *
+	 * @return void
+	 */
+	public function authorAction() {
+		$service = new Blipoteka_Service_Book();
+		$author = $service->getAuthor($this->_getParam('author'));
+		if ($author === false) {
+			$this->notfound('Nie ma takiego autora');
+		} else {
+			$books = $service->getBooksByAuthor($this->_getParam('author'));
+			$this->view->books = $books;
+			$this->view->author = $author;
+			$this->view->headTitle($author);
+		}
+	}
+
 
 }
