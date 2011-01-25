@@ -60,6 +60,14 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	}
 
 	/**
+	 * Get identity cache
+	 * @return Zend_Cache_Core|Zend_Cache_Frontend
+	 */
+	protected function getIdentityCache() {
+		return $this->getCache('identity');
+	}
+
+	/**
 	 * Process given user password hashing/salting algorithms
 	 * if provided and store it in a record.
 	 *
@@ -144,6 +152,21 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	 */
 	public function getUserByIdentity($identity) {
 		return Doctrine_Core::getTable('Blipoteka_User')->findOneBy('email', $identity);
+	}
+
+	/**
+	 * Get currently authenticated user entity.
+	 *
+	 * @return Blipoteka_User
+	 */
+	public function getAuthenticatedUser() {
+		$cache = $this->getIdentityCache();
+		if ($cache === false || ($user = $cache->load('user')) === false) {
+			$identity = Zend_Auth::getInstance()->getIdentity();
+			$user = $this->getUserByIdentity($identity);
+			if ($cache) $cache->save($user, 'user');
+		}
+		return $user;
 	}
 
 	/**
