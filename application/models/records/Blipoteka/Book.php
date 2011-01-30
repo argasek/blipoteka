@@ -122,6 +122,7 @@ class Blipoteka_Book extends Void_Doctrine_Record {
 		$this->hasColumn('isbn', 'string', 13, array('notnull' => false));
 		$this->hasColumn('description', 'string', 2048, array('notnull' => false));
 		$this->hasColumn('auto_accept_requests', 'boolean', null, array('notnull' => true, 'default' => false));
+		$this->hasColumn('has_cover', 'boolean', 2, array('notnull' => true, 'default' => false));
 	}
 
 	/**
