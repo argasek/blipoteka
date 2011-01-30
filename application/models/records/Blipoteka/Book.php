@@ -41,6 +41,7 @@
  * @property string $type_name Book type as string
  * @property string $slug Slug of book
  * @property bool $auto_accept_requests Automatically accept borrow requests from any user
+ * @property bool $has_cover Does book have a cover set?
  * @property string $created_at Date and time the book was added to library
  * @property Blipoteka_User $user A user who provided the book
  * @property Blipoteka_User $owner A user who is the owner of the book
