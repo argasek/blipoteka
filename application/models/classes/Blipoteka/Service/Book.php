@@ -218,70 +218,25 @@ class Blipoteka_Service_Book extends Blipoteka_Service {
 	 * @return string
 	 */
 	public function getCoverUrl(array $book, $size = 'small') {
-		// Map $size to $dimensions
-		$dimensions = $this->getBookCoverDimensionsBySize($size);
-
-		// If book has cover, generate cover filename, otherwise use cover placeholder
-		if ($book['has_cover']) {
-			$filename = $this->getCoverFileBasename($book);
-			$filename .= '.jpg';
-		} else {
-			$filename = 'missing.png';
-		}
-
-		// Build relative URL
-		$relativeUrl = 'img/cover/' . $dimensions . '/' . $filename;
+		$cover = new Blipoteka_Book_Cover();
+		$relativeUrl = $cover->getUrl($book, $size);
 
 		return $relativeUrl;
 	}
 
 	/**
-	 * Get book cover file basename
+	 * Set cover of a $book. If $path is not null, it must point to cover file location.
+	 * Otherwise, we try to search for a file in a default original covers location.
+	 * Return true if operation succeeded.
 	 *
-	 * @param array $book A book array (with at least 'book_id' and 'slug' keys)
-	 * @return string
+	 * @param Blipoteka_Book $book
+	 * @param string $path A complete path to an original file
+	 * @return bool
 	 */
-	protected function getCoverFileBasename(array $book) {
-		$basename = $book['slug'] . '-' . $book['book_id'];
-		return $basename;
-	}
-
-	/**
-	 * Get book cover dimensions for $size given.
-	 *
-	 * @param string $size ('tiny', 'small', 'medium', 'original')
-	 * @return array
-	 */
-	protected function getBookCoverDimensionsBySize($size) {
-		$dimensions = $this->getBookCoverDimensions();
-		return $dimensions[$size];
-	}
-
-
-	/**
-	 * Get book cover dimensions array.
-	 *
-	 * @return array
-	 */
-	protected function getBookCoverDimensions() {
-		$dimensions = array(
-			'tiny' => '50x75',
-			'small' => '120x180',
-			'medium' => '180x270',
-			'original' => 'original'
-		);
-		return $dimensions;
-	}
-
-	/**
-	 * Get available cover sizes as array of strings.
-	 *
-	 * @return array
-	 */
-	public function getAvailableCoverSizes() {
-		$dimensions = $this->getBookCoverDimensions();
-		$sizes = array_keys($dimensions);
-		return $sizes;
+	public function setCover(Blipoteka_Book $book, $path = null) {
+		$cover = new Blipoteka_Book_Cover();
+		$result = $cover->set($book, $path);
+		return $result;
 	}
 
 }
