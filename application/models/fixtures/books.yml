@@ -119,6 +119,7 @@ Blipoteka_Book:
     description: 'Tylko jedna osoba może ocalić Świat Dysku, który dąży do kolizji ze złowróżbną czerwoną gwiazdą. Na nieszczęście, osobą tą jest mało uzdolniony i tchórzliwy mag o imieniu Ricewind. Zostaje on magicznie ściągnięty z Kosmosu, by stać się obiektem polowania wszystkich ośmiu Obrządków Magicznych, próbujących odzyskać ukryte w jego umyśle Zaklęcie. W towarzystwie Dwukwiata z Bagażem i Cohena – największego i najsłynniejszego z bohaterów Dysku – po licznych przygodach powraca do Ankh Morpork, by uczestniczyć w jednym z kluczowych wydarzeń historii i kosmologii równocześnie.'
     auto_accept_requests: true
     created_at: '2010-10-17 18:07:15'
+    has_cover: true
   Blipoteka_Book_9:
     type: '0'
     user: Blipoteka_User_2
