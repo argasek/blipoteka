@@ -1,6 +1,9 @@
-<p>&laquo; <a href="<?php echo $this->previousPage('book-index'); ?>">wróć do listy książek</a></p>
-<p>&nbsp;</p>
+<p class="top-nav-link">&laquo; <a href="<?php echo $this->previousPage('book-index'); ?>">wróć do listy książek</a></p>
 
+<div class="grid_3 alpha cover-medium">
+<img src="<?php echo $this->bookCover($this->book, 'medium'); ?>" alt="<?php echo $this->book['title']; ?>" />
+</div>
+<div class="grid_9 omega">
 <header>
 	<h2>
 	<?php echo $this->book['title']; ?>
@@ -19,9 +22,9 @@
 <p>
 <?php echo $this->book['city']['name']; ?> <?php echo $this->book['year']; ?>
 </p>
-<article>
+<article class="description">
 <h4>Opis:</h4>
 <?php echo $this->book['description']; ?>
 </article>
-<pre> <?php // var_dump($this->book); ?> </pre>
+</div>
 
