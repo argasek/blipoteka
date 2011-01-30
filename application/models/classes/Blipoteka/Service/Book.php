@@ -208,4 +208,80 @@ class Blipoteka_Service_Book extends Blipoteka_Service {
 		return $paginator;
 	}
 
+	/**
+	 * Get book cover relative URL based on $book slug/id
+	 * and $size parameter. If book has no cover, URL to
+	 * or non-existant file.
+	 *
+	 * @param array $book A book array (with at least 'has_cover', 'book_id' and 'slug' keys)
+	 * @param string $size Size of cover
+	 * @return string
+	 */
+	public function getCoverUrl(array $book, $size = 'small') {
+		// Map $size to $dimensions
+		$dimensions = $this->getBookCoverDimensionsBySize($size);
+
+		// If book has cover, generate cover filename, otherwise use cover placeholder
+		if ($book['has_cover']) {
+			$filename = $this->getCoverFileBasename($book);
+			$filename .= '.jpg';
+		} else {
+			$filename = 'missing.png';
+		}
+
+		// Build relative URL
+		$relativeUrl = 'img/cover/' . $dimensions . '/' . $filename;
+
+		return $relativeUrl;
+	}
+
+	/**
+	 * Get book cover file basename
+	 *
+	 * @param array $book A book array (with at least 'book_id' and 'slug' keys)
+	 * @return string
+	 */
+	protected function getCoverFileBasename(array $book) {
+		$basename = $book['slug'] . '-' . $book['book_id'];
+		return $basename;
+	}
+
+	/**
+	 * Get book cover dimensions for $size given.
+	 *
+	 * @param string $size ('tiny', 'small', 'medium', 'original')
+	 * @return array
+	 */
+	protected function getBookCoverDimensionsBySize($size) {
+		$dimensions = $this->getBookCoverDimensions();
+		return $dimensions[$size];
+	}
+
+
+	/**
+	 * Get book cover dimensions array.
+	 *
+	 * @return array
+	 */
+	protected function getBookCoverDimensions() {
+		$dimensions = array(
+			'tiny' => '50x75',
+			'small' => '120x180',
+			'medium' => '180x270',
+			'original' => 'original'
+		);
+		return $dimensions;
+	}
+
+	/**
+	 * Get available cover sizes as array of strings.
+	 *
+	 * @return array
+	 */
+	public function getAvailableCoverSizes() {
+		$dimensions = $this->getBookCoverDimensions();
+		$sizes = array_keys($dimensions);
+		return $sizes;
+	}
+
 }
