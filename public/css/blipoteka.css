@@ -415,3 +415,23 @@ input:focus {
 	padding: 4px;
 }
 
+.top-nav-link {
+	margin-bottom: 1.5em;
+}
+
+.cover-medium img {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 4px;
+	box-shadow: 2 2px 2px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 2 2px 2px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+article.description {
+	line-height: 1.5em;
+}
