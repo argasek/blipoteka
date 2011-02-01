@@ -161,10 +161,11 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	 */
 	public function getAuthenticatedUser() {
 		$cache = $this->getIdentityCache();
-		if ($cache === false || ($user = $cache->load('user')) === false) {
-			$identity = Zend_Auth::getInstance()->getIdentity();
+		$identity = Zend_Auth::getInstance()->getIdentity();
+		$cache_id = $this->identityToCacheId($identity);
+		if ($cache === false || ($user = $cache->load($cache_id)) === false) {
 			$user = $this->getUserByIdentity($identity);
-			if ($cache) $cache->save($user, 'user');
+			if ($cache) $cache->save($user, $cache_id);
 		}
 		return $user;
 	}
@@ -282,6 +283,17 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	 */
 	public function isAccountActive(Blipoteka_User $user) {
 		return $user->is_active;
+	}
+
+	/**
+	 * Converts user's identity to Zend_Cache compatible cache_id.
+	 *
+	 * @param string $identity
+	 * @return string
+	 */
+	protected function identityToCacheId($identity) {
+		$cache_id = bin2hex($identity);
+		return $cache_id;
 	}
 
 }
