@@ -27,6 +27,8 @@
  *
  */
 class Blipoteka_Book_Cover {
+	const DIMENSIONS_ORIGINAL = 'original';
+
 	/**
 	 * Get book cover dimensions array.
 	 *
@@ -37,7 +39,7 @@ class Blipoteka_Book_Cover {
 			'tiny' => '50x75',
 			'small' => '120x180',
 			'medium' => '180x270',
-			'original' => 'original'
+			'original' => self::DIMENSIONS_ORIGINAL
 		);
 		return $dimensions;
 	}
@@ -112,6 +114,21 @@ class Blipoteka_Book_Cover {
 	}
 
 	/**
+	 * Get book cover absolute path based on $book slug/id
+	 * and $size parameter. If book has no cover, URL to
+	 * or non-existant file.
+	 *
+	 * @param array $book A book array (with at least 'has_cover', 'book_id' and 'slug' keys)
+	 * @param string $size Size of cover
+	 * @return string
+	 */
+	protected function getPath(array $book, $size = 'small') {
+		$filename = $this->getFilename($book);
+		$dimensions = $this->getDimensionsBySize($size);
+		return ROOT_PATH . DS . 'public' . DS . 'img' . DS . 'cover' . DS . $dimensions . DS . $filename;
+	}
+
+	/**
 	 * Get book cover dimensions for $size given.
 	 *
 	 * @param string $size ('tiny', 'small', 'medium', 'original')
@@ -130,16 +147,20 @@ class Blipoteka_Book_Cover {
 	 * @param string $path A complete path to an original file
 	 */
 	public function set(Blipoteka_Book $book, $path = null) {
+		// Mark the book as having the cover
+		$book->has_cover = true;
+		$bookArray = $book->toArray();
+
 		// If path to a file not provided, use default one
-		if (path === null) {
-			$path = $this->getOriginalPath() . $this->getFilename($book->toArray());
+		if ($path === null) {
+			$path = $this->getOriginalPath() . $this->getFilename($bookArray);
 		}
 		// (Re-)Generate book cover thumbnails for all available sizes
 		foreach ($this->getAvailableSizes() as $size) {
-			$this->createThumbnail($path, $size);
+			$this->createThumbnail($bookArray, $path, $size);
 		}
-		// Mark the book as having the cover
-		$book->has_cover = true;
+
+		// Update book record
 		$book->save();
 
 		return true;
@@ -150,9 +171,40 @@ class Blipoteka_Book_Cover {
 	 *
 	 * @param string $path A complete path to an original file
 	 * @param string $size A size of thumbnail ('tiny', 'small', etc.)
+	 * @return string A file path to just created file
 	 */
-	protected function createThumbnail($path, $size) {
+	protected function createThumbnail(array $book, $path, $size) {
+		$dimensions = $this->getDimensionsBySize($size);
+		// If dimensions are 'original', don't scale, simply copy
+		if ($dimensions == self::DIMENSIONS_ORIGINAL) {
+			$originalPath = $this->getOriginalPath() . $this->getFilename($book);
+			// If source path is different than directory with original covers,
+			// simply copy the file. Otherwise do nothing.
+			if ($path != $originalPath) {
+				copy($path, $originalPath);
+			}
+			return $originalPath;
+		}
+		list($width, $height) = explode('x', $dimensions);
+		require_once('WideImage/WideImage.php');
+		$destination = $this->getPath($book, $size);
+		$image = WideImage::load($path);
+		$image->resize($width, $height, 'outside', 'any')->crop('center', 'middle', $width, $height)->saveToFile($destination, 95);
+		$image->destroy();
 
+		return $destination;
+	}
+
+	/**
+	 * Copy and rename file pointed by $path (URL allowed) to original
+	 * cover files directory.
+	 *
+	 * @param Blipoteka_Book $book
+	 * @param string $path
+	 * @return A file path to cover file
+	 */
+	public function putOriginalFile(Blipoteka_Book $book, $path) {
+		return $this->createThumbnail($book->toArray(), $path, 'original');
 	}
 
 }
