@@ -485,7 +485,7 @@ Blipoteka_Book:
     user: Blipoteka_User_1
     owner: Blipoteka_User_1
     status: '0'
-    title: Silmarilion
+    title: Silmarillion
     original_title: 'The Silmarillion'
     city: Blipoteka_City_756135
     publisher: Blipoteka_Publisher_18
