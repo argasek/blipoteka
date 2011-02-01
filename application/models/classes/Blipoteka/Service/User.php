@@ -99,12 +99,13 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	}
 
 	/**
-	 * Create user account with reasonable default values.
+	 * Create $user account from $form with reasonable default values.
 	 *
-	 * @param Blipoteka_User $user
+	 * @param Blipoteka_User $user A user entity
+	 * @param Blipoteka_Form_Account_Signup $user The signup form
 	 * @return bool
 	 */
-	public function createUser(Blipoteka_User $user, Blipoteka_Form_Account_Signup $form) {
+	public function createUserFromForm(Blipoteka_User $user, Blipoteka_Form_Account_Signup $form) {
 		$user->blip = $form->getValue('login');
 		$user->email = $form->getValue('email');
 		$user->is_active = false;
@@ -140,6 +141,53 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 		);
 		$user->errorStackToForm('blip', $mappings, $form, 'login');
 
+		return false;
+	}
+
+	/**
+	 * Create $user account from parameters given.
+	 *
+	 * @param Blipoteka_User $user A user entity
+	 * @param string $identity An identity (e-mail)
+	 * @param string $blip A blip account
+	 * @param string $credential A credential
+	 * @param string $name A real name
+	 * @param string $city_id An ID of user's city
+	 * @param bool $activate If true, silently activate account (no e-mail activation) (default)
+	 */
+	public function createUser(Blipoteka_User $user, $identity, $blip, $credential, $name = null, $city_id = null, $activate = true) {
+		$user->blip = $blip;
+		$user->email = $identity;
+		$user->is_active = $activate;
+		if ($activate === true) {
+			$activated_at = new Zend_Date();
+			$activated_at->addMinute(1);
+			$user->activated_at = $activated_at->toString('YYYY-MM-dd HH:mm:ss');
+		}
+		$this->setPassword($credential, $user);
+		// If user name not provided, use default
+		if ($user->name === null) {
+			$user->name = $this->getDefaultUserName();
+		}
+		// If user city not provided, use default
+		if ($user->city_id === null) {
+			$user->city = $this->getDefaultCity();
+		}
+
+		// If we wish activation to take place...
+		if ($activate === false) {
+			// Generate token and send e-mail notification
+			$subject = 'Potwierdzenie rejestracji w Blipotece';
+			$user->addListener(new Blipoteka_Listener_User_Token());
+			$user->addListener(new Blipoteka_Listener_User_Notification_Email('activation', $subject));
+		}
+
+		// If save successful, nothing to see here, move along.
+		if ($user->trySave()) {
+			return true;
+		}
+
+		// Some error occured, do nothing
 		return false;
 	}
 

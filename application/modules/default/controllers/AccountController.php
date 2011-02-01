@@ -55,7 +55,7 @@ class AccountController extends Blipoteka_Controller {
 				if ($form->isValid($this->getRequest()->getParams())) {
 					$user = new Blipoteka_User();
 					$service = new Blipoteka_Service_User($this->getRequest());
-					$result = $service->createUser($user, $form);
+					$result = $service->createUserFromForm($user, $form);
 					// If user account was created successfuly, pass account
 					// data through session with one hop validity
 					if ($result === true) {
