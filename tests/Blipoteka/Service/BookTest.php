@@ -42,8 +42,7 @@ class Blipoteka_Service_BookTest extends PHPUnit_Framework_TestCase {
 	protected $bookArrayMock;
 
 	public function setUp() {
-		$service = new Blipoteka_Service_Book();
-		$this->sizes = $service->getAvailableCoverSizes();
+		$this->sizes = array('tiny', 'small', 'medium', 'original');
 		$this->bookArrayMock = array(
 			'book_id' => '50',
 			'type' => '0',
@@ -66,27 +65,6 @@ class Blipoteka_Service_BookTest extends PHPUnit_Framework_TestCase {
 			'status_name' => 'dostępna',
 			'type_name' => 'wróć',
 		);
-	}
-
-	/**
-	 * We expect a correct part of relative URL.
-	 */
-	public function testGetBookCoverDimensionsBySize() {
-		$reflector = new ReflectionClass('Blipoteka_Service_Book');
-		$method = $reflector->getMethod('getBookCoverDimensionsBySize');
-		$method->setAccessible(true);
-		$service = $reflector->newInstance();
-
-		$dimensions = array_combine($this->sizes, array(
-			'50x75',
-			'120x180',
-			'180x270',
-			'original'
-		));
-
-		foreach ($dimensions as $size => $dimension) {
-			$this->assertEquals($dimension, $method->invoke($service, $size));
-		}
 	}
 
 	/**
