@@ -61,10 +61,10 @@ class Blipoteka_Service_Book extends Blipoteka_Service {
 	 * @param string $book
 	 * @return Blipoteka_Book
 	 */
-	public function getBookBySlug($slug) {
+	public function getBookBySlug($slug, $hydrationMode = Doctrine_Core::HYDRATE_ARRAY) {
 		$query = $this->getBookQuery();
 		$query->where('book.slug = ?', $slug);
-		$item = $query->fetchOne(array(), Doctrine_Core::HYDRATE_ARRAY);
+		$item = $query->fetchOne(array(), $hydrationMode);
 		return $item;
 	}
 
@@ -177,11 +177,13 @@ class Blipoteka_Service_Book extends Blipoteka_Service {
 
 	/**
 	 * Get collection of all books.
+	 *
+	 * @param $hydrationMode Hydration mode
 	 * @return Doctrine_Collection
 	 */
-	public function getBookList() {
+	public function getBookList($hydrationMode = Doctrine_Core::HYDRATE_ARRAY) {
 		$query = $this->getBookListQuery();
-		$result = $query->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+		$result = $query->execute(array(), $hydrationMode);
 		return $result;
 	}
 
