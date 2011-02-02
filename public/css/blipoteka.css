@@ -423,6 +423,7 @@ input:focus {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
