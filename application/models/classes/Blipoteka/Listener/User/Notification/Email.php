@@ -15,7 +15,7 @@
  * to blipoteka@gmail.com so we can send you a copy immediately.
  *
  * @category   Blipoteka
- * @package    Blipoteka_Service
+ * @package    Blipoteka_Listener
  * @copyright  Copyright (c) 2010-2011 Jakub Argasiński (argasek@gmail.com)
  * @license    http://blipoteka.pl/license Simplified BSD License
  */
@@ -23,7 +23,7 @@
 require_once('mbfunctions.php');
 
 /**
- * User related service class
+ * User email notification postInsert listener
  *
  * @author Jakub Argasiński <argasek@gmail.com>
  *
