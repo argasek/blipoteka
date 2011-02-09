@@ -100,6 +100,9 @@ class Blipoteka_Book_Cover {
 		// Map $size to $dimensions
 		$dimensions = $this->getDimensionsBySize($size);
 
+		// Check if required parameters are passed
+		$this->checkIsValidBookArray($book);
+
 		// If book has cover, generate cover filename, otherwise use cover placeholder
 		if ($book['has_cover']) {
 			$filename = $this->getFilename($book);
@@ -111,6 +114,21 @@ class Blipoteka_Book_Cover {
 		$relativeUrl = 'img/cover/' . $dimensions . '/' . $filename;
 
 		return $relativeUrl;
+	}
+
+	/**
+	 * Check if required parameters in book array are available.
+	 *
+	 * @param array $book
+	 * @throws InvalidArgumentException
+	 */
+	protected function checkIsValidBookArray(array $book) {
+		$keys = array('has_cover', 'book_id', 'slug');
+		foreach ($keys as $key) {
+			if (false === array_key_exists($key, $book)) {
+				throw new InvalidArgumentException("Missing required '$key' key in book array");
+			}
+		}
 	}
 
 	/**
