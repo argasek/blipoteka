@@ -114,7 +114,7 @@ ServerSignature Off
 RewriteEngine On
 
 # Stop rewrite processing no matter if a resource, robots.txt etc. exists or not
-RewriteRule ^(css/|img/|js/|robots\.txt|favicon\.ico|crossdomain\.xml) - [L]
+RewriteRule ^(css/|fonts/|img/|js/|robots\.txt|favicon\.ico|crossdomain\.xml) - [L]
 
 # Stop rewrite process if the path points to a static file/directory anyway
 RewriteCond %{REQUEST_FILENAME} -s [OR]
