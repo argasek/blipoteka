@@ -1,0 +1,46 @@
+<?php
+	$book = $this->book;
+	$holder = $book['holder'];
+	$book_url = $this->url(array('book' => $book['slug']), 'book');
+	$title = $book['title'];
+	$title = Void_Util_Text::truncate($title, 48, true, '');
+	$description = $book['description'];
+	$description = Void_Util_Text::truncate($description, 300, true, '');
+?>
+
+<div class="book-item book-list-item clearfix">
+	<div class="grid_2 alpha">
+		<a href="<?php echo $book_url; ?>" class="cover cover-small">
+			<img src="<?php echo $this->bookCover($this->book, 'small'); ?>" alt="<?php echo $this->book['title']; ?>" />
+		</a>
+	</div>
+	<div class="grid_10 omega">
+		<h3 class="title">
+			<a href="<?php echo $book_url; ?>">
+			<?php echo $title; ?>
+			</a>
+		</h3>
+		<h4 class="author">
+		<?php
+			$authors = array();
+			foreach ($book['authors'] as $k => $author) {
+				$url = $this->url(array('author' => $author['slug']), 'author');
+				$name = $author['name'];
+				$authors[] = sprintf('<a href="%s">%s</a>', $url, $name);
+			}
+			echo implode(', ', $authors);
+		?>
+		</h4>
+		<p><?php echo $description; ?></p>
+	</div>
+</div>
+
+
+<?php /* ?>
+	<?php echo $book['type_name']; ?>
+	<?php echo $book['status_name']; ?>
+	<?php echo $book['owner']['username']; ?>
+	<?php if ($holder !== null): ?>
+	<?php echo $holder['blip']; ?> (<?php echo $holder['city']['name']; ?>)
+	<?php endif; ?>
+*/ ?>
