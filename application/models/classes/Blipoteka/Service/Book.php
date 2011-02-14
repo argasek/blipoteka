@@ -152,7 +152,7 @@ class Blipoteka_Service_Book extends Blipoteka_Service {
 	 */
 	protected function getBookListQuery() {
 		$query = Doctrine_Query::create();
-		$query->select('book.type, book.status, book.title, book.slug');
+		$query->select('book.type, book.status, book.title, book.slug, book.has_cover, book.book_id, book.description');
 		$query->from($this->_recordClass . ' book');
 		// Owner
 		$query->leftJoin('book.owner owner');
