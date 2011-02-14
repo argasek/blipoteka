@@ -1,14 +1,14 @@
 <p class="top-nav-link">&laquo; <a href="<?php echo $this->previousPage('book-index'); ?>">wróć do listy książek</a></p>
 
-<div class="grid_3 alpha cover-medium">
+<div class="grid_3 alpha cover cover-medium">
 <img src="<?php echo $this->bookCover($this->book, 'medium'); ?>" alt="<?php echo $this->book['title']; ?>" />
 </div>
 <div class="grid_9 omega">
-<header>
-	<h2>
+<header class="book-item">
+	<h2 class="title">
 	<?php echo $this->book['title']; ?>
 	</h2>
-	<h3>
+	<h3 class="author">
 	<?php $bookAuthors = new SplFixedArray(count($this->book['authors'])); ?>
 	<?php foreach ($this->book['authors'] as $i => $author): ?>
 	<?php $bookAuthors[$i] = '<a href="' . $this->url(array('author' => $author['slug']), 'author') . '">' . $author['name'] . '</a>'; ?>
