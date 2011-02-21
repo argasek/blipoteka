@@ -36,7 +36,7 @@ class IndexController extends Blipoteka_Controller {
 	public function indexAction() {
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			$this->view->headTitle('Strona główna');
-			$this->_forward('index', 'book');
+			$this->_redirect($this->view->url(array('page' => '1'), 'books'));
 		} else {
 			$this->_forward('login', null, null, array('skip-auth' => 1));
 		}

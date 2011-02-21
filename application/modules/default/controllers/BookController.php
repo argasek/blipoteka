@@ -39,6 +39,7 @@ class BookController extends Blipoteka_Controller {
 		$paginator->setCurrentPageNumber($this->_getParam('page'));
 		$this->view->books = $paginator;
 		$this->_helper->previousPage->setPreviousPage('book-index');
+		$this->view->headTitle('Wszystkie książki');
 	}
 
 	/**
