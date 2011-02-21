@@ -15,10 +15,10 @@
 				<div class="grid_1">
 					<a href="<?php echo $this->url(array(), 'index'); ?>"><img class="logo" src="<?php echo $this->baseUrl('img/logo60.png'); ?>" alt="Logo Blipoteki" /></a>
 				</div>
-				<header class="grid_7">
-					<h1><a href="<?php echo $this->url(array(), 'index') ?>">Blipoteka.pl</a></h1>
+				<div class="grid_7">
+					<p class="pagetitle"><a href="<?php echo $this->url(array(), 'index') ?>">Blipoteka.pl</a></p>
 					<p>Mię­dzy­mia­stowa biblioteka użyt­kow­ni­ków ser­wisu Blip.pl</p>
-				</header>
+				</div>
 				<?php if ($this->hasIdentity === true): ?>
 				<div class="grid_4 account-area">
 					<p>Witaj, <strong><?php echo $this->identity['username']; ?></strong>!</p>
@@ -28,6 +28,9 @@
 			</div>
 		</section>
 		<section id="content" class="container_12">
+			<?php if ($this->hasIdentity === true): ?>
+			<?php echo $this->partial('navigation-top-main.phtml') . "\n"; ?>
+			<?php endif; ?>
 			<article class="grid_12">
 			<?php echo $this->layout()->content . "\n" ?>
 			</article>
@@ -38,5 +41,6 @@
 <?php echo $this->partial('footer-layout.phtml') . "\n"; ?>
 <?php echo $this->headScript() . "\n"; ?>
 <?php echo $this->partial('footer.phtml') . "\n"; ?>
+
 </body>
 </html>
