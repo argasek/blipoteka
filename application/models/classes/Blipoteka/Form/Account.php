@@ -33,6 +33,39 @@ class Blipoteka_Form_Account extends Zend_Form {
 
 		$user = Doctrine_Core::getTable('Blipoteka_User')->getRecordInstance();
 
+		$validators = $user->getColumnValidatorsArray('email');
+		$validators['email']->setMessage('Nieprawidłowy adres e-mail', Void_Validate_Email::INVALID);
+		$email = $this->createElement('text', 'email');
+		$email->setLabel('E-mail');
+		$email->setFilters(array('StringTrim', 'StringToLower', 'StripNewLines', 'StripTags'));
+		$email->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Adres e-mail nie może być pusty')));
+		$email->addValidators($validators);
+		$email->setRequired(true);
+		$this->addElement($email);
+
+		$validators = $user->getColumnValidatorsArray('name');
+		$name = $this->createElement('text', 'name');
+		$name->setLabel('Imię i nazwisko');
+		$name->setFilters(array('StringTrim', 'StripNewLines', 'StripTags'));
+		$name->addValidators($validators);
+		$name->setRequired(true);
+		$this->addElement($name);
+
+		$validators = $user->getColumnValidatorsArray('gender');
+		$gender = $this->createElement('radio', 'gender');
+		$gender->setLabel('Jestem');
+		$gender->addValidators($validators);
+		$gender->setRequired(false);
+		$gender->addMultiOptions(array('' => 'nie powiem', '0' => 'kobietą', '1' => 'mężczyzną'));
+		$this->addElement($gender);
+
+		$validators = $user->getColumnValidatorsArray('auto_accept_requests');
+		$auto_accept_requests = $this->createElement('checkbox', 'auto_accept_requests');
+		$auto_accept_requests->setLabel('Automatycznie akceptuj zamówienia');
+		$auto_accept_requests->addValidators($validators);
+		$auto_accept_requests->setRequired(false);
+		$this->addElement($auto_accept_requests);
+
 		$viewScript = new Zend_Form_Decorator_ViewScript();
 		$viewScript->setViewScript('forms/account.phtml');
 		$this->clearDecorators()->addDecorator($viewScript);
