@@ -99,6 +99,44 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	}
 
 	/**
+	 * Update user profile information from user profile form.
+	 *
+	 * @param Blipoteka_Form_Account_Profile $form
+	 * @param Blipoteka_User $user
+	 * @return Blipoteka_User|false
+	 */
+	public function updateAccountFromForm(Blipoteka_Form_Account $form, Blipoteka_User $user) {
+		// Map gender field values ('', '0', '1') onto (NULL, false, true)
+		$filter = new Zend_Filter();
+		$filter->addFilter(new Zend_Filter_Null(Zend_Filter_Null::STRING));
+		$filter->addFilter(new Zend_Filter_Boolean(array('type' => Zend_Filter_Boolean::INTEGER + Zend_Filter_Boolean::ZERO, 'casting' => false)));
+		$gender = $filter->filter($form->getElement('gender')->getValue());
+
+		// Map auto_accept_requests field from (NULL, '1') onto (false, true)
+		$filter = new Zend_Filter_Boolean(Zend_Filter_Boolean::NULL + Zend_Filter_Boolean::ZERO);
+		$auto_accept_requests = $filter->filter($form->getElement('auto_accept_requests')->getValue());
+
+		// Assign form fields to record fields
+		$user->email = $form->getElement('email')->getValue();
+		$user->name = $form->getElement('name')->getValue();
+		$user->gender = $gender;
+		$user->auto_accept_requests = $auto_accept_requests;
+
+		// If save successful, nothing to see here, move along.
+		if ($user->trySave()) {
+			return $user;
+		}
+
+		// Email errors handling
+		$mappings = array(
+			'unique' => 'W systemie istnieje już konto o takim adresie e-mail',
+		);
+		$user->errorStackToForm('email', $mappings, $form, 'email');
+
+		return false;
+	}
+
+	/**
 	 * Create $user account from $form with reasonable default values.
 	 *
 	 * @param Blipoteka_User $user A user entity
@@ -124,9 +162,24 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 		$user->addListener(new Blipoteka_Listener_User_Token());
 		$user->addListener(new Blipoteka_Listener_User_Notification_Email('activation', $subject));
 
-		// If save successful, nothing to see here, move along.
-		if ($user->trySave()) {
-			return true;
+		// Begin transaction
+		$connection = $user->getTable()->getConnection();
+		$connection->beginTransaction();
+
+		// An e-mail is sent in postInsert. It may fail under some rare conditions (mostly
+		// connection problems), so user has no way to activate the account. We handle the
+		// situation by rolling back the transaction.
+		try {
+			// If save successful, nothing to see here, move along.
+			if ($user->trySave()) {
+				$connection->commit();
+				return true;
+			}
+		} catch (Zend_Mail_Exception $exception) {
+			// In case of error, roll back and pass an error message to the form.
+			$connection->rollback();
+			$form->addError('Nie udało się wysłać e-maila potwierdzającego. Wygląda na to, że serwer pocztowy dostał zadyszki. Spróbuj ponownie za chwilę');
+			return false;
 		}
 
 		// Email errors handling
@@ -145,6 +198,24 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	}
 
 	/**
+	 * Populate $form with data from $user entity. If $user is not
+	 * given, assumes currently authenticated user.
+	 *
+	 * @param Blipoteka_Form_Account $form
+	 * @param Blipoteka_User $user (optional)
+	 */
+	public function accountFormFromUser(Blipoteka_Form_Account $form, Blipoteka_User $user = null) {
+		// Get currently authenticated user, if none was given
+		$user = ($user instanceof Blipoteka_User ? $user : $this->getAuthenticatedUser());
+		// Map (NULL, false, true) onto ('', '0', '1')
+		$gender = ($user->gender === null ? '' : (int) $user->gender);
+		$form->getElement('email')->setValue($user->email);
+		$form->getElement('name')->setValue($user->name);
+		$form->getElement('gender')->setValue($gender);
+		$form->getElement('auto_accept_requests')->setValue($user->auto_accept_requests);
+	}
+
+	/**
 	 * Create $user account from parameters given.
 	 *
 	 * @param Blipoteka_User $user A user entity
@@ -157,12 +228,12 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	 */
 	public function createUser(Blipoteka_User $user, $identity, $blip, $credential, $name = null, $city_id = null, $activate = true) {
 		$user->blip = $blip;
-		$user->email = $identity;
+		$user->set(Blipoteka_User::IDENTITY_FIELD, $identity, false);
 		$user->is_active = $activate;
 		if ($activate === true) {
 			$activated_at = new Zend_Date();
 			$activated_at->addMinute(1);
-			$user->activated_at = $activated_at->toString('YYYY-MM-dd HH:mm:ss');
+			$user->activated_at = $activated_at->get(Zend_Date::W3C);
 		}
 		$this->setPassword($credential, $user);
 		// If user name not provided, use default
@@ -194,24 +265,34 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 	/**
 	 * Get user entity by identity.
 	 *
-	 * @todo Don't assume email is an identity field.
 	 * @param string $identity
 	 * @return Blipoteka_User
 	 */
 	public function getUserByIdentity($identity) {
-		return Doctrine_Core::getTable('Blipoteka_User')->findOneBy('email', $identity);
+		return Doctrine_Core::getTable('Blipoteka_User')->findOneBy(Blipoteka_User::IDENTITY_FIELD, $identity);
+	}
+
+	/**
+	 * Get identity from user entity.
+	 *
+	 * @param Blipoteka_User $user
+	 * @return string
+	 */
+	public function getUserIdentity(Blipoteka_User $user) {
+		return $user->get(Blipoteka_User::IDENTITY_FIELD);
 	}
 
 	/**
 	 * Get currently authenticated user entity.
 	 *
+	 * @param boolean $force Force reading data from the database and refreshing data in cache
 	 * @return Blipoteka_User
 	 */
-	public function getAuthenticatedUser() {
+	public function getAuthenticatedUser($force = false) {
 		$cache = $this->getIdentityCache();
 		$identity = Zend_Auth::getInstance()->getIdentity();
 		$cache_id = $this->identityToCacheId($identity);
-		if ($cache === false || ($user = $cache->load($cache_id)) === false) {
+		if ($force === true || $cache === false || ($user = $cache->load($cache_id)) === false) {
 			$user = $this->getUserByIdentity($identity);
 			if ($cache) $cache->save($user, $cache_id);
 		}
@@ -256,7 +337,7 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 			$user->token = null;
 			// Mark as active
 			$user->is_active = true;
-			$user->activated_at = $activated_at->toString('YYYY-MM-dd HH:mm:ss');
+			$user->activated_at = $activated_at->get(Zend_Date::W3C);
 			$user->save();
 			// Authenticate user
 			$this->authenticateUser($user);
@@ -275,7 +356,7 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 		$treatment = new Void_Auth_Credential_Treatment_None();
 
 		$adapter = $this->_authAdapter;
-		$adapter->setIdentity($user->email);
+		$adapter->setIdentity($user->get(Blipoteka_User::IDENTITY_FIELD));
 		$adapter->setCredential($user->password);
 		$adapter->setCredentialTreatment($treatment);
 		$result = $auth->authenticate($adapter);
