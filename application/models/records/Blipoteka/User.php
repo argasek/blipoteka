@@ -30,7 +30,7 @@
  * @property string $password Salted hash of user's password
  * @property string $name Last name and first name of user
  * @property string $log_date The date and time user last logged in
- * @property integer $lognum How many times user logged in
+ * @property integer $log_num How many times user logged in
  * @property bool $is_active Is user's account active?
  * @property bool $auto_accept_requests Automatically accept all borrow requests from user's friends
  * @property bool $gender Gender of user (true for male, false for female, NULL for not specified)

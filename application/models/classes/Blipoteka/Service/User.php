@@ -296,20 +296,46 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 		$adapter->setIdentity($form->getValue('email'));
 		$adapter->setCredential($form->getValue('password'));
 		$result = $auth->authenticate($adapter);
+		// Check if authentication succeeded
 		if ($result->isValid()) {
+			// Get user entity by identity
 			$user = $this->getUserByIdentity($auth->getIdentity());
+			// Check if this account has been activated
 			if ($this->isAccountActivated($user) === false) {
 				$auth->clearIdentity();
 				$form->addError("Najpierw musisz aktywować konto");
 			} else {
+				// Check if account is active (i.e. not blocked)
 				if ($this->isAccountActive($user) === false) {
 					$auth->clearIdentity();
 					$form->addError("Twoje konto zostało zablokowane");
+				} else {
+					$this->signinSuccess($user);
 				}
 			}
 		} else {
 			$form->addError("Podano nieprawidłowy adres e-mail lub hasło");
 		}
+	}
+
+	/**
+	 * Update last successful login date and a number of
+	 * successful logins.
+	 *
+	 * @param Blipoteka_User $user
+	 * @return void
+	 */
+	protected function signinSuccess(Blipoteka_User $user) {
+		// Get current date and time
+		$date = new Zend_Date();
+		$date = $date->get(Zend_Date::W3C);
+		// Update user account data (without triggering Timestampable behavior)
+		$query = Doctrine_Query::create();
+		$query->update('Blipoteka_User');
+		$query->set('log_date', '?', $date);
+		$query->set('log_num', '?', $user->log_num + 1);
+		$query->where('user_id = ?', $user->user_id);
+		$query->execute();
 	}
 
 	/**
