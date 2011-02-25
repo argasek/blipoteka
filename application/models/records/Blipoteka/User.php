@@ -142,6 +142,12 @@ class Blipoteka_User extends Void_Doctrine_Record {
 		$validators = array();
 		$validators['email'] = new Void_Validate_Email(array('checkdns' => true));
 		$this->setColumnValidators('email', $validators);
+		// Validate blip login
+		$validators = array();
+		$validators['blip'] = new Zend_Validate_Regex('/^[a-z]{1}[a-z0-9]{2,24}$/');
+		$validators['blip']->setMessage('Login musi mieć od 3 do 25 znaków, składać się z małych liter lub cyfr i zaczynać się literą');
+
+		$this->setColumnValidators('blip', $validators);
 	}
 
 	/**
