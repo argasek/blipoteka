@@ -37,7 +37,7 @@ class Blipoteka_Form_Account_Signup extends Zend_Form {
 		$validators['email']->setMessage('Nieprawidłowy adres e-mail', Void_Validate_Email::INVALID);
 		$email = $this->createElement('text', 'email');
 		$email->setLabel('E-mail');
-		$email->setFilters(array('StringTrim', 'StringToLower'));
+		$email->setFilters(array('StringTrim', 'StringToLower', 'StripNewLines', 'StripTags'));
 		$email->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Adres e-mail nie może być pusty')));
 		$email->addValidators($validators);
 		$email->setRequired(true);
@@ -53,7 +53,7 @@ class Blipoteka_Form_Account_Signup extends Zend_Form {
 		));
 		$login = $this->createElement('text', 'login');
 		$login->setLabel('Login na Blip');
-		$login->setFilters(array('StringTrim', 'StringToLower'));
+		$login->setFilters(array('StringTrim', 'StringToLower', 'StripNewLines', 'StripTags'));
 		$login->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Login nie może być pusty')));
 		$login->addValidators($validators);
 		$login->addValidator($blipValidator);
@@ -64,7 +64,7 @@ class Blipoteka_Form_Account_Signup extends Zend_Form {
 		$validators = $user->getColumnValidatorsArray('password');
 		$password = $this->createElement('password', 'password');
 		$password->setLabel('Hasło');
-		$password->setFilters(array('StringTrim'));
+		$password->setFilters(array('StringTrim', 'StripNewLines'));
 		$password->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Hasło nie może być puste')));
 		$password->addValidator('StringLength', false, array($minPasswordLength, null,'messages' => array(
 			Zend_Validate_StringLength::TOO_SHORT => "Zbyt krótkie hasło (min. $minPasswordLength znaków)"
@@ -76,7 +76,7 @@ class Blipoteka_Form_Account_Signup extends Zend_Form {
 		$validators = $user->getColumnValidatorsArray('password');
 		$passwordconfirm = $this->createElement('password', 'passwordconfirm');
 		$passwordconfirm->setLabel('Powtórz hasło');
-		$passwordconfirm->setFilters(array('StringTrim'));
+		$passwordconfirm->setFilters(array('StringTrim', 'StripNewLines'));
 		$passwordconfirm->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Ej. Hasło naprawdę nie może być puste')));
 		$passwordconfirm->addValidators($validators);
 		$passwordconfirm->addValidator('Identical');
