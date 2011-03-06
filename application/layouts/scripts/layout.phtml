@@ -4,7 +4,7 @@
 <?php echo $this->headMeta() . "\n"; ?>
 <?php echo $this->headTitle() . "\n"; ?>
 <?php echo $this->headLink() . "\n"; ?>
-<script src="<?php echo $this->baseUrl("js/libs/modernizr-1.6.min.js"); ?>"></script>
+<script src="<?php echo $this->baseUrl("js/libs/modernizr-1.7.min.js"); ?>"></script>
 <?php echo $this->inlineScript()->setScript(sprintf("var baseUrl = '%s';", $this->baseUrl(''))); ?>
 </head>
 <body>
@@ -20,7 +20,8 @@
 					<p>Mię­dzy­mia­stowa biblioteka użyt­kow­ni­ków ser­wisu Blip.pl</p>
 				</div>
 				<?php if ($this->hasIdentity === true): ?>
-				<div class="grid_4 account-area">
+				<div class="grid_4 account-area clearfix">
+					<a class="avatar" href="<?php echo $this->url(array(), 'account') ?>"><img class="avatar pico" src="<?php echo $this->userAvatar($this->identity['blip'], 'pico'); ?>" alt="Awatar" /></a>
 					<p>Witaj, <strong><?php echo $this->identity['username']; ?></strong>!</p>
 					<p>Zobacz <a href="<?php echo $this->url(array(), 'account') ?>">swój profil</a> lub <a href="<?php echo $this->url(array(), 'signout') ?>">wyloguj się</a>.</p>
 				</div>
