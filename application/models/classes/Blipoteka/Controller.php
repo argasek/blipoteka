@@ -34,6 +34,7 @@ abstract class Blipoteka_Controller extends Zend_Controller_Action {
 			$service = new Blipoteka_Service_User();
 			$this->view->identity = $service->getAuthenticatedUser();
 		}
+		$this->view->headScript()->appendFile($this->view->baseUrl('js/blipoteka.js'));
 	}
 
 	/**
