@@ -35,6 +35,18 @@ class AccountController extends Blipoteka_Controller {
 	 */
 	public function indexAction() {
 		$this->view->headTitle('Twój profil');
+
+		$form = new Blipoteka_Form_Account(array('action' => $this->view->url(array(), 'account-update')));
+
+		$session = new Zend_Session_Namespace('account');
+		if ($session->form instanceof Blipoteka_Form_Account) {
+			$this->view->accountForm = $session->form;
+			$this->view->accountUpdateSuccess = $session->success;
+		} else {
+			$service = new Blipoteka_Service_User();
+			$service->accountFormFromUser($form);
+			$this->view->accountForm = $form;
+		}
 	}
 
 	/**
@@ -115,7 +127,7 @@ class AccountController extends Blipoteka_Controller {
 	}
 
 	/**
-	 * Sigup action
+	 * Signup action
 	 *
 	 * @return void
 	 */
@@ -154,6 +166,45 @@ class AccountController extends Blipoteka_Controller {
 	 */
 	public function signinOauthAction() {
 
+	}
+
+	/**
+	 * Account update action
+	 *
+	 * @return void
+	 */
+	public function updateAction() {
+		$success = false;
+		// If this is POST request, proceed
+		if ($this->getRequest()->isPost()) {
+			$service = new Blipoteka_Service_User();
+			$form = new Blipoteka_Form_Account(array('action' => $this->view->url(array(), 'account-update')));
+			$form->populate($this->getRequest()->getParams());
+			$session = new Zend_Session_Namespace('account');
+			$session->setExpirationHops(1);
+			// If form is valid
+			if ($form->isValid($this->getRequest()->getParams())) {
+				// Get currently authenticated user
+				$user = $service->getAuthenticatedUser();
+				// Update user's account from form data
+				$service->updateAccountFromForm($form, $user);
+				// There could be some errors even though form is valid, ie. e-mail not unique etc.
+				if ($form->isErrors() === false) {
+					// Invalidate authenticated user cache by force-read
+					$user = $service->getAuthenticatedUser(true);
+					// E-mail might have changed, so update currently authenticated identity
+					Zend_Auth::getInstance()->getStorage()->write($service->getUserIdentity($user));
+					$success = true;
+				}
+			}
+			// A hack for problematic (notorious string/int conversion problem) tri-state gender field
+			$gender = ($this->getRequest()->getParam('gender') === '' ? '' : (int) $this->getRequest()->getParam('gender'));
+			$form->getElement('gender')->setValue($gender);
+			// Save form in session
+			$session->form = $form;
+			$session->success = $success;
+		}
+		$this->_redirect($this->view->url(array(), 'account'));
 	}
 
 }

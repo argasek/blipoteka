@@ -1,1 +1,10 @@
-<h2>Twój profil</h2>
+<header>
+	<h2>Twój profil</h2>
+	<p>Tutaj możesz zmienić ustawienia dotyczące Twojego konta.</p>
+</header>
+<?php if ($this->accountUpdateSuccess === true): ?>
+<div class="message information autohide">
+	<p>Twój profil został poprawnie zaktualizowany!</p>
+</div>
+<?php endif; ?>
+<?php echo $this->accountForm; ?>
