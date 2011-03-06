@@ -117,6 +117,17 @@ class Blipoteka_Book_Cover {
 	}
 
 	/**
+	 * Check if cover file exists for a given $book and $size of cover.
+	 *
+	 * @param array $book
+	 * @param string $size
+	 */
+	public function checkIfCoverFileExists(array $book, $size = 'small') {
+		$path = $this->getPath($book, $size);
+		return is_file($path);
+	}
+
+	/**
 	 * Check if required parameters in book array are available.
 	 *
 	 * @param array $book
