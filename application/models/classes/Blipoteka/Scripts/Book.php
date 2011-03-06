@@ -54,6 +54,9 @@ class Blipoteka_Scripts_Book extends Void_Scripts {
 			case 'cover-set':
 				$this->actionSetCover();
 				break;
+			case 'cover-repair-all':
+				$this->actionRepairAllCovers();
+				break;
 			case 'list-all':
 				$this->actionListAllBooks();
 				break;
@@ -171,6 +174,33 @@ class Blipoteka_Scripts_Book extends Void_Scripts {
 	}
 
 	/**
+	 * For each book, check if cover files exist, and, if so,
+	 * set an appropriate flag in the database.
+	 */
+	protected function actionRepairAllCovers() {
+		// Find all books
+		$service = new Blipoteka_Service_Book();
+		$books = $service->getBookList(Doctrine_Core::HYDRATE_RECORD);
+		if (count($books) == 0) {
+			printf("No books have been found.\n");
+			exit(0);
+		}
+		// Check for cover files existance of all books
+		$service = new Blipoteka_Book_Cover();
+		foreach ($books as $book) {
+			// If cover found, adjust the value in the database
+			if ($service->checkIfCoverFileExists($book->toArray())) {
+				$book->has_cover = true;
+				$book->save();
+				if ($this->cli->options['verbose'] === true) {
+					printf("Successfuly enabled cover for book '%s'\n", $book->title);
+				}
+			}
+		}
+	}
+
+
+	/**
 	 * Set up additional command line options, arguments, commands etc.
 	 */
 	protected function setUpParser() {
@@ -226,6 +256,10 @@ class Blipoteka_Scripts_Book extends Void_Scripts {
 			'action'      => 'StoreTrue',
 			'description' => "force import/set operation"
 		));
+
+		// Add a command to repair cover information in database for all books
+		$command = $this->parser->addCommand('cover-repair-all', array('description' => 'fix book cover information in database'));
+
 	}
 
 }
