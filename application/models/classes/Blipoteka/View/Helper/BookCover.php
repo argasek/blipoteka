@@ -27,11 +27,6 @@
  *
  */
 class Blipoteka_View_Helper_BookCover extends Zend_View_Helper_Abstract {
-	/**
-	 * Action helper
-	 * @var Void_Controller_Action_Helper_PreviousPage
-	 */
-	protected $_helper;
 
 	/**
 	 * Get book cover URL for a book array.
