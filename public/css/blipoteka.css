@@ -299,6 +299,16 @@ hr {
 	text-align: right;
 }
 
+#header .account-area > .avatar + p {
+	margin-top: 6px;
+}
+
+#header .account-area > .avatar {
+	display: block;
+	margin-left: 10px;
+	float: right;
+}
+
 #signin > footer p {
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
@@ -575,6 +585,18 @@ input:focus {
 .cover-medium img {
 	padding: 4px;
 }
+
+.avatar.pico {
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #888;
+}
+
+header.account > img {
+	float: left;
+}
+
 
 article.description {
 	line-height: 1.5em;
