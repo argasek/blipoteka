@@ -8,8 +8,40 @@
 <?php echo $this->inlineScript()->setScript(sprintf("var baseUrl = '%s';", $this->baseUrl(''))); ?>
 </head>
 <body>
-<?php echo $this->layout()->content . "\n" ?>
+<div id="wrap">
+	<div id="container">
+		<section id="header">
+			<div class="container_12 clearfix">
+				<div class="grid_1">
+					<a href="<?php echo $this->url(array(), 'index'); ?>"><img class="logo" src="<?php echo $this->baseUrl('img/logo60.png'); ?>" alt="Logo Blipoteki" /></a>
+				</div>
+				<div class="grid_7">
+					<p class="pagetitle"><a href="<?php echo $this->url(array(), 'index') ?>">Blipoteka.pl</a></p>
+					<p>Mię­dzy­mia­stowa biblioteka użyt­kow­ni­ków ser­wisu Blip.pl</p>
+				</div>
+				<?php if ($this->hasIdentity === true): ?>
+				<div class="grid_4 account-area clearfix">
+					<a class="avatar" href="<?php echo $this->url(array(), 'account') ?>"><img class="avatar pico" src="<?php echo $this->userAvatar($this->identity['blip'], 'pico'); ?>" alt="Awatar" /></a>
+					<p>Witaj, <strong><?php echo $this->identity['username']; ?></strong>!</p>
+					<p>Zobacz <a href="<?php echo $this->url(array(), 'account') ?>">swój profil</a> lub <a href="<?php echo $this->url(array(), 'signout') ?>">wyloguj się</a>.</p>
+				</div>
+				<?php endif; ?>
+			</div>
+		</section>
+		<section id="content" class="container_12">
+			<?php if ($this->hasIdentity === true): ?>
+			<?php echo $this->partial('navigation-top-main.phtml') . "\n"; ?>
+			<?php endif; ?>
+			<article class="grid_12">
+			<?php echo $this->layout()->content . "\n" ?>
+			</article>
+		</section>
+	</div>
+</div>
+
+<?php echo $this->partial('footer-layout.phtml') . "\n"; ?>
 <?php echo $this->headScript() . "\n"; ?>
 <?php echo $this->partial('footer.phtml') . "\n"; ?>
+
 </body>
 </html>
