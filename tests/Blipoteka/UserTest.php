@@ -37,11 +37,14 @@ class Blipoteka_UserTest extends PHPUnit_Framework_TestCase {
 	 * @see PHPUnit_Framework_TestCase::setUp()
 	 */
 	protected function setUp() {
+		$time = Void_Util_Base62::encode(time());
+		$blip = 'blip' . $time;
+		$blip = Zend_Filter::filterStatic($blip, 'StringToLower');
 		$this->user = new Blipoteka_User();
 		$this->user->city_id = 756135;
 		$this->user->password = 'password';
-		$this->user->name = 'user_' . Void_Util_Base62::encode(time());
-		$this->user->blip = 'blip_' . Void_Util_Base62::encode(time());
+		$this->user->name = 'user_' . $time;
+		$this->user->blip = $blip;
 		$this->user->email = $this->user->name . '@blipoteka.pl';
 	}
 
