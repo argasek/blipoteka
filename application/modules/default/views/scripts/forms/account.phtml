@@ -18,6 +18,13 @@
 		<?php endif; ?>
 	</p>
 	<p>
+		<label for="city"><?php echo $this->element->city->getLabel(); ?>:</label>
+		<input type="text" id="city" name="<?php echo $this->element->city->getName(); ?>" value="<?php echo $this->element->city->getValue(); ?>" maxlength="64" required="required">
+		<?php if (count($this->element->city->getMessages()) > 0): ?>
+		<span class="error"><?php echo ltrim(implode('. ', $this->element->city->getMessages()) . '.', '.'); ?></span>
+		<?php endif; ?>
+	</p>
+	<p>
 		<?php $element = $this->element->gender; ?>
 		<label for="gender"><?php echo $element->getLabel(); ?>:</label>
 		<?php foreach ($element->getMultiOptions() as $value => $name): ?>
