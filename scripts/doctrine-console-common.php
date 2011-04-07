@@ -40,4 +40,11 @@ $doctrineManager = $doctrine->getManager();
 $doctrineManager->setAttribute(Doctrine_Core::ATTR_MODEL_LOADING, Doctrine_Core::MODEL_LOADING_PEAR);
 $connectionOptions = $doctrineManager->getCurrentConnection()->getOptions();
 
+// Take care of default migration table options
+Doctrine_Migration_Base::setDefaultTableOptions(array(
+	'type' => $doctrineManager->getAttribute(Doctrine_Core::ATTR_DEFAULT_TABLE_TYPE),
+	'charset' => $doctrineManager->getAttribute(Doctrine_Core::ATTR_DEFAULT_TABLE_CHARSET),
+	'collate' => $doctrineManager->getAttribute(Doctrine_Core::ATTR_DEFAULT_TABLE_COLLATE)
+));
+
 echo sprintf("Environment: %s, DSN: '%s'\n", APPLICATION_ENV, $connectionOptions['dsn']);
