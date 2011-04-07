@@ -99,7 +99,7 @@ class Void_Scripts_GeoNames extends Void_Scripts {
 	 * Get a number of lines in CSV file. Not very ellegant, but works.
 	 *
 	 * @param SplFileObject $file
-	 * @return interger Number of lines
+	 * @return integer Number of lines
 	 */
 	private function getCsvFileLineCount(SplFileObject $file) {
 		$file->seek(PHP_INT_MAX);
