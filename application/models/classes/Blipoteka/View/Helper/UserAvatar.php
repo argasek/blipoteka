@@ -38,9 +38,9 @@ class Blipoteka_View_Helper_UserAvatar extends Zend_View_Helper_Abstract {
 	 * pico - 50x50 px
 	 * standard - 90x90 px
 	 * large - 120x120 px
-	 * 
+	 *
 	 * If operation fails for some reason, return false.
-	 * 
+	 *
 	 * @todo This is mostly a placeholder; this requires better error handling
 	 * (especially in case of network errors), caching etc.
 	 *
@@ -49,29 +49,34 @@ class Blipoteka_View_Helper_UserAvatar extends Zend_View_Helper_Abstract {
 	 * @return string|false
 	 */
 	public function userAvatar($blip, $size = 'nano') {
-		$api = new BlipApi();
-		$avatar = new BlipApi_Avatar();
-		$avatar->size = $size;
-		$avatar->user = $blip;
 		try {
-			$response = $api->read($avatar);
-		} catch (InvalidArgumentException $e) {
-			return false;
-		}
-		if ($response['status_code'] == 200) {
-			$body = $response['body'];
-			$url = 'http://blip.pl';
-			$url .= $body->{$this->getSizeUrlPart($size)};
-		} else {
-			return false;
+			$api = new BlipApi();
+			$avatar = new BlipApi_Avatar();
+			$avatar->size = $size;
+			$avatar->user = $blip;
+			try {
+				$response = $api->read($avatar);
+			} catch (InvalidArgumentException $e) {
+				return false;
+			}
+			if ($response['status_code'] == 200) {
+				$body = $response['body'];
+				$url = 'http://blip.pl';
+				$url .= $body->{$this->getSizeUrlPart($size)};
+			} else {
+				return $this->view->baseUrl('img/blip/default/' . $size . '.png');
+			}
+		// RuntimeException means something like connection error
+		} catch (RuntimeException $e) {
+			return $this->view->baseUrl('img/blip/default/' . $size . '.png');
 		}
 
 		return $url;
 	}
-	
+
 	/**
 	 * Get size URL part.
-	 * 
+	 *
 	 * @param string $size
 	 * @return string
 	 */
