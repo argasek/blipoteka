@@ -82,8 +82,12 @@ class Void_Scripts_Teryt extends Void_Scripts {
 	public function run() {
 		parent::run();
 
-		// Import administrative units
-		$this->importTerc($this->getCsvFile('TERC'));
+		// This step may be skipped
+		if ($this->cli->options['skipterc'] !== true) {
+			// Import administrative units
+			$this->importTerc($this->getCsvFile('TERC'));
+		}
+
 		// Import cities, towns, villages, etc.
 		$this->importSimc($this->getCsvFile('SIMC'));
 	}
@@ -212,7 +216,50 @@ class Void_Scripts_Teryt extends Void_Scripts {
 	 * @param SplFileObject $file TERC CSV file object
 	 */
 	public function importSimc(SplFileObject $file) {
+		// Get numer of lines in file
+		$lineCount = $this->getCsvFileLineCount($file);
+		// We skip first line (it contains column names)
+		$lineCount = ($lineCount > 0 ? $lineCount-- : $lineCount);
 
+		// Show a progress bar
+		if ($this->cli->options['verbose']) {
+			$progressBar = new Console_ProgressBar('Importing: [%bar%] %percent%', '=', '.', '60', $lineCount - 1);
+			$line = 0;
+		}
+
+		$lineImported = 1;
+
+		// Iterate file by line
+		while ($row = $file->fgetcsv()) {
+			// We need to increase progressbar here -- because we filter out some lines later
+			if ($this->cli->options['verbose']) $progressBar->update($line++);
+			// Extract variables
+			list($change_type, $symbol, $province, $district, $borough, $type, $rm, $mz, $name, $city_id, $modified_at, ) = $row;
+			// Create or update database record
+			$city = Doctrine_Core::getTable($this->_cityComponentName)->find($city_id);
+			$city = ($city instanceof $this->_cityComponentName ? $city : clone $this->_city);
+
+			$asciiname = mb_strip_accents($name);
+
+			$city->city_id = $city_id;
+			$city->province_id = $province;
+			$city->district_id = $province . $district;
+			$city->borough_id = $province . $district . $borough . $type;
+			$city->modified_at = $modified_at;
+			$city->name = $name;
+			$city->asciiname = $asciiname;
+			$city->lat = 0;
+			$city->lng = 0;
+
+			// Save record
+			$city->trySave();
+			$city->free();
+
+			// Increase number of imported records
+			$lineImported++;
+		}
+
+		printf("\nSuccessfully imported %d out of %d SIMC records.\n", $lineImported, $lineCount);
 	}
 
 	protected function setUpParser() {
@@ -224,6 +271,13 @@ class Void_Scripts_Teryt extends Void_Scripts {
 			'description' => 'directory path to Teryt files'
 	    ));
 
+		// Add an option to skip TERC import
+		$this->parser->addOption('skipterc', array(
+			'short_name'  => '-t',
+			'long_name'   => '--skip-terc',
+			'action'      => 'StoreTrue',
+			'description' => 'skip TERC import step'
+	    ));
 	}
 
 }
