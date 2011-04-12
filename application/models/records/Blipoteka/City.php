@@ -49,9 +49,9 @@ class Blipoteka_City extends Void_Doctrine_Record {
 		$this->hasColumn('asciiname', 'string', 64, array('notnull' => true));
 		$this->hasColumn('lat', 'decimal', 9, array('notnull' => true, 'scale' => 5));
 		$this->hasColumn('lng', 'decimal', 9, array('notnull' => true, 'scale' => 5));
-		$this->hasColumn('feature_code', 'string', 10, array('notnull' => true));
-		$this->hasColumn('admin1_code', 'string', 20, array('notnull' => true));
-		$this->hasColumn('admin2_code', 'string', 80, array('notnull' => false));
+		$this->hasColumn('province_id', 'string', 7, array('notnull' => true));
+		$this->hasColumn('district_id', 'string', 7, array('notnull' => true));
+		$this->hasColumn('borough_id', 'string', 7, array('notnull' => true));
 		$this->hasColumn('modified_at', 'date', null, array('notnull' => true));
 	}
 
@@ -64,6 +64,12 @@ class Blipoteka_City extends Void_Doctrine_Record {
 		$this->hasMany('Blipoteka_User as users', array('local' => 'city_id', 'foreign' => 'user_id'));
 		// Many books may have been printed in this city
 		$this->hasMany('Blipoteka_Book as books', array('local' => 'city_id', 'foreign' => 'book_id'));
+		// A city belongs to one borough
+		$this->hasOne('Blipoteka_Terc as borough', array('local' => 'borough_id', 'foreign' => 'terc_id'));
+		// A city belongs to one district
+		$this->hasOne('Blipoteka_Terc as district', array('local' => 'district_id', 'foreign' => 'terc_id'));
+		// A city belongs to one province
+		$this->hasOne('Blipoteka_Terc as province', array('local' => 'province_id', 'foreign' => 'terc_id'));
 	}
 
 }
