@@ -65,11 +65,11 @@ class Blipoteka_City extends Void_Doctrine_Record {
 		// Many books may have been printed in this city
 		$this->hasMany('Blipoteka_Book as books', array('local' => 'city_id', 'foreign' => 'book_id'));
 		// A city belongs to one borough
-		$this->hasOne('Blipoteka_Terc as borough', array('local' => 'borough_id', 'foreign' => 'terc_id'));
+		$this->hasOne('Blipoteka_Terc as borough', array('local' => 'borough_id', 'foreign' => 'terc_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE'));
 		// A city belongs to one district
-		$this->hasOne('Blipoteka_Terc as district', array('local' => 'district_id', 'foreign' => 'terc_id'));
+		$this->hasOne('Blipoteka_Terc as district', array('local' => 'district_id', 'foreign' => 'terc_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE'));
 		// A city belongs to one province
-		$this->hasOne('Blipoteka_Terc as province', array('local' => 'province_id', 'foreign' => 'terc_id'));
+		$this->hasOne('Blipoteka_Terc as province', array('local' => 'province_id', 'foreign' => 'terc_id', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE'));
 	}
 
 }
