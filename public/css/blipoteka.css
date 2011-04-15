@@ -593,10 +593,14 @@ input:focus {
 	border: 1px solid #888;
 }
 
+#account-form-map {
+	height: 320px;
+	outline: 1px solid #ddd;
+}
+
 header.account > img {
 	float: left;
 }
-
 
 article.description {
 	line-height: 1.5em;

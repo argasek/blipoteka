@@ -8,5 +8,23 @@
 
 $(function() {
 	// Auto-hide informational messages
-	$('.message.autohide').delay(2000).fadeOut('slow', function() { $(this).remove() });
+	$('.message.autohide').delay(2000).fadeOut('slow', function() { $(this).remove(); });
+
+	// Show user's location on Google Maps in account view
+	$('#account-form-map').each(function() {
+		var self = $(this);
+	    var position = new google.maps.LatLng(self.data('lat'), self.data('lng'));
+	    var options = {
+	    	zoom: 10,
+	    	center: position,
+	    	mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };
+	  	var map = new google.maps.Map(this, options);
+	  	var marker = new google.maps.Marker({
+	        position: position, 
+	        map: map,
+	        title: $('#city').val()
+	    });
+	});
+
 });

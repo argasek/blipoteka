@@ -2,52 +2,64 @@
 <?php if (count($this->element->getErrorMessages())): ?>
 <p class="error"><?php echo ltrim(implode('. ', $this->element->getErrorMessages()) . '.', '.'); ?></p>
 <?php endif; ?>
-<fieldset>
-	<p>
-		<label for="name"><?php echo $this->element->name->getLabel(); ?>:</label>
-		<input type="text" id="name" name="<?php echo $this->element->name->getName(); ?>" value="<?php echo $this->element->name->getValue(); ?>" maxlength="64" required="required">
-		<?php if (count($this->element->name->getMessages()) > 0): ?>
-		<span class="error"><?php echo ltrim(implode('. ', $this->element->name->getMessages()) . '.', '.'); ?></span>
-		<?php endif; ?>
-	</p>
-	<p>
-		<label for="email"><?php echo $this->element->email->getLabel(); ?>:</label>
-		<input type="email" id="email" name="email" value="<?php echo $this->element->email->getValue(); ?>" maxlength="128" required="required">
-		<?php if (count($this->element->email->getMessages()) > 0): ?>
-		<span class="error"><?php echo ltrim(implode('. ', $this->element->email->getMessages()) . '.', '.'); ?></span>
-		<?php endif; ?>
-	</p>
-	<p>
-		<label for="city"><?php echo $this->element->city->getLabel(); ?>:</label>
-		<input type="text" id="city" name="<?php echo $this->element->city->getName(); ?>" value="<?php echo $this->element->city->getValue(); ?>" maxlength="64" required="required">
-		<?php if (count($this->element->city->getMessages()) > 0): ?>
-		<span class="error"><?php echo ltrim(implode('. ', $this->element->city->getMessages()) . '.', '.'); ?></span>
-		<?php endif; ?>
-	</p>
-	<p>
-		<?php $element = $this->element->gender; ?>
-		<label for="gender"><?php echo $element->getLabel(); ?>:</label>
-		<?php foreach ($element->getMultiOptions() as $value => $name): ?>
-		<input type="radio" id="<?php echo $element->getName() . $value; ?>" name="<?php echo $element->getName(); ?>" value="<?php echo $value; ?>" <?php if ($element->getValue() === $value):?>checked="checked"<?php endif;?>>
-		<label class="inline" for="<?php echo $element->getName() . $value; ?>"><?php echo $name; ?></label>
-		<?php endforeach; ?>
-		<?php if (count($element->getMessages()) > 0): ?>
-		<span class="error"><?php echo ltrim(implode('. ', $element->getMessages()) . '.', '.'); ?></span>
-		<?php endif; ?>
-	</p>
-</fieldset>
-<fieldset>
-	<p>
-		<?php $element = $this->element->auto_accept_requests; ?>
-		<label for="auto_accept_requests"><?php echo $element->getLabel(); ?>:</label>
-		<input type="checkbox" id="<?php echo $element->getName(); ?>" name="<?php echo $element->getName(); ?>" value="<?php echo $element->getCheckedValue(); ?>" <?php if ($element->getValue() == 1):?>checked="checked"<?php endif;?>>
-		<label class="inline" for="auto_accept_requests">tak</label>
-		<?php if (count($element->getMessages()) > 0): ?>
-		<span class="error"><?php echo ltrim(implode('. ', $element->getMessages()) . '.', '.'); ?></span>
-		<?php endif; ?>
-	</p>
-	<p>
-		<button class="button" type="submit">Aktualizuj mój profil</button>
-	</p>
-</fieldset>
+<section class="clearfix">
+	<!-- Form fields -->
+	<div class="grid_5 alpha">
+		<fieldset>
+			<p>
+				<label for="name"><?php echo $this->element->name->getLabel(); ?>:</label>
+				<input type="text" id="name" name="<?php echo $this->element->name->getName(); ?>" value="<?php echo $this->element->name->getValue(); ?>" maxlength="64" required="required">
+				<?php if (count($this->element->name->getMessages()) > 0): ?>
+				<span class="error"><?php echo ltrim(implode('. ', $this->element->name->getMessages()) . '.', '.'); ?></span>
+				<?php endif; ?>
+			</p>
+			<p>
+				<label for="email"><?php echo $this->element->email->getLabel(); ?>:</label>
+				<input type="email" id="email" name="email" value="<?php echo $this->element->email->getValue(); ?>" maxlength="128" required="required">
+				<?php if (count($this->element->email->getMessages()) > 0): ?>
+				<span class="error"><?php echo ltrim(implode('. ', $this->element->email->getMessages()) . '.', '.'); ?></span>
+				<?php endif; ?>
+			</p>
+			<p>
+				<label for="city"><?php echo $this->element->city->getLabel(); ?>:</label>
+				<input type="text" id="city" name="<?php echo $this->element->city->getName(); ?>" value="<?php echo $this->element->city->getValue(); ?>" maxlength="64" required="required">
+				<?php if (count($this->element->city->getMessages()) > 0): ?>
+				<span class="error"><?php echo ltrim(implode('. ', $this->element->city->getMessages()) . '.', '.'); ?></span>
+				<?php endif; ?>
+				<input type="hidden" id="city_id" name="<?php echo $this->element->city_id->getName(); ?>" value="<?php echo $this->element->city_id->getValue(); ?>">
+			</p>
+			<p>
+				<?php $element = $this->element->gender; ?>
+				<label for="gender"><?php echo $element->getLabel(); ?>:</label>
+				<?php foreach ($element->getMultiOptions() as $value => $name): ?>
+				<input type="radio" id="<?php echo $element->getName() . $value; ?>" name="<?php echo $element->getName(); ?>" value="<?php echo $value; ?>" <?php if ($element->getValue() === $value):?>checked="checked"<?php endif;?>>
+				<label class="inline" for="<?php echo $element->getName() . $value; ?>"><?php echo $name; ?></label>
+				<?php endforeach; ?>
+				<?php if (count($element->getMessages()) > 0): ?>
+				<span class="error"><?php echo ltrim(implode('. ', $element->getMessages()) . '.', '.'); ?></span>
+				<?php endif; ?>
+			</p>
+		</fieldset>
+		<fieldset>
+			<p>
+				<?php $element = $this->element->auto_accept_requests; ?>
+				<label for="auto_accept_requests"><?php echo $element->getLabel(); ?>:</label>
+				<input type="checkbox" id="<?php echo $element->getName(); ?>" name="<?php echo $element->getName(); ?>" value="<?php echo $element->getCheckedValue(); ?>" <?php if ($element->getValue() == 1):?>checked="checked"<?php endif;?>>
+				<label class="inline" for="auto_accept_requests">tak</label>
+				<?php if (count($element->getMessages()) > 0): ?>
+				<span class="error"><?php echo ltrim(implode('. ', $element->getMessages()) . '.', '.'); ?></span>
+				<?php endif; ?>
+			</p>
+			<p>
+				<button class="button" type="submit">Aktualizuj mój profil</button>
+			</p>
+		</fieldset>
+	</div>
+	<!-- Google Maps -->
+	<div class="alpha grid_7" id="account-form-map" data-lat="<?php echo $this->element->lat->getValue(); ?>" data-lng="<?php echo $this->element->lng->getValue(); ?>">
+		<div>
+			<p>Ładuję mapę, zaczekaj...</p>
+		</div>
+	</div>
+</section>
 </form>
