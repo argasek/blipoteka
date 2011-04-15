@@ -21,6 +21,7 @@
 
 require_once 'Console/ProgressBar.php';
 require_once 'mbfunctions.php';
+require_once 'GoogleMap.php';
 
 /**
  * Teryt database import tool script class
@@ -29,8 +30,15 @@ require_once 'mbfunctions.php';
  *
  */
 class Void_Scripts_Teryt extends Void_Scripts {
-	const VERSION = '0.1';
+	const VERSION = '0.2';
 	const DESCRIPTION = 'Import Teryt CSV files into the database';
+	/**
+	 * Maximum number of entries to update when running Google Maps
+	 * coordinates update.
+	 *
+	 * @var integer
+	 */
+	const GOOGLE_MAPS_MAX_UPDATE_ENTRIES_COUNT = 1000;
 
 	/**
 	 * City object
@@ -82,14 +90,20 @@ class Void_Scripts_Teryt extends Void_Scripts {
 	public function run() {
 		parent::run();
 
-		// This step may be skipped
-		if ($this->cli->options['skipterc'] !== true) {
-			// Import administrative units
+		// Import administrative units
+		if ($this->cli->options['terc'] === true) {
 			$this->importTerc($this->getCsvFile('TERC'));
 		}
 
 		// Import cities, towns, villages, etc.
-		$this->importSimc($this->getCsvFile('SIMC'));
+		if ($this->cli->options['simc'] === true) {
+			$this->importSimc($this->getCsvFile('SIMC'));
+		}
+
+		// Run Google Maps search for coordinates of cities
+		if ($this->cli->options['googlemaps'] === true) {
+			$this->coordsUpdateViaGoogleMaps();
+		}
 	}
 
 	/**
@@ -262,6 +276,59 @@ class Void_Scripts_Teryt extends Void_Scripts {
 		printf("\nSuccessfully imported %d out of %d SIMC records.\n", $lineImported, $lineCount);
 	}
 
+	/**
+	 * Update cities coordinates via Google Maps API.
+	 * Each time GOOGLE_MAPS_MAX_UPDATE_ENTRIES_COUNT of
+	 * records not having coords yet are updated (GM API limit is 15,000).
+	 *
+	 */
+	public function coordsUpdateViaGoogleMaps() {
+		$query = Doctrine_Query::create();
+		$query->select('c.*, b.name, d.name, p.name');
+		$query->from('Blipoteka_City c');
+		$query->innerJoin('c.borough b');
+		$query->innerJoin('c.district d');
+		$query->innerJoin('c.province p');
+		$query->addWhere('c.lat = 0.0');
+		$query->addWhere('c.lng = 0.0');
+		$query->limit(self::GOOGLE_MAPS_MAX_UPDATE_ENTRIES_COUNT);
+		$cities = $query->execute();
+		// Get numer of cities
+		$count = $cities->count();
+
+		// Show a progress bar
+		if ($this->cli->options['verbose']) {
+			$progressBar = new Console_ProgressBar('Looking up coords: [%bar%] %percent%', '=', '.', '60', $count);
+			$line = 0;
+		}
+
+		$done = 0;
+		$maps = new GoogleMapAPI();
+
+		// Iterate file by line
+		foreach ($cities as $city) {
+			++$done;
+			if ($this->cli->options['verbose']) $progressBar->update($done);
+
+			$name = array($city->name, $city->borough->name, $city->district->name, $city->province->name);
+			$name = '"' . implode(',', $name) . '"';
+
+			// Get coordinates based on Google Maps
+			$result = $maps->geoGetCoords($name);
+
+			// Update city's coords
+			$city->lat = $result['lat'];
+			$city->lng = $result['lon'];
+			if ($city->lat === null || $city->lng === null) {
+				echo "Warning: could not lookup $name, skipping...\n";
+			} else {
+				$city->save();
+			}
+		}
+
+		printf("\nSuccessfully looked up %d out of %d cities.\n", $done, $count);
+	}
+
 	protected function setUpParser() {
 		// Add an option to specify the path where Teryt files reside
 		$this->parser->addOption('path', array(
@@ -271,12 +338,28 @@ class Void_Scripts_Teryt extends Void_Scripts {
 			'description' => 'directory path to Teryt files'
 	    ));
 
-		// Add an option to skip TERC import
-		$this->parser->addOption('skipterc', array(
-			'short_name'  => '-t',
-			'long_name'   => '--skip-terc',
+		// Add an option to run SIMC import
+		$this->parser->addOption('simc', array(
+			'short_name'  => '-s',
+			'long_name'   => '--simc',
 			'action'      => 'StoreTrue',
-			'description' => 'skip TERC import step'
+			'description' => 'run TERC import step'
+	    ));
+
+		// Add an option to run TERC import
+		$this->parser->addOption('terc', array(
+			'short_name'  => '-t',
+			'long_name'   => '--terc',
+			'action'      => 'StoreTrue',
+			'description' => 'run TERC import step'
+	    ));
+
+		// Add an option to run Google coords
+		$this->parser->addOption('googlemaps', array(
+			'short_name'  => '-g',
+			'long_name'   => '--google-maps',
+			'action'      => 'StoreTrue',
+			'description' => 'run Google Maps coordinates lookup'
 	    ));
 	}
 
