@@ -213,6 +213,10 @@ class Blipoteka_Service_User extends Blipoteka_Service {
 		$form->getElement('name')->setValue($user->name);
 		$form->getElement('gender')->setValue($gender);
 		$form->getElement('auto_accept_requests')->setValue($user->auto_accept_requests);
+		$form->getElement('city')->setValue($user->city->name);
+		$form->getElement('lat')->setValue($user->city->lat);
+		$form->getElement('lng')->setValue($user->city->lng);
+		$form->getElement('city_id')->setValue($user->city_id);
 	}
 
 	/**
