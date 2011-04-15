@@ -283,12 +283,9 @@ class Void_Scripts_Teryt extends Void_Scripts {
 	 *
 	 */
 	public function coordsUpdateViaGoogleMaps() {
-		$query = Doctrine_Query::create();
+		$service = new Blipoteka_Service_City();
+		$query = $service->getCityBoroughDistrictProvinceQuery();
 		$query->select('c.*, b.name, d.name, p.name');
-		$query->from('Blipoteka_City c');
-		$query->innerJoin('c.borough b');
-		$query->innerJoin('c.district d');
-		$query->innerJoin('c.province p');
 		$query->addWhere('c.lat = 0.0');
 		$query->addWhere('c.lng = 0.0');
 		$query->limit(self::GOOGLE_MAPS_MAX_UPDATE_ENTRIES_COUNT);
