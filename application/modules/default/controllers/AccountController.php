@@ -47,6 +47,7 @@ class AccountController extends Blipoteka_Controller {
 			$service->accountFormFromUser($form);
 			$this->view->accountForm = $form;
 		}
+		$this->view->headScript()->appendFile('http://maps.google.com/maps/api/js?sensor=false&language=pl&region=PL');
 	}
 
 	/**
