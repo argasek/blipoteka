@@ -51,11 +51,24 @@ class Blipoteka_Form_Account extends Zend_Form {
 		$name->setRequired(true);
 		$this->addElement($name);
 
-		$name = $this->createElement('text', 'city');
-		$name->setLabel('Miejscowość');
-		$name->setFilters(array('StringTrim', 'StripNewLines', 'StripTags'));
-		$name->setRequired(true);
-		$this->addElement($name);
+		$city = $this->createElement('text', 'city');
+		$city->setLabel('Miejscowość');
+		$city->setFilters(array('StringTrim', 'StripNewLines', 'StripTags'));
+		$city->setRequired(true);
+		$this->addElement($city);
+
+		$city_id = $this->createElement('hidden', 'city_id');
+		$city_id->setFilters(array('Int'));
+		$city_id->setRequired(true);
+		$this->addElement($city_id);
+
+		$lat = $this->createElement('hidden', 'lat');
+		$lat->setFilters(array('LocalizedToNormalized'));
+		$this->addElement($lat);
+
+		$lng = $this->createElement('hidden', 'lng');
+		$lng->setFilters(array('LocalizedToNormalized'));
+		$this->addElement($lng);
 
 		$validators = $user->getColumnValidatorsArray('gender');
 		$gender = $this->createElement('radio', 'gender');
