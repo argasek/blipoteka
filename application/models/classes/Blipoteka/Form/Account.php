@@ -37,7 +37,7 @@ class Blipoteka_Form_Account extends Zend_Form {
 		$validators['email']->setMessage('Nieprawidłowy adres e-mail', Void_Validate_Email::INVALID);
 		$email = $this->createElement('text', 'email');
 		$email->setLabel('E-mail');
-		$email->setFilters(array('StringTrim', 'StringToLower', 'StripNewLines', 'StripTags'));
+		$email->setFilters(array('StringTrim', 'StringToLower', 'StripNewlines', 'StripTags'));
 		$email->addValidator('NotEmpty', true, array('messages' => array('isEmpty' => 'Adres e-mail nie może być pusty')));
 		$email->addValidators($validators);
 		$email->setRequired(true);
@@ -46,14 +46,14 @@ class Blipoteka_Form_Account extends Zend_Form {
 		$validators = $user->getColumnValidatorsArray('name');
 		$name = $this->createElement('text', 'name');
 		$name->setLabel('Imię i nazwisko');
-		$name->setFilters(array('StringTrim', 'StripNewLines', 'StripTags'));
+		$name->setFilters(array('StringTrim', 'StripNewlines', 'StripTags'));
 		$name->addValidators($validators);
 		$name->setRequired(true);
 		$this->addElement($name);
 
 		$city = $this->createElement('text', 'city');
 		$city->setLabel('Miejscowość');
-		$city->setFilters(array('StringTrim', 'StripNewLines', 'StripTags'));
+		$city->setFilters(array('StringTrim', 'StripNewlines', 'StripTags'));
 		$city->setRequired(true);
 		$this->addElement($city);
 
