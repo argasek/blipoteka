@@ -19,7 +19,7 @@
  * @license    http://tekla.art.pl/license/void-simplified-bsd-license.txt Simplified BSD License
  */
 
-require 'Console/Table.php';
+include_once 'Console/Table.php';
 
 /**
  * Doctrine queries logging tool class.
