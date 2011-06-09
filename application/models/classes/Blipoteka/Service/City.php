@@ -36,14 +36,21 @@ class Blipoteka_Service_City extends Blipoteka_Service {
 	/**
 	 * Get cities which name begin with $prefix along with
 	 * borough, district and province information.
+	 * A null value is returned if $prefix length is
+	 * smaller than $minLength.
 	 *
-	 * @return Doctrine_Collection|array
+	 * @return Doctrine_Collection|array|null
 	 */
-	public function getCitiesByPrefix($prefix, $hydrationMode = Doctrine_Core::HYDRATE_ARRAY) {
-		$query = $this->getCityBoroughDistrictProvinceQuery();
-		$query->select('c.city_id, c.lat, c.lng, c.name, b.name, d.name, p.name');
-		$query->where('c.name LIKE ?%', $prefix);
-		$cites = $query->execute(array(), $hydrationMode);
+	public function getCitiesByPrefix($prefix, $minLength = 3, $hydrationMode = Doctrine_Core::HYDRATE_ARRAY) {
+		$prefix = $this->getFilteredCityName($prefix);
+		if (mb_strlen($prefix) >= $minLength) {
+			$query = $this->getCityBoroughDistrictProvinceQuery();
+			$query->select('c.city_id, c.lat, c.lng, c.name, b.name, d.name, p.name');
+			$query->where('c.name LIKE ?%', $prefix);
+			$cites = $query->execute(array(), $hydrationMode);
+		} else {
+			return null;
+		}
 		return $cities;
 	}
 
@@ -59,6 +66,22 @@ class Blipoteka_Service_City extends Blipoteka_Service {
 		$query->innerJoin('c.district d');
 		$query->innerJoin('c.province p');
 		return $query;
+	}
+
+	/**
+	 * Get filtered city name.
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	protected function getFilteredCityName($name) {
+		$filter = new Zend_Filter();
+		$filter->addFilter(new Zend_Filter_StripTags());
+		$filter->addFilter(new Zend_Filter_StripNewlines());
+		$filter->addFilter(new Zend_Filter_StringTrim());
+		$filter->addFilter(new Zend_Filter_Alnum(true));
+		$name = $filter->filter($name);
+		return $name;
 	}
 
 }
